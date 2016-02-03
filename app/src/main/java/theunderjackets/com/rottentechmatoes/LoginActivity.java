@@ -28,7 +28,6 @@ public class LoginActivity extends AppCompatActivity {
                 attemptLogin();
             }
         });
-
     }
     //Attempt login based on text in @var username and @var password
     //TODO
