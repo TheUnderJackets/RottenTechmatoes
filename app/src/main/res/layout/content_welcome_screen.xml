@@ -15,5 +15,36 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="Rotten \n Techmatoes"
+        android:id="@+id/WelcomeBanner"
+        android:textSize="42sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp"
+        android:textAlignment="center"
+        android:typeface="serif" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Log In"
+        android:id="@+id/logInButton"
+        android:textColor="#ffffff"
+        android:background="#ff4603"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="20sp" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:id="@+id/registerButton"
+        android:textColor="#ffffff"
+        android:background="#ffb499"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/logInButton"
+        android:layout_alignParentStart="true"
+        android:textSize="20sp" />
+
 </RelativeLayout>
