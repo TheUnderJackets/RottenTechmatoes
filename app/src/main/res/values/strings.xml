@@ -8,6 +8,8 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">\t\tWelcome\nPlease Log In</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="action_cancel_short">Cancel</string>
 
 
 </resources>
