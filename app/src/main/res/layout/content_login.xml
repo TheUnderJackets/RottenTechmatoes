@@ -40,7 +40,7 @@
         android:text="@string/action_sign_in_short"
         android:id="@+id/signInButton"
         android:layout_below="@+id/password"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignStart="@+id/password" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -50,4 +50,13 @@
         android:id="@+id/textViewWelcome"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_cancel_short"
+        android:id="@+id/cancelButton"
+        android:layout_alignTop="@+id/signInButton"
+        android:layout_alignEnd="@+id/textViewWelcome" />
 </RelativeLayout>

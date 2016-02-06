@@ -1,5 +1,6 @@
 package theunderjackets.com.rottentechmatoes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,31 +9,54 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
-
+    public static final String EXTRA_LOGIN_USERNAME = "theunderjackets.com.rottentechmatoes.USERNAME";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        EditText username = (EditText) findViewById(R.id.username);
-        EditText password = (EditText) findViewById(R.id.password);
-
+        final EditText username = (EditText) findViewById(R.id.username);
+        final EditText password = (EditText) findViewById(R.id.password);
         Button signInButton = (Button) findViewById(R.id.signInButton);
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                attemptLogin();
+                attemptLogin(v, username, password);
+                username.requestFocus();
+            }
+        });
+        Button cancelButton = (Button) findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancel(v);
             }
         });
     }
     //Attempt login based on text in @var username and @var password
-    //TODO
-    private void attemptLogin() {
+    private void attemptLogin(View v, EditText username, EditText password) {
+        String userName = username.getText().toString();
+        System.out.println(userName);
+        String passWord = password.getText().toString();
+        password.setText("");
+        if (userName.equals("user") && passWord.equals("pass")) {
+            Intent loginIntent = new Intent(this, HomeActivity.class);
+            loginIntent.putExtra(EXTRA_LOGIN_USERNAME, userName);
+            startActivity(loginIntent);
+        } else {
+            CharSequence msgText = "Incorrect Login. Please try again.";
+            Toast noLoginToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
+            noLoginToast.show();
+        }
+    }
 
+    //Cancels the login attempt
+    private void cancel(View v) {
+        finish();
     }
 
 }
