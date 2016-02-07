@@ -28,15 +28,5 @@
         android:layout_height="wrap_content"
         android:text="Logout"
         android:id="@+id/logoutButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/textViewWelcomeUser" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:id="@+id/logoutButton"
-        android:layout_above="@+id/logoutButton"
         android:layout_alignParentStart="true" />
 </RelativeLayout>
