@@ -18,6 +18,8 @@ public class RegistrationActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        EditText emailaddress = (EditText) findViewById(R.id.emailaddress);
+        EditText name = (EditText) findViewById(R.id.name);
         EditText username = (EditText) findViewById(R.id.username);
         EditText password = (EditText) findViewById(R.id.password);
         EditText passwordrepeat = (EditText) findViewById(R.id.repeatpassword);
@@ -30,8 +32,8 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
     }
-    //Attempt registration based on text in @var username, @var password and
-    // @var password repeat
+    //Attempt registration based on text in @emailaddress, @var username, @var name
+    // @var password and @var password repeat
     //TODO
     private void attemptRegistration() {
 
