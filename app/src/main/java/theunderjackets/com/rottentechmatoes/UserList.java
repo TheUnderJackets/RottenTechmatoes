@@ -34,33 +34,5 @@ public class UserList {
         return false;
     }
 
-    /**
-     * TODO
-     * Checks to see if the username is already used. This is used during user creation.
-     * @param username the username we are checking for
-     * @return true if username is valid, false otherwise
-     */
-    public static boolean isUserValid(String username) {
-        return true;
-    }
 
-    /**
-     * TODO
-     * Getter method for user by username.
-     * @param username username of the requested user
-     * @return user if found
-     */
-    public static User getUserByUsername(String username) {
-        return new User("a", "a", "a", "a");
-    }
-
-    /**
-     * TODO
-     * Getter method for user by email.
-     * @param email email of the requested user
-     * @return user if found
-     */
-    public static User getUserByEmail(String email) {
-        return new User("a", "a", "a", "a");
-    }
 }
