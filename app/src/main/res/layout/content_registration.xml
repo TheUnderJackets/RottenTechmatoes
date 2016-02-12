@@ -17,11 +17,33 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/username"
+        android:id="@+id/emailaddress"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="118dp"
+        android:hint="@string/email_address" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/name"
+        android:layout_below="@+id/emailaddress"
+        android:layout_alignStart="@+id/emailaddress"
+        android:hint="@string/name" />
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailSubject"
+        android:ems="10"
+        android:id="@+id/username"
+        android:layout_below="@+id/name"
+        android:layout_alignStart="@+id/name"
         android:hint="@string/prompt_username" />
+
 
     <EditText
         android:layout_width="wrap_content"
@@ -32,7 +54,7 @@
         android:layout_below="@+id/username"
         android:layout_alignStart="@+id/username"
         android:hint="@string/prompt_password" />
-<EditText
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
@@ -40,13 +62,13 @@
         android:id="@+id/repeatpassword"
         android:layout_below="@+id/password"
         android:layout_alignStart="@+id/password"
-        android:hint="Repeat Password" />
+        android:hint="@string/repeat_password" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/action_sign_in_short"
+        android:text="@string/register"
         android:id="@+id/registerButton"
         android:layout_below="@+id/repeatpassword"
         android:layout_centerHorizontal="true" />
@@ -55,7 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/welcome"
+        android:text="@string/registration"
         android:id="@+id/textViewWelcome"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
