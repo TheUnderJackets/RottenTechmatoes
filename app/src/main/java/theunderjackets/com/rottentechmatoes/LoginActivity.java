@@ -1,18 +1,24 @@
 package theunderjackets.com.rottentechmatoes;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
     public static final String EXTRA_LOGIN_USERNAME = "theunderjackets.com.rottentechmatoes.USERNAME";
+    private Toast currentToast;
+    private int incorrectLoginCounter = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,15 +54,46 @@ public class LoginActivity extends AppCompatActivity {
             loginIntent.putExtra(EXTRA_LOGIN_USERNAME, userName);
             startActivity(loginIntent);
         } else {
-            CharSequence msgText = "Incorrect Login. Please try again.";
-            Toast noLoginToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
-            noLoginToast.show();
+            if (++incorrectLoginCounter >= 3) {
+                CharSequence msgText = "Too many incorrect login attempts.";
+                if (currentToast != null && currentToast.getView().isShown()) {
+                    currentToast.cancel();
+                }
+                currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
+                currentToast.show();
+            } else {
+                CharSequence msgText = "Incorrect Login. Please try again.";
+                if (currentToast != null && currentToast.getView().isShown()) {
+                    currentToast.cancel();
+                }
+                currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
+                currentToast.show();
+            }
         }
     }
 
     //Cancels the login attempt
     private void cancel(View v) {
         finish();
+    }
+
+    // This is here to make it so that clicking outside of text field will remove focus from the
+    // textbox.
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View view = getCurrentFocus();
+            if (view instanceof EditText) {
+                Rect out = new Rect();
+                view.getGlobalVisibleRect(out);
+                if (!out.contains((int) event.getRawX(), (int) event.getRawY())) {
+                    view.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event);
     }
 
 }
