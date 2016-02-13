@@ -1,11 +1,15 @@
 package theunderjackets.com.rottentechmatoes;
 
+import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -37,6 +41,24 @@ public class RegistrationActivity extends AppCompatActivity {
     //TODO
     private void attemptRegistration() {
 
+    }
+    // This is here to make it so that clicking outside of text field will remove focus from the
+    // textbox.
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View view = getCurrentFocus();
+            if (view instanceof EditText) {
+                Rect out = new Rect();
+                view.getGlobalVisibleRect(out);
+                if (!out.contains((int) event.getRawX(), (int) event.getRawY())) {
+                    view.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent( event );
     }
 
 }
