@@ -1,6 +1,7 @@
 package theunderjackets.com.rottentechmatoes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -35,6 +36,15 @@ public class RegistrationActivity extends AppCompatActivity {
                 attemptRegistration();
             }
         });
+
+        Button cancelButton = (Button) findViewById(R.id.cancelRegistrationButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
     //Attempt registration based on text in @emailaddress, @var username, @var name
     // @var password and @var password repeat
