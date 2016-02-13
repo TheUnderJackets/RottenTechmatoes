@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
-    public static final String EXTRA_LOGIN_USERNAME = "theunderjackets.com.rottentechmatoes.USERNAME";
+    public static final String EXTRA_LOGIN_USEREMAIL = "theunderjackets.com.rottentechmatoes.LoginActivity.USEREMAIL";
     private Toast currentToast;
     private int incorrectLoginCounter = 0;
     @Override
@@ -44,14 +44,22 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     //Attempt login based on text in @var username and @var password
+
+    /**
+     * Attempts to login with username and password credentials.
+     * @param v the current view
+     * @param username the username box
+     * @param password the password box
+     */
     private void attemptLogin(View v, EditText username, EditText password) {
         String userName = username.getText().toString();
         System.out.println(userName);
         String passWord = password.getText().toString();
         password.setText("");
-        if (userName.equals("user") && passWord.equals("pass")) {
+        if (UserList.isUserValid(userName)) {
             Intent loginIntent = new Intent(this, HomeActivity.class);
-            loginIntent.putExtra(EXTRA_LOGIN_USERNAME, userName);
+            User user = UserList.getUserByUsername(userName);
+            loginIntent.putExtra(EXTRA_LOGIN_USEREMAIL, user.getEmail());
             startActivity(loginIntent);
         } else {
             if (++incorrectLoginCounter >= 3) {
@@ -77,8 +85,11 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
-    // This is here to make it so that clicking outside of text field will remove focus from the
-    // textbox.
+    /**
+     * Makes it so that edittext will not be focused on anymore once clicked out of.
+     * @param event click outside of box
+     * @return super.dispatchTouchEvent(event)
+     */
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {

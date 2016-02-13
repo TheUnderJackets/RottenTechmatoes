@@ -52,8 +52,12 @@ public class RegistrationActivity extends AppCompatActivity {
     private void attemptRegistration() {
 
     }
-    // This is here to make it so that clicking outside of text field will remove focus from the
-    // textbox.
+
+    /**
+     * Makes it so that edittext will not be focused on anymore once clicked out of.
+     * @param event click outside of box
+     * @return super.dispatchTouchEvent(event)
+     */
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
