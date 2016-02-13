@@ -68,7 +68,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             }
         }
-        return super.dispatchTouchEvent( event );
+        return super.dispatchTouchEvent(event);
     }
 
 }
