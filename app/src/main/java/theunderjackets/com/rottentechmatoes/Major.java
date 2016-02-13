@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Andrew Suh on 2/12/2016.
  */
-public enum Major implements Comparable<Major> {
+public enum Major {
 
     AEROSPACE_ENGINEERING("Aerospace Engineering"),
     APPLIED_LANGUAGE_AND_INTERCULTURAL_STUDIES("Applied Language and Intercultural Studies"),
@@ -57,12 +57,6 @@ public enum Major implements Comparable<Major> {
      */
     public static List<Major> getMajorList() {
         List<Major> majors = Arrays.asList(Major.values());
-        Collections.sort(majors, new Comparator<Major>() {
-            @Override
-            public int compare(Major a, Major b) {
-                return a.compareTo(b);
-            }
-        });
         return majors;
     }
 
