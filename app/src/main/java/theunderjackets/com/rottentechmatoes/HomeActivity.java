@@ -1,18 +1,23 @@
 package theunderjackets.com.rottentechmatoes;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity {
-    SharedPreferences SM;
+    public static final String EXTRA_LOGIN_USEREMAIL = "theunderjackets.com.rottentechmatoes.HomeActivity.USEREMAIL";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,17 +26,10 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
-        String userName = intent.getStringExtra(LoginActivity.EXTRA_LOGIN_USERNAME);
+        String userEmail = intent.getStringExtra(LoginActivity.EXTRA_LOGIN_USEREMAIL);
+        final User user = UserList.getUserByEmail(userEmail);
         TextView welcomeUser = (TextView) findViewById(R.id.textViewWelcomeUser);
-        welcomeUser.setText("Welcome " + userName + "!");
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        welcomeUser.setText("Welcome " + user.getUserName() + "!");
         Button logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +39,37 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }
         });
+        Button profileButton = (Button) findViewById(R.id.editProfileButton);
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, EditProfileActivity.class);
+                intent.putExtra(HomeActivity.EXTRA_LOGIN_USEREMAIL, user.getEmail());
+                startActivity(intent);
+            }
+        });
+    }
+
+    /**
+     * Makes it so that edittext will not be focused on anymore once clicked out of.
+     * @param event click outside of box
+     * @return super.dispatchTouchEvent(event)
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View view = getCurrentFocus();
+            if (view instanceof EditText) {
+                Rect out = new Rect();
+                view.getGlobalVisibleRect(out);
+                if (!out.contains((int) event.getRawX(), (int) event.getRawY())) {
+                    view.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event);
     }
 
 }

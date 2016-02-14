@@ -1,8 +1,7 @@
 package theunderjackets.com.rottentechmatoes;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -10,6 +9,7 @@ import java.util.List;
  */
 public enum Major {
 
+    UNDECIDED("<Undecided>"),
     AEROSPACE_ENGINEERING("Aerospace Engineering"),
     APPLIED_LANGUAGE_AND_INTERCULTURAL_STUDIES("Applied Language and Intercultural Studies"),
     APPLIED_MATHEMATICS("Applied Mathematics"),
@@ -58,6 +58,11 @@ public enum Major {
     public static List<Major> getMajorList() {
         List<Major> majors = Arrays.asList(Major.values());
         return majors;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 
     /**

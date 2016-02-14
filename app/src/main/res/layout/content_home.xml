@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Thanks for Registering!"
+        android:text="@string/text_welcome"
         android:id="@+id/textViewWelcomeUser"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -26,8 +26,18 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
+        android:text="@string/action_logout"
         android:id="@+id/logoutButton"
+        android:layout_marginBottom="49dp"
         android:layout_alignParentBottom="true"
         android:layout_alignEnd="@+id/textViewWelcomeUser" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_profile"
+        android:id="@+id/editProfileButton"
+        android:layout_alignTop="@+id/logoutButton"
+        android:layout_toStartOf="@+id/textViewWelcomeUser" />
+
 </RelativeLayout>
