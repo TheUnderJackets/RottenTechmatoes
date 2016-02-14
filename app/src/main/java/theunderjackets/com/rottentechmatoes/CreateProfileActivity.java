@@ -1,5 +1,6 @@
 package theunderjackets.com.rottentechmatoes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 public class CreateProfileActivity extends AppCompatActivity {
@@ -39,6 +41,30 @@ public class CreateProfileActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+        Button submit = (Button) findViewById(R.id.submitButton);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linkToHome(v);
+            }
+        });
+
+        Button noThanks = (Button) findViewById(R.id.noThanksButton);
+        noThanks.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linkToHome(v);
+            }
+        });
     }
+
+    private void linkToHome(View v) {
+        Intent createProfileIntent = new Intent(this, HomeActivity.class);
+        startActivity(createProfileIntent);
+    }
+
+
 
 }
