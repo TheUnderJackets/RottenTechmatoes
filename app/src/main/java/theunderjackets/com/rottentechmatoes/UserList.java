@@ -1,37 +1,33 @@
 package theunderjackets.com.rottentechmatoes;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
 
 public class UserList {
-    private static Map users;
+    private static Set userNames;
 
     public UserList() {
-        Map<User,String> users = new HashMap<>();
+        Set<String> userNames = new HashSet<>();
     }
 
     /**
      * checks the list of users to see if it already exists in the map
-     * @param user user to check list
+     * @param userName user to check list
      * @return true if the userName is taken, false otherwise
      */
 
-    public boolean userExists(User user) {
-        return users.containsKey(user);
+    public boolean userNameExists(String userName) {
+        return userNames.contains(userName);
     }
 
     /**
      * adds the given user to the list
-     * @param user user to be added
+     * @param userName user to be added
      * @return true if user was added to the list, false otherwise
      */
 
-    public boolean addUser(User user) {
-        if (!userExists(user)) {
-            users.put(user,user.getPass());
-            return true;
-        }
-        return false;
+    public boolean addUser(String userName) {
+        return userNames.add(userName);
     }
 
 
