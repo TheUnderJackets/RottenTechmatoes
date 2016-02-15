@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
@@ -25,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        UserList.addUser(new User("a", "a", "a", "a"));
         final EditText username = (EditText) findViewById(R.id.username);
         final EditText password = (EditText) findViewById(R.id.password);
         Button signInButton = (Button) findViewById(R.id.signInButton);
@@ -56,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println(userName);
         String passWord = password.getText().toString();
         password.setText("");
-        if (UserList.isUserValid(userName)) {
+        if (UserList.isUserValid(userName, passWord)) {
             Intent loginIntent = new Intent(this, HomeActivity.class);
             User user = UserList.getUserByUsername(userName);
             loginIntent.putExtra(EXTRA_LOGIN_USEREMAIL, user.getEmail());

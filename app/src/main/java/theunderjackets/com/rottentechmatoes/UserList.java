@@ -20,7 +20,7 @@ public class UserList {
      * @return true if the userName is taken, false otherwise
      */
 
-    public boolean userExists(User user) {
+    public static boolean userExists(User user) {
         return users.contains(user);
     }
 
@@ -29,7 +29,7 @@ public class UserList {
      * @param user user to be added
      */
 
-    public void addUser(User user) {
+    public static void addUser(User user) {
         userNames.put(user, user.getUserName());
         users.add(user);
     }
@@ -38,7 +38,7 @@ public class UserList {
      * updates the list based on the given user
      * @param user user whose information has changed
      */
-    public void updateUser(User user) {
+    public static void updateUser(User user) {
         userNames.put(user, user.getUserName());
     }
 
@@ -49,7 +49,26 @@ public class UserList {
      * @return true if username is valid, false otherwise
      */
     public static boolean isUserValid(String username) {
-        return userNames.containsValue(username);
+        return !userNames.containsValue(username);
+    }
+
+    /**
+     * Checks to see if the username and password combo is valid.
+     * @param username username to check
+     * @param password password to check
+     * @return true if login attempt is valid, false otherwise
+     */
+    public static boolean isUserValid(String username, String password) {
+        User user;
+        if (!UserList.isUserValid(username)) {
+            user = UserList.getUserByUsername(username);
+        } else {
+            return false;
+        }
+        if (user.getPass().equals(password)) {
+            return true;
+        }
+        return false;
     }
 
     /**
