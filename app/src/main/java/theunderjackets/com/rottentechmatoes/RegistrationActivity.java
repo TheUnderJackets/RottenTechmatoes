@@ -13,8 +13,10 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class RegistrationActivity extends AppCompatActivity {
+    private Toast currentToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,17 +25,17 @@ public class RegistrationActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        EditText emailaddress = (EditText) findViewById(R.id.emailaddress);
-        EditText name = (EditText) findViewById(R.id.name);
-        EditText username = (EditText) findViewById(R.id.username);
-        EditText password = (EditText) findViewById(R.id.password);
-        EditText passwordrepeat = (EditText) findViewById(R.id.repeatpassword);
+        final EditText emailaddress = (EditText) findViewById(R.id.emailaddress);
+        final EditText name = (EditText) findViewById(R.id.name);
+        final EditText username = (EditText) findViewById(R.id.username);
+        final EditText password = (EditText) findViewById(R.id.password);
+        final EditText passwordrepeat = (EditText) findViewById(R.id.repeatpassword);
 
         Button registerButton = (Button) findViewById(R.id.registerButton);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                attemptRegistration();
+                attemptRegistration(v, emailaddress, name, username, password, passwordrepeat);
             }
         });
 
@@ -46,11 +48,42 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
     }
-    //Attempt registration based on text in @emailaddress, @var username, @var name
-    // @var password and @var password repeat
-    //TODO
-    private void attemptRegistration() {
 
+    /**
+     * Attempts to register a new user based on info entered.
+     * @param v the current view
+     * @param emailaddress the emailaddress box
+     * @param username the username box
+     * @param password the password box
+     * @param passwordrepeat the retype password box
+     */
+    private void attemptRegistration(View v, EditText emailaddress, EditText name, EditText username, EditText password, EditText passwordrepeat) {
+        String email = emailaddress.getText().toString();
+        String aName = name.getText().toString();
+        String userName = username.getText().toString();
+        String pass = password.getText().toString();
+        String passRepeat = passwordrepeat.getText().toString();
+        if (!UserList.isUserValid(userName)) {
+            CharSequence msgText = "Username has been taken. Please enter a different one.";
+            if (currentToast != null && currentToast.getView().isShown()) {
+                currentToast.cancel();
+            }
+            currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
+            currentToast.show();
+        } else if (!pass.equals(passRepeat)){
+            CharSequence msgText = "Repeat password does not match first password. Please try again.";
+            if (currentToast != null && currentToast.getView().isShown()) {
+                currentToast.cancel();
+            }
+            currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
+            currentToast.show();
+        } else{
+            Intent registerIntent = new Intent(this, EditProfileActivity.class);
+            User newUser = new User(aName, email, pass, userName);
+            //UserList.addUser(newUser);
+            startActivity(registerIntent);
+            finish();
+        }
     }
 
     /**
