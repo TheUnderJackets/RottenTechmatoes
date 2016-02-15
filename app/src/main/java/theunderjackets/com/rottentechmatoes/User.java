@@ -8,7 +8,7 @@ public class User {
     private String name;
     private Major major = Major.UNDECIDED;
     private String description = "";
-    //private RatingList ratings;
+
     //This is the only constructor necessary since these are the required fields, and
     //we will have a separate page for the rest. DELETE THIS LATER.
     public User(String name, String email, String pass, String userName) {
@@ -29,11 +29,11 @@ public class User {
     public String getName() {
         return name;
     }
-    //Is this necessary??? DELETE LATER
+
     public String getPass() {
         return pass;
     }
-    //Keep this around for later, might implement something like this. DELETE LATER
+
     public void changePass(String pass) {
         this.pass = pass;
     }
