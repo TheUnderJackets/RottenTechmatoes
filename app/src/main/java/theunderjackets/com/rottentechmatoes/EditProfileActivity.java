@@ -83,6 +83,7 @@ public class EditProfileActivity extends AppCompatActivity {
             user.setName(name);
             user.setDescription(description);
             user.setMajor(major);
+            UserList.updateUser(user);
             finish();
         } else {
             CharSequence msgText = "Username is already taken. Please try again.";

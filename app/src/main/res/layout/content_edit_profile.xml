@@ -47,6 +47,7 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
+        android:focusable="false"
         android:editable="false"
         android:id="@+id/inputEmail"
         android:layout_below="@+id/inputName"
