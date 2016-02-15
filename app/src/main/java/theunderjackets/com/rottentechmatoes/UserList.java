@@ -49,7 +49,7 @@ public class UserList {
      * @return true if username is valid, false otherwise
      */
     public static boolean isUserValid(String username) {
-        return !userNames.containsValue(username);
+        return userNames.containsValue(username);
     }
 
     /**
