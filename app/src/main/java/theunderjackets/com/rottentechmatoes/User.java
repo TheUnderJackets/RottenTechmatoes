@@ -6,28 +6,20 @@ public class User {
     private String pass;
     private String email;
     private String name;
-    private Major major;
-    private String bio;
+    private Major major = Major.UNDECIDED;
+    private String description = "";
 
-    public User(String name, String email, String pass, String userName, String major, String bio) {
+    //This is the only constructor necessary since these are the required fields, and
+    //we will have a separate page for the rest. DELETE THIS LATER.
+    public User(String name, String email, String pass, String userName) {
         this.userName = userName;
         this.name = name;
         this.pass = pass;
         this.email = email;
-        this.major = major;
-        this.bio = bio;
-    }
-
-    public User(String name, String email, String pass, String userName) {
-        this(name, email, pass, userName, "", "");
     }
 
     public String getUserName() {
         return userName;
-    }
-
-    public void changeUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getEmail() {
@@ -46,20 +38,28 @@ public class User {
         this.pass = pass;
     }
 
-    public String getMajor() {
+    public Major getMajor() {
         return major;
     }
 
-    public void changeMajor(Major major) {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setMajor(Major major) {
         this.major = major;
     }
 
-    public String getBio() {
-        return bio;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void changeBio(String newBio) {
-        this.bio = newBio;
+    public void setUserName(String name) {
+        this.userName = name;
+    }
+
+    public void setDescription(String desc) {
+        this.description = desc;
     }
 
 }
