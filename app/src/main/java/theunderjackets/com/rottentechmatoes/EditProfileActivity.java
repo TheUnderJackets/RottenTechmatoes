@@ -78,7 +78,7 @@ public class EditProfileActivity extends AppCompatActivity {
      * @param user current user
      */
     private void applyChanges(String username, String name, String description, Major major, User user) {
-        if (user.getUserName().equals(username) || UserList.isUserValid(username)) {
+        if (user.getUserName().equals(username) || UserList.isUserNameValid(username)) {
             user.setUserName(username);
             user.setName(name);
             user.setDescription(description);

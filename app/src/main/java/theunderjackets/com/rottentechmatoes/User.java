@@ -30,10 +30,6 @@ public class User {
         return name;
     }
 
-    public String getPass() {
-        return pass;
-    }
-
     public void changePass(String pass) {
         this.pass = pass;
     }
@@ -60,6 +56,15 @@ public class User {
 
     public void setDescription(String desc) {
         this.description = desc;
+    }
+
+    /**
+     * Checks if the password passed in is the same as the actual password.
+     * @param pass password to be checked
+     * @return true if they are equal, false otherwise
+     */
+    public boolean validatePassword(String pass) {
+        return this.pass.equals(pass);
     }
 
 }

@@ -48,7 +48,7 @@ public class UserList {
      * @param username the username we are checking for
      * @return true if username is valid, false otherwise
      */
-    public static boolean isUserValid(String username) {
+    public static boolean isUserNameValid(String username) {
         return !userNames.containsValue(username);
     }
 
@@ -60,15 +60,26 @@ public class UserList {
      */
     public static boolean isUserValid(String username, String password) {
         User user;
-        if (!UserList.isUserValid(username)) {
+        if (!UserList.isUserNameValid(username)) {
             user = UserList.getUserByUsername(username);
         } else {
             return false;
         }
-        if (user.getPass().equals(password)) {
-            return true;
+        return user.validatePassword(password);
+    }
+
+    /**
+     * Checks to see if the email entered during registration is taken or not.
+     * @param email email to be verified
+     * @return true if not used, false otherwise
+     */
+    public static boolean isEmailValid(String email) {
+        for (User user : users) {
+            if (user.getEmail().equals(email)) {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 
     /**

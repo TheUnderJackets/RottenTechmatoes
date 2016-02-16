@@ -63,13 +63,31 @@ public class RegistrationActivity extends AppCompatActivity {
         String userName = username.getText().toString();
         String pass = password.getText().toString();
         String passRepeat = passwordrepeat.getText().toString();
-        if (!UserList.isUserValid(userName)) {
+        if (email.equals("") || aName.equals("") || userName.equals("") || pass.equals("")) {
+            CharSequence msgText = "This is a required field. Make sure to enter something.";
+            if (currentToast != null && currentToast.getView().isShown()) {
+                currentToast.cancel();
+            }
+            currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
+            currentToast.show();
+        } else if (!UserList.isUserNameValid(userName)) {
             CharSequence msgText = "Username has been taken. Please enter a different one.";
             if (currentToast != null && currentToast.getView().isShown()) {
                 currentToast.cancel();
             }
             currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
             currentToast.show();
+            username.setText("");
+            username.requestFocus();
+        } else if (!UserList.isEmailValid(email)) {
+            CharSequence msgText = "Email is already taken. Enter a different one.";
+            if (currentToast != null && currentToast.getView().isShown()) {
+                currentToast.cancel();
+            }
+            currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
+            currentToast.show();
+            emailaddress.setText("");
+            emailaddress.requestFocus();
         } else if (!pass.equals(passRepeat)){
             CharSequence msgText = "Repeat password does not match first password. Please try again.";
             if (currentToast != null && currentToast.getView().isShown()) {
@@ -77,13 +95,23 @@ public class RegistrationActivity extends AppCompatActivity {
             }
             currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
             currentToast.show();
-        } else{
-            Intent registerIntent = new Intent(this, EditProfileActivity.class);
+            password.setText("");
+            passwordrepeat.setText("");
+            password.requestFocus();
+        } else {
             User newUser = new User(aName, email, pass, userName);
-            //UserList.addUser(newUser);
-            startActivity(registerIntent);
+            UserList.addUser(newUser);
             finish();
         }
+    }
+
+    /**
+     * Checks to see if the email used during registration is available or not.
+     * @param email the email to check
+     * @return true if email is unused, false otherwise
+     */
+    public static boolean isEmailValid(String email) {
+        return true;
     }
 
     /**
