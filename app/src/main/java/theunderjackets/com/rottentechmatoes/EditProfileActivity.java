@@ -27,7 +27,7 @@ public class EditProfileActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
-        final User user = UserList.getUserByEmail(intent.getStringExtra(HomeActivity.EXTRA_LOGIN_USEREMAIL));
+        final User user = CurrentUser.getInstance().getUser();
         TextView userNameText = (TextView) findViewById(R.id.textUsername);
         TextView nameText = (TextView) findViewById(R.id.textName);
         TextView emailText = (TextView) findViewById(R.id.textEmail);

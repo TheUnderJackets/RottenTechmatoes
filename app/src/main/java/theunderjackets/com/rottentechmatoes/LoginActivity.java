@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
-    public static final String EXTRA_LOGIN_USEREMAIL = "theunderjackets.com.rottentechmatoes.LoginActivity.USEREMAIL";
     private Toast currentToast;
     private int incorrectLoginCounter = 0;
     @Override
@@ -57,7 +56,8 @@ public class LoginActivity extends AppCompatActivity {
         if (UserList.isUserValid(userName, passWord)) {
             Intent loginIntent = new Intent(this, HomeActivity.class);
             User user = UserList.getUserByUsername(userName);
-            loginIntent.putExtra(EXTRA_LOGIN_USEREMAIL, user.getEmail());
+            CurrentUser current = CurrentUser.getInstance();
+            current.setUser(user);
             startActivity(loginIntent);
         } else {
             if (++incorrectLoginCounter >= 3) {

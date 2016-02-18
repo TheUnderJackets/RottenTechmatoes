@@ -17,7 +17,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity {
-    public static final String EXTRA_LOGIN_USEREMAIL = "theunderjackets.com.rottentechmatoes.HomeActivity.USEREMAIL";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,14 +25,14 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
-        String userEmail = intent.getStringExtra(LoginActivity.EXTRA_LOGIN_USEREMAIL);
-        final User user = UserList.getUserByEmail(userEmail);
-        TextView welcomeUser = (TextView) findViewById(R.id.textViewWelcomeUser);
+        final User user = CurrentUser.getInstance().getUser();
+        final TextView welcomeUser = (TextView) findViewById(R.id.textViewWelcomeUser);
         welcomeUser.setText("Welcome " + user.getUserName() + "!");
         Button logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CurrentUser.getInstance().setUser(null);
                 Intent intent = new Intent(HomeActivity.this, WelcomeScreenActivity.class);
                 startActivity(intent);
                 finish();
@@ -44,8 +43,8 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, EditProfileActivity.class);
-                intent.putExtra(HomeActivity.EXTRA_LOGIN_USEREMAIL, user.getEmail());
                 startActivity(intent);
+                welcomeUser.setText("Welcome " + user.getUserName() + "!");
             }
         });
     }
@@ -70,6 +69,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
         return super.dispatchTouchEvent(event);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        final User user = CurrentUser.getInstance().getUser();
+        final TextView welcomeUser = (TextView) findViewById(R.id.textViewWelcomeUser);
+        welcomeUser.setText("Welcome " + user.getUserName() + "!");
     }
 
 }
