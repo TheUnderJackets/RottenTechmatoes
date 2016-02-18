@@ -6,12 +6,11 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 
-public class UserList {
+public final class UserList {
     private static Map<User, String> userNames = new HashMap<>();
     private static Set<User> users = new HashSet<>();
 
-    public UserList() {
-
+    private UserList() {
     }
 
     /**
