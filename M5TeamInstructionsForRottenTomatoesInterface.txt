@@ -1,0 +1,18 @@
+I did not get the chance to fully implement the search requests from Rotten
+Tomatoes. However, I did stub out all of the methods that I will have. Here's
+how the flow of control goes.
+From the HomeActivity, using an OnClickListener for the searches or something,
+call
+RequestQueueSingleton.getInstance().add(RottenTomatoes.getMovies(stuff));
+using the enums that I've made. This will update the singleton with the results
+for the rest call. Then, get the results using the respective getter method
+from the singleton in the search results activity to get the list of movies
+or simply the movie itself.
+
+I'm sorry that I could not fully implement this, but to make it up to you, I'll
+make sure that everything compiles and works when I get back from MHacks. You
+won't be able to see if your stuff works if you implement the stuff above since
+I haven't fully implemented my stuff yet, so I recommend using dummy variables
+and workarounds and use the above ^ once you know your stuff works.
+
+- Andrew
