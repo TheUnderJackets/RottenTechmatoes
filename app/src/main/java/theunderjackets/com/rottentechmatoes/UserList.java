@@ -27,7 +27,6 @@ public final class UserList {
      * adds the given user to the list
      * @param user user to be added
      */
-
     public static void addUser(User user) {
         userNames.put(user, user.getUserName());
         users.add(user);
