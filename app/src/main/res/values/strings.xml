@@ -43,6 +43,8 @@
     <string name="input_text_description">Description:</string>
     <string name="action_apply_changes">Apply Changes</string>
     <string name="action_cancel_changes">Cancel</string>
+    <string name="title_movie_list">Movies</string>
+    <string name="title_movie_detail">Movie Detail</string>
 
 
 </resources>
