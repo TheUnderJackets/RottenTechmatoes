@@ -2,6 +2,9 @@ package theunderjackets.com.rottentechmatoes;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -13,12 +16,16 @@ import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import theunderjackets.com.rottentechmatoes.dummy.*;
 import theunderjackets.com.rottentechmatoes.dummy.Movie;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -100,8 +107,12 @@ public class MovieListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
+            Bitmap bmp = getBitmapFromURL(mValues.get(position).getThumbnailURL());
+            if (bmp != null) {
+                holder.mThumbnail.setImageBitmap(bmp);
+            }
             holder.mIdView.setText(mValues.get(position).getTitle());
-            holder.mContentView.setText(mValues.get(position).toString());
+            holder.mContentView.setText(mValues.get(position).getGenresString());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -134,6 +145,7 @@ public class MovieListActivity extends AppCompatActivity {
             public final View mView;
             public final TextView mIdView;
             public final TextView mContentView;
+            public final ImageView mThumbnail;
             public Movie mItem;
 
             public ViewHolder(View view) {
@@ -141,11 +153,31 @@ public class MovieListActivity extends AppCompatActivity {
                 mView = view;
                 mIdView = (TextView) view.findViewById(R.id.id);
                 mContentView = (TextView) view.findViewById(R.id.content);
+                mThumbnail = (ImageView) view.findViewById(R.id.thumbnail);
             }
 
             @Override
             public String toString() {
                 return super.toString() + " '" + mContentView.getText() + "'";
+            }
+        }
+
+        private Bitmap getBitmapFromURL(String src) {
+            try {
+
+                URL url = new URL(src);
+                HttpURLConnection connection = (HttpURLConnection) url
+                        .openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+
+                return BitmapFactory.decodeStream(input);
+
+            } catch (Exception ex) {
+
+                return null;
+
             }
         }
     }

@@ -33,6 +33,11 @@
     <string name="action_profile">Profile</string>
     <string name="action_logout">Logout</string>
     <string name="text_welcome">Welcome</string>
+    <string name="hint_search">Search for…</string>
+    <string name="action_search">Search</string>
+    <string name="action_newReleases">New\nReleases</string>
+    <string name="action_topRentals">Top\nRentals</string>
+    <string name="action_recommend">Recommendations</string>
     <string name="title_activity_edit_profile">EditProfileActivity</string>
     <!--Strings related to Edit Profile-->
     <string name="text_profile">Profile</string>
@@ -45,6 +50,8 @@
     <string name="action_cancel_changes">Cancel</string>
     <string name="title_movie_list">Movies</string>
     <string name="title_movie_detail">Movie Detail</string>
+    <!--Strings related to search results-->
+    <string name="text_thumbnail">Thumbnail</string>
 
 
 </resources>

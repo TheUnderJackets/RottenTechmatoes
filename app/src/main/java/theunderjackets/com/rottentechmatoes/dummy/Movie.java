@@ -60,13 +60,12 @@ public class Movie implements Serializable{
         return thumbnailURL;
     }
 
-    @Override
-    public String toString() {
+    public String getGenresString() {
         String movieDetails = "";
         for (Genre g: genres) {
             movieDetails = movieDetails + " " + g;
 
         }
-        return movieDetails + " " + synopsis;
+        return movieDetails;
     }
 }

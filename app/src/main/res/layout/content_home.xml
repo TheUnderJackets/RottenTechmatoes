@@ -19,8 +19,7 @@
         android:text="@string/text_welcome"
         android:id="@+id/textViewWelcomeUser"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="92dp" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -39,5 +38,51 @@
         android:id="@+id/editProfileButton"
         android:layout_alignTop="@+id/logoutButton"
         android:layout_toStartOf="@+id/textViewWelcomeUser" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchEditText"
+        android:layout_below="@+id/textViewWelcomeUser"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp"
+        android:hint="@string/hint_search"
+        android:layout_toStartOf="@+id/logoutButton"
+        android:layout_alignEnd="@+id/textViewWelcomeUser" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchButton"
+        android:layout_alignBottom="@+id/searchEditText"
+        android:layout_alignParentEnd="true"
+        android:text="@string/action_search" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_topRentals"
+        android:id="@+id/topRentButton"
+        android:layout_marginTop="58dp"
+        android:layout_below="@+id/searchEditText"
+        android:layout_toStartOf="@+id/textViewWelcomeUser" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_newReleases"
+        android:id="@+id/newReleaseButton"
+        android:layout_alignTop="@+id/topRentButton"
+        android:layout_toEndOf="@+id/searchEditText" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_recommend"
+        android:id="@+id/recommendButton"
+        android:layout_marginTop="51dp"
+        android:layout_below="@+id/topRentButton"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="12dp" />
 
 </RelativeLayout>

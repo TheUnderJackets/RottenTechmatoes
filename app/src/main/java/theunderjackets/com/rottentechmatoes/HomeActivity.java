@@ -28,6 +28,7 @@ public class HomeActivity extends AppCompatActivity {
         final User user = CurrentUser.getInstance().getUser();
         final TextView welcomeUser = (TextView) findViewById(R.id.textViewWelcomeUser);
         welcomeUser.setText("Welcome " + user.getUserName() + "!");
+
         Button logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +39,7 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         Button profileButton = (Button) findViewById(R.id.editProfileButton);
         profileButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +47,39 @@ public class HomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(HomeActivity.this, EditProfileActivity.class);
                 startActivity(intent);
                 welcomeUser.setText("Welcome " + user.getUserName() + "!");
+            }
+        });
+
+        final EditText nameSearch = (EditText) findViewById(R.id.searchEditText);
+        Button searchButton = (Button) findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Search.byName(nameSearch.getText());
+            }
+        });
+
+        Button topRentalsButton = (Button) findViewById(R.id.topRentButton);
+        topRentalsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Search.topRentals();
+            }
+        });
+
+        Button newReleaseButton = (Button) findViewById(R.id.newReleaseButton);
+        newReleaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Search.newReleases();
+            }
+        });
+
+        Button recommendButton = (Button) findViewById(R.id.recommendButton);
+        recommendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Search.recommend(user.getMajor());
             }
         });
     }
