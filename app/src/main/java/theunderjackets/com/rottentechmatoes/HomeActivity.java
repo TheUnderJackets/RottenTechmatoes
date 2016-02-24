@@ -56,6 +56,8 @@ public class HomeActivity extends AppCompatActivity {
                 welcomeUser.setText("Welcome " + user.getUserName() + "!");
             }
         });
+        //Ben, this is an example of how to do this thingy. Put this stuff into an OnClickListener().
+        //Search.byKeyword(10, HomeActivity.this, MovieController.class, "Fire");
     }
 
     /**
