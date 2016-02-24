@@ -23,7 +23,7 @@ public class MovieController extends AppCompatActivity implements AdapterView.On
 
         //Receives the intent.
         Intent intent = getIntent();
-        MovieList list = intent.getParcelableExtra(HomeActivity.MOVIE_LIST_EXTRA);
+        MovieList list = intent.getParcelableExtra(Search.MOVIES_EXTRAS);
         for (int i = 0; i < list.getMovies().size(); i++) {
             System.out.println(list.getMovies().get(i).getTitle());
         }

@@ -1,34 +1,66 @@
 package theunderjackets.com.rottentechmatoes;
 
+import android.content.Context;
+import android.content.Intent;
+
 /**
  * Created by will on 2/21/16.
  */
 public final class Search {
-    private static MovieList list = new MovieList();
+//Different Search for each type
+    //Keyword, new rel, top rentals
 
     private Search() {
     }
+
     /**
      * Returns a list from searching by movie name
      * @param movieName name of searched movie
      * @return list containing searched movie
      */
-    public static MovieList byName(String movieName) {
-        list.addMovie(list.getMovieByTitle(movieName));
-        return list;
+    public final static String MOVIES_EXTRAS = "theunderjackets.com.rottentechmatoes.Search.MovieList";
+    public static void byKeyword(int limit, Context activity, Class goal, String query) { //activity - from, goal - to
+        query = query.replaceAll(" ", "+");
+        RottenTomatoes.getMovies(RottenTomatoesRequest.MOVIE_KEYWORD_SEARCH, limit, activity, goal, new RTCallBack() {
+            @Override
+            public void fireIntent(MovieList list, Context thisActivityContext, Class goalClass) {
+                Intent intent = new Intent(thisActivityContext, goalClass);
+                intent.putExtra(MOVIES_EXTRAS, list);
+                thisActivityContext.startActivity(intent);
+            }
+        },query);
     }
 
-    /**
-     * Returns a list from searching by movie id
-     * @param id ID of searched movie
-     * @return list containing searched movie
-     */
-    public static MovieList byID(String id) {
-        list.addMovie(list.getMovieById(id));
-        return list;
+    public static void byRentals(int limit, Context activity, Class goal) { //activity - from, goal - to
+        RottenTomatoes.getMovies(RottenTomatoesRequest.TOP_RENTALS, limit, activity, goal, new RTCallBack() {
+            @Override
+            public void fireIntent(MovieList list, Context thisActivityContext, Class goalClass) {
+                Intent intent = new Intent(thisActivityContext, goalClass);
+                intent.putExtra(MOVIES_EXTRAS, list);
+                thisActivityContext.startActivity(intent);
+            }
+        });
     }
 
-    /**
-     * Need more methods in MovieList to implement other search functions.
-     */
+    public static void byNewDVD(int limit, Context activity, Class goal) { //activity - from, goal - to
+        RottenTomatoes.getMovies(RottenTomatoesRequest.NEW_RELEASES_DVD, limit, activity, goal, new RTCallBack() {
+            @Override
+            public void fireIntent(MovieList list, Context thisActivityContext, Class goalClass) {
+                Intent intent = new Intent(thisActivityContext, goalClass);
+                intent.putExtra(MOVIES_EXTRAS, list);
+                thisActivityContext.startActivity(intent);
+            }
+        });
+    }
+
+    public static void byNewMovies(int limit, Context activity, Class goal) { //activity - from, goal - to
+        RottenTomatoes.getMovies(RottenTomatoesRequest.NEW_RELEASES_MOVIES, limit, activity, goal, new RTCallBack() {
+            @Override
+            public void fireIntent(MovieList list, Context thisActivityContext, Class goalClass) {
+                Intent intent = new Intent(thisActivityContext, goalClass);
+                intent.putExtra(MOVIES_EXTRAS, list);
+                thisActivityContext.startActivity(intent);
+            }
+        });
+    }
 }

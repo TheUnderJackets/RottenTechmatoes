@@ -16,6 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/*Format for Search in OnClick method:
+ *
+ * By Keyword:
+ *Search.byKeyword(10, HomeActivity.this, MovieController.class, "Title");
+ *
+ *  All other three Search methods:
+ * Search.byRentals(10, HomeActivity.this, MovieController.class);
+ */
 public class HomeActivity extends AppCompatActivity {
     public static final String MOVIE_LIST_EXTRA = "theunderjackets.com.rottentechmatoes.MOVIELIST";
     @Override
