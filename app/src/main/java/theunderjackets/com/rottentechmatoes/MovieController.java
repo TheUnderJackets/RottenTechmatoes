@@ -21,6 +21,12 @@ public class MovieController extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_controller);
 
+        //Receives the intent.
+        Intent intent = getIntent();
+        MovieList list = intent.getParcelableExtra(HomeActivity.MOVIE_LIST_EXTRA);
+        for (int i = 0; i < list.getMovies().size(); i++) {
+            System.out.println(list.getMovies().get(i).getTitle());
+        }
         //Get the List control reference (Step 2 above)
         ListView listView = (ListView) findViewById(R.id.listView);
 
@@ -29,7 +35,7 @@ public class MovieController extends AppCompatActivity implements AdapterView.On
 
         // Add the search stuff, need the context for getInstance()
         // RequestQueueSingleton mgr = RequestQueueSingleton.getInstance();
-        // listView.setAdapter(new MovieAdapter(this, R.layout.list_item, R.id.textView, mgr.getMovies()));
+        //listView.setAdapter(new MovieAdapter(this, android.R.layout.simple_list_item_1, android.R.layout.test_list_item, list));
 
     }
 
