@@ -26,7 +26,10 @@ import theunderjackets.com.rottentechmatoes.dummy.Movie;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+
+import static theunderjackets.com.rottentechmatoes.Search.MOVIES_EXTRAS;
 
 /**
  * An activity representing a list of Movies. This activity
@@ -44,7 +47,8 @@ public class MovieListActivity extends AppCompatActivity {
      */
     private boolean mTwoPane;
 
-    private List<theunderjackets.com.rottentechmatoes.dummy.Movie> movies;
+
+    protected static List<theunderjackets.com.rottentechmatoes.Movie>  movies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,9 @@ public class MovieListActivity extends AppCompatActivity {
             }
         });
 
+
+
+
         View recyclerView = findViewById(R.id.movie_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
@@ -77,11 +84,14 @@ public class MovieListActivity extends AppCompatActivity {
         }
 
         //get movies from intent
-        movies = (List<Movie>) getIntent().getSerializableExtra("movies");
-        for (theunderjackets.com.rottentechmatoes.dummy.Movie m: movies)
-        {
+        MovieList movieList = getIntent().getParcelableExtra(MOVIES_EXTRAS);
+        movies = movieList.getMovies();
+        Movies.clear();
+        for(theunderjackets.com.rottentechmatoes.Movie m: movies) {
             Movies.addItem(m);
         }
+
+
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -91,16 +101,16 @@ public class MovieListActivity extends AppCompatActivity {
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<Movie> mValues;
+        private final List<theunderjackets.com.rottentechmatoes.Movie> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<Movie> items) {
+        public SimpleItemRecyclerViewAdapter(List<theunderjackets.com.rottentechmatoes.Movie> items) {
             mValues = items;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.movie_list_content, parent, false);
+                    .inflate(R.layout.movie_list_content1, parent, false);
             return new ViewHolder(view);
         }
 
@@ -112,7 +122,8 @@ public class MovieListActivity extends AppCompatActivity {
                 holder.mThumbnail.setImageBitmap(bmp);
             }
             holder.mIdView.setText(mValues.get(position).getTitle());
-            holder.mContentView.setText(mValues.get(position).getGenresString());
+            String rating = "Rating: " + mValues.get(position).getApiRating();
+            holder.mContentView.setText(rating);
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -135,33 +146,6 @@ public class MovieListActivity extends AppCompatActivity {
                 }
             });
         }
-
-        @Override
-        public int getItemCount() {
-            return mValues.size();
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            public final View mView;
-            public final TextView mIdView;
-            public final TextView mContentView;
-            public final ImageView mThumbnail;
-            public Movie mItem;
-
-            public ViewHolder(View view) {
-                super(view);
-                mView = view;
-                mIdView = (TextView) view.findViewById(R.id.id);
-                mContentView = (TextView) view.findViewById(R.id.content);
-                mThumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            }
-
-            @Override
-            public String toString() {
-                return super.toString() + " '" + mContentView.getText() + "'";
-            }
-        }
-
         private Bitmap getBitmapFromURL(String src) {
             try {
 
@@ -180,5 +164,33 @@ public class MovieListActivity extends AppCompatActivity {
 
             }
         }
+
+        @Override
+        public int getItemCount() {
+            return mValues.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            public final View mView;
+            public final TextView mIdView;
+            public final TextView mContentView;
+            public final ImageView mThumbnail;
+            public theunderjackets.com.rottentechmatoes.Movie mItem;
+
+            public ViewHolder(View view) {
+                super(view);
+                mView = view;
+                mIdView = (TextView) view.findViewById(R.id.title);
+                mContentView = (TextView) view.findViewById(R.id.rating);
+                mThumbnail = (ImageView) view.findViewById(R.id.thumbnail);
+            }
+
+            @Override
+            public String toString() {
+                return super.toString() + " '" + mContentView.getText() + "'";
+            }
+        }
+
+
     }
 }

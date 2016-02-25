@@ -115,4 +115,6 @@ public class Movie implements Parcelable {
     public String getThumbnailURL() {
         return thumbnailURL;
     }
+
+
 }

@@ -52,11 +52,12 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         final EditText nameSearch = (EditText) findViewById(R.id.searchEditText);
+        final String keyword = nameSearch.toString();
         Button searchButton = (Button) findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Search.byName(nameSearch.getText());
+                Search.byKeyword(10, HomeActivity.this, MovieListActivity.class, keyword);
             }
         });
 
@@ -64,7 +65,7 @@ public class HomeActivity extends AppCompatActivity {
         topRentalsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Search.topRentals();
+                Search.byRentals(10, HomeActivity.this, MovieListActivity.class);
             }
         });
 
@@ -72,7 +73,7 @@ public class HomeActivity extends AppCompatActivity {
         newReleaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Search.newReleases();
+                Search.byNewMovies(10, HomeActivity.this, MovieListActivity.class);
             }
         });
 
