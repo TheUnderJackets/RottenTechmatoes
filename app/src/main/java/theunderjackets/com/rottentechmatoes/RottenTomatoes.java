@@ -1,5 +1,7 @@
 package theunderjackets.com.rottentechmatoes;
 
+import android.content.Context;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -11,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.ConnectException;
 import java.util.List;
 
 /**
@@ -24,42 +27,103 @@ public final class RottenTomatoes {
     }
 
     /**
-     * Makes a REST request from RottenTomatoes and returns a JsonObjectRequest
+     * Makes a REST request to RottenTomatoes and fills a MovieList with the results, which is passed along through an Intent.
      * @param urlRequest the type of request in url form
      * @param limit the limit on number of movies in the list (maximum)
+     * @param activityContext the activity context
+     * @param goalClass the class to fire the intent to
+     * @param callback the code to execute once the results are back
      * @param query the query of the search if of type keyword search
-     * @return the list of movies queried for
+     * @throws IllegalStateException if server access is denied
      */
-    public static JsonObjectRequest getMovies(RottenTomatoesRequest urlRequest, int limit, String query) {
-    String url = urlRequest.getRequestURL() + "?";
-    if (urlRequest.equals(RottenTomatoesRequest.MOVIE_KEYWORD_SEARCH)) {
-        url += "q=" + query + "&";
-    }
-    url += "limit=" + limit;
-    url += "&country=us&apikey=" + apiKey;
-    return makeCall(url);
+    public static void getMovies(RottenTomatoesRequest urlRequest, int limit, Context activityContext, Class goalClass, RTCallBack callback, String query) {
+        String url = urlRequest.getRequestURL() + "?";
+        if (urlRequest.equals(RottenTomatoesRequest.MOVIE_KEYWORD_SEARCH) && query != null) {
+            url += "q=" + query + "&";
+        }
+        url += "limit=" + limit;
+        url += "&country=us&apikey=" + apiKey;
+        RequestQueueSingleton.getInstance(activityContext.getApplicationContext()).add(makeCall(url, callback, activityContext, goalClass, limit));
     }
 
     /**
-     * Makes a REST request from RottenTomatoes and gets a list of movies
+     * Makes a REST request to RottenTomatoes and fills a MovieList with the results, which is passed along through an Intent.
      * @param urlRequest the type of request in url form
      * @param limit the limit on number of movies in the list (maximum)
-     * @return a request for the query made
+     * @param context the activity context
+     * @param goalClass the goal class
+     * @param callback the code that exuecutes once results are returned
+     * @throws IllegalArgumentException if query is of type keyword search
+     * @throws IllegalStateException if server access is denied
      */
-    public static JsonObjectRequest getMovies(RottenTomatoesRequest urlRequest, int limit) {
-        return getMovies(urlRequest, limit, null);
+    public static void getMovies(RottenTomatoesRequest urlRequest, int limit, Context context, Class goalClass, RTCallBack callback) {
+        if (urlRequest.equals(RottenTomatoesRequest.MOVIE_KEYWORD_SEARCH)) {
+            throw new IllegalArgumentException("You cannot have an empty query parameter for keyword search.");
+        }
+        getMovies(urlRequest, limit, context, goalClass, callback, null);
     }
-    // Don't worry about this.
-    private static JsonObjectRequest makeCall(String url) {
+
+    /**
+     * Nakes a REST request to RottenTomatoes and parses the information using the url given. It also
+     * executes the code passed in as a callback method.
+     * @param url url for REST request
+     * @param callback code that executes after the results are returned
+     * @param activityContext context of the current activity
+     * @param goalClass class of the class to fire the intent to
+     * @param limit the number of queries to limit to
+     * @return
+     */
+    private static JsonObjectRequest makeCall(String url, final RTCallBack callback, final Context activityContext, final Class goalClass, final int limit) {
         return new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject resp) {
-
+                JSONArray arrMain = null;
+                MovieList list = new MovieList();
+                try {
+                    arrMain = resp.getJSONArray("movies");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                assert arrMain != null;
+                int bound = limit;
+                if (limit > arrMain.length()) {
+                    bound = arrMain.length();
+                }
+                    for (int i = 0; i < bound; i++) {
+                        String id = "Not Available", title = "Not Available", theaterReleaseDate = "Not Available", synopsis = "Not Available", thumbnailURL = "Not Available";
+                        double apiRating = 0;
+                        int year = 0;
+                        int runtime = 0;
+                        JSONObject obj = null;
+                        try {
+                            obj = arrMain.getJSONObject(i);
+                            id = obj.getString("id");
+                            title = obj.getString("title");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            synopsis = obj.getString("synopsis");
+                            year = obj.getInt("year");
+                            runtime = obj.getInt("runtime");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            apiRating = obj.getJSONObject("ratings").getInt("critics_score");
+                            thumbnailURL = obj.getJSONObject("posters").getString("thumbnail");
+                            theaterReleaseDate = obj.getJSONObject("release_dates").getString("theater");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        list.addMovie(new Movie(id, title, year, runtime, theaterReleaseDate, apiRating, synopsis, thumbnailURL));
+                    }
+                callback.fireIntent(list, activityContext, goalClass);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                throw new IllegalStateException("Could not connect to the server.");
             }
 
         });
@@ -71,19 +135,13 @@ public final class RottenTomatoes {
      * @param id id of the movie
      * @return a request for the query made
      */
+    /*
     public static JsonObjectRequest getMovieInfo(RottenTomatoesRequest urlRequest, String id) {
         String url = urlRequest.getRequestURL() + "?";
         url += "id=" + id;
         url += "&country=us&apikey=" + apiKey;
         return makeCall(url);
     }
-
-    private void goToResultsScreen(List<Movie> movies) {
-
-    }
-
-    private void goToMovieScreen(Movie movie) {
-
-    }
+    */
 
 }

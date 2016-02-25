@@ -1,18 +1,68 @@
 package theunderjackets.com.rottentechmatoes;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-public class MovieList {
-    private Set<Movie> movies = new HashSet<>();
+public class MovieList implements Parcelable {
+    private List<Movie> movies = new ArrayList<>();
 
     /**
-     * A no args constructor that initiates an empty MovieList
+     * Default constructor for constructing list.
      */
-    private MovieList() {
+    public MovieList() {
 
     }
+
+    /**
+     * Private constructor for implementation of Parcelable.
+     * @param in parcel used to construct the object
+     */
+    private MovieList(Parcel in) {
+        this.movies = in.readArrayList(Movie.class.getClassLoader());
+    }
+
+    /**
+     * Implementation of Parcelable. Ensures that the read/write are given in FIFO.
+     * @param dest destination parcel
+     * @param flags flags
+     */
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeList(movies);
+    }
+
+    /**
+     * Basic implementation of describeContents(). For our purposes, we have no need to customize
+     * the implementation.
+     * @return 0
+     */
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    /**
+     * Constant for implementation of Parcelable.
+     */
+    public static final Parcelable.Creator<MovieList> CREATOR =
+            new Parcelable.Creator<MovieList>() {
+
+                @Override
+                public MovieList createFromParcel(Parcel source) {
+                    return new MovieList(source);
+                }
+
+                @Override
+                public MovieList[] newArray(int size) {
+                    return new MovieList[size];
+                }
+            };
 
     /**
      * Adds the movie to the list.
@@ -69,5 +119,13 @@ public class MovieList {
             }
         }
         throw new NoSuchElementException("Movie is not in list.");
+    }
+
+    /**
+     * Getter method for the list of movies.
+     * @return list of movies
+     */
+    public List<Movie> getMovies() {
+        return movies;
     }
 }

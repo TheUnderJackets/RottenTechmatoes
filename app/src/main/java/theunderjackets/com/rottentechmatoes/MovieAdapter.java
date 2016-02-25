@@ -27,8 +27,8 @@ public class MovieAdapter extends ArrayAdapter<Movie>{
 
     }
     // Constructor of ArrayAdapter
-    public MovieAdapter(Context context, int resource, int textViewResourceId, List<Movie> objects) {
-        super(context, resource, textViewResourceId, objects);
+    public MovieAdapter(Context context, int resource, int textViewResourceId, MovieList objects) {
+        super(context, resource, textViewResourceId, objects.getMovies());
     }
 
     @Override

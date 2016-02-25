@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class HomeActivity extends AppCompatActivity {
+    public static final String MOVIE_LIST_EXTRA = "theunderjackets.com.rottentechmatoes.MOVIELIST";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
