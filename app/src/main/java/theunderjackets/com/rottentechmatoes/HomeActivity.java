@@ -15,9 +15,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
     public static final String MOVIE_LIST_EXTRA = "theunderjackets.com.rottentechmatoes.MOVIELIST";
+    private Toast currentToast;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +30,6 @@ public class HomeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final User user = CurrentUser.getInstance().getUser();
         final TextView welcomeUser = (TextView) findViewById(R.id.textViewWelcomeUser);
-        welcomeUser.setText("Welcome " + user.getUserName() + "!");
 
         Button logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -52,12 +53,21 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         final EditText nameSearch = (EditText) findViewById(R.id.searchEditText);
-        final String keyword = nameSearch.toString();
         Button searchButton = (Button) findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Search.byKeyword(10, HomeActivity.this, MovieListActivity.class, keyword);
+                final String keyword = nameSearch.getText().toString();
+                if (keyword.equals("") || keyword == null) {
+                    CharSequence msgText = "Search field cannot be empty.";
+                    if (currentToast != null && currentToast.getView().isShown()) {
+                        currentToast.cancel();
+                    }
+                    currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
+                    currentToast.show();
+                } else {
+                    Search.byKeyword(10, HomeActivity.this, MovieListActivity.class, keyword);
+                }
             }
         });
 
@@ -81,7 +91,7 @@ public class HomeActivity extends AppCompatActivity {
         newDVDButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Search.byNewDVD(10, HomeActivity.this,MovieListActivity.class);
+                Search.byNewDVD(10, HomeActivity.this, MovieListActivity.class);
             }
         });
 

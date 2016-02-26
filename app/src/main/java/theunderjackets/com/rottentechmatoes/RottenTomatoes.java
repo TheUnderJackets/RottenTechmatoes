@@ -38,11 +38,14 @@ public final class RottenTomatoes {
      */
     public static void getMovies(RottenTomatoesRequest urlRequest, int limit, Context activityContext, Class goalClass, RTCallBack callback, String query) {
         String url = urlRequest.getRequestURL() + "?";
-        if (urlRequest.equals(RottenTomatoesRequest.MOVIE_KEYWORD_SEARCH) && query != null) {
+        if (urlRequest.equals(RottenTomatoesRequest.MOVIE_KEYWORD_SEARCH) && query != null && !query.equals("")) {
             url += "q=" + query + "&";
+            url += "page_limit=" + limit;
+            url += "&apikey=" + apiKey;
+        } else {
+            url += "limit=" + limit;
+            url += "&country=us&apikey=" + apiKey;
         }
-        url += "limit=" + limit;
-        url += "&country=us&apikey=" + apiKey;
         RequestQueueSingleton.getInstance(activityContext.getApplicationContext()).add(makeCall(url, callback, activityContext, goalClass, limit));
     }
 
