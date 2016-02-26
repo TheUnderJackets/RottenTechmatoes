@@ -85,4 +85,12 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="12dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_newDVDs"
+        android:id="@+id/newDVDButton"
+        android:layout_alignTop="@+id/recommendButton"
+        android:layout_toEndOf="@+id/textViewWelcomeUser" />
+
 </RelativeLayout>

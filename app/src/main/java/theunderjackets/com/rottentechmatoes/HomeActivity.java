@@ -77,6 +77,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        Button newDVDButton = (Button) findViewById(R.id.newDVDButton);
+        newDVDButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Search.byNewDVD(10, HomeActivity.this,MovieListActivity.class);
+            }
+        });
+
         Button recommendButton = (Button) findViewById(R.id.recommendButton);
         recommendButton.setOnClickListener(new View.OnClickListener() {
             @Override
