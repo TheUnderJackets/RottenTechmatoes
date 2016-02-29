@@ -1,6 +1,8 @@
 package theunderjackets.com.rottentechmatoes;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -13,7 +15,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.net.ConnectException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -94,7 +99,7 @@ public final class RottenTomatoes {
                 }
                     for (int i = 0; i < bound; i++) {
                         String id = "Not Available", title = "Not Available", theaterReleaseDate = "Not Available", synopsis = "Not Available", thumbnailURL = "Not Available";
-                        double apiRating = 0;
+                        String apiRating = "0";
                         int year = 0;
                         int runtime = 0;
                         JSONObject obj = null;
@@ -106,20 +111,29 @@ public final class RottenTomatoes {
                             e.printStackTrace();
                         }
                         try {
-                            synopsis = obj.getString("synopsis");
-                            year = obj.getInt("year");
-                            runtime = obj.getInt("runtime");
-                        } catch (JSONException e) {
+                            if (!obj.getString("synopsis").equals("")) {
+                                synopsis = obj.getString("synopsis");
+                            }
+                            year = Integer.parseInt(obj.getString("year"));
+                            runtime = Integer.parseInt(obj.getString("runtime"));
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                         try {
-                            apiRating = obj.getJSONObject("ratings").getInt("critics_score");
+                            apiRating = obj.getJSONObject("ratings").getString("audience_score");
+                            if (apiRating.equals("-1") || apiRating.equals("")) {
+                                apiRating = obj.getJSONObject("ratings").getString("critics_score");
+                            }
+                            if (apiRating.equals("-1") || apiRating.equals("")) {
+                                apiRating = "Not Rated Yet";
+                            }
                             thumbnailURL = obj.getJSONObject("posters").getString("thumbnail");
                             theaterReleaseDate = obj.getJSONObject("release_dates").getString("theater");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        list.addMovie(new Movie(id, title, year, runtime, theaterReleaseDate, apiRating, synopsis, thumbnailURL));
+                        Movie movie = new Movie(id, title, year, runtime, theaterReleaseDate, apiRating, synopsis, thumbnailURL);
+                        list.addMovie(movie);
                     }
                 callback.fireIntent(list, activityContext, goalClass);
             }
@@ -146,5 +160,4 @@ public final class RottenTomatoes {
         return makeCall(url);
     }
     */
-
 }

@@ -59,14 +59,6 @@ public class MovieListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
 
 
@@ -119,6 +111,7 @@ public class MovieListActivity extends AppCompatActivity {
             holder.mItem = mValues.get(position);
             Bitmap bmp = getBitmapFromURL(mValues.get(position).getThumbnailURL());
             if (bmp != null) {
+                System.out.println("HELLLLLLLO");
                 holder.mThumbnail.setImageBitmap(bmp);
             }
             holder.mIdView.setText(mValues.get(position).getTitle());
@@ -160,9 +153,11 @@ public class MovieListActivity extends AppCompatActivity {
 
             } catch (Exception ex) {
 
-                return null;
+                ex.printStackTrace();
 
             }
+
+            return null;
         }
 
         @Override
