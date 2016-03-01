@@ -6,6 +6,9 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -36,16 +39,6 @@ public class HomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(HomeActivity.this, WelcomeScreenActivity.class);
                 startActivity(intent);
                 finish();
-            }
-        });
-
-        Button profileButton = (Button) findViewById(R.id.editProfileButton);
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, EditProfileActivity.class);
-                startActivity(intent);
-                welcomeUser.setText("Welcome " + user.getUserName() + "!");
             }
         });
 
@@ -129,6 +122,35 @@ public class HomeActivity extends AppCompatActivity {
         final User user = CurrentUser.getInstance().getUser();
         final TextView welcomeUser = (TextView) findViewById(R.id.textViewWelcomeUser);
         welcomeUser.setText("Welcome " + user.getUserName() + "!");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_logged_in_screen, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.view_profile) {
+            Intent intent = new Intent(this, ViewProfileActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (item.getItemId() == R.id.edit_profile) {
+            Intent intent = new Intent(this, EditProfileActivity.class);
+            startActivity(intent);
+            return true;
+        } else if (item.getItemId() == R.id.logout) {
+            CurrentUser.getInstance().setUser(null);
+            Intent intent = new Intent(this, WelcomeScreenActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+
     }
 
 }

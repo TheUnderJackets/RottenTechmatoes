@@ -49,6 +49,16 @@ public class EditProfileActivity extends AppCompatActivity {
         if (!user.getDescription().equals("")) {
             descriptionTextField.setText(user.getDescription());
         }
+        descriptionTextField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus && descriptionTextField.getText().toString().equals("Description")) {
+                    descriptionTextField.setText("");
+                } else if (!hasFocus && descriptionTextField.getText().toString().equals("")) {
+                    descriptionTextField.setText("Description");
+                }
+            }
+        });
         final Button applyChanges = (Button) findViewById(R.id.buttonApplyChanges);
         applyChanges.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +91,9 @@ public class EditProfileActivity extends AppCompatActivity {
         if (user.getUserName().equals(username) || UserList.isUserNameValid(username)) {
             user.setUserName(username);
             user.setName(name);
+            if (!description.equals("Description")) {
+                user.setDescription(description);
+            }
             user.setDescription(description);
             user.setMajor(major);
             UserList.updateUser(user);
