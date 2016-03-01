@@ -31,17 +31,6 @@ public class HomeActivity extends AppCompatActivity {
         final User user = CurrentUser.getInstance().getUser();
         final TextView welcomeUser = (TextView) findViewById(R.id.textViewWelcomeUser);
 
-        Button logoutButton = (Button) findViewById(R.id.logoutButton);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CurrentUser.getInstance().setUser(null);
-                Intent intent = new Intent(HomeActivity.this, WelcomeScreenActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
         final EditText nameSearch = (EditText) findViewById(R.id.searchEditText);
         Button searchButton = (Button) findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
