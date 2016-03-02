@@ -1,6 +1,7 @@
 package theunderjackets.com.rottentechmatoes;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +9,10 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import theunderjackets.com.rottentechmatoes.dummy.*;
 
@@ -48,7 +52,7 @@ public class MovieDetailFragment extends Fragment {
             mItem = Movies.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
             final Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+            android.support.v7.widget.Toolbar appBarLayout = (android.support.v7.widget.Toolbar) activity.findViewById(R.id.detail_toolbar);
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.getTitle());
                 appBarLayout.setOnKeyListener(new View.OnKeyListener() {
@@ -67,9 +71,17 @@ public class MovieDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.movie_detail, container, false);
 
-        // Show the dummy content as text in a TextView.
+        // Show the content details
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.movie_detail)).setText(mItem.getSynopsis());
+            //Bitmap bmp = getBitmapFromURL(mItem.getThumbnailURL());
+            //if (bmp != null) {
+            //    ((ImageView) rootView.findViewById(R.id.thumbnail)).setImageBitmap(bmp);
+            //}
+
+            ((TextView) rootView.findViewById(R.id.textView_title)).setText(mItem.getTitle());
+            ((TextView) rootView.findViewById(R.id.textView_release)).append(mItem.getTheaterReleaseDate());
+            ((RatingBar) rootView.findViewById(R.id.movieRating)).setRating((float) (mItem.getApiRating() / 20));
+            ((TextView) rootView.findViewById(R.id.textView_synopsis)).setText(mItem.getSynopsis());
         }
 
         return rootView;

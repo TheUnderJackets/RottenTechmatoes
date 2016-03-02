@@ -15,13 +15,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import theunderjackets.com.rottentechmatoes.dummy.*;
+
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import theunderjackets.com.rottentechmatoes.dummy.Movies;
 
 import static theunderjackets.com.rottentechmatoes.Search.MOVIES_EXTRAS;
 
@@ -51,11 +52,7 @@ public class MovieListActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
-
-
-
-
+        toolbar.setTitle("Search results");
 
         View recyclerView = findViewById(R.id.movie_list);
         assert recyclerView != null;
@@ -70,12 +67,17 @@ public class MovieListActivity extends AppCompatActivity {
         }
 
         //get movies from intent
+
         MovieList movieList = getIntent().getParcelableExtra(MOVIES_EXTRAS);
         movies = movieList.getMovies();
-        Movies.clear();
+
+        if (Movies.ITEMS != null) {
+            Movies.clear();
+        }
         for(theunderjackets.com.rottentechmatoes.Movie m: movies) {
             Movies.addItem(m);
         }
+
 
 
     }
@@ -105,7 +107,6 @@ public class MovieListActivity extends AppCompatActivity {
             holder.mItem = mValues.get(position);
             Bitmap bmp = getBitmapFromURL(mValues.get(position).getThumbnailURL());
             if (bmp != null) {
-                System.out.println("HELLLLLLLO");
                 holder.mThumbnail.setImageBitmap(bmp);
             }
             holder.mIdView.setText(mValues.get(position).getTitle());

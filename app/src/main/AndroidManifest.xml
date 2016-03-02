@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="theunderjackets.com.rottentechmatoes">
-
-    <!-- Permissions Requested -->
-    <uses-permission android:name="android.permission.INTERNET" />
-
+    <!--Permissions Requested-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+     
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -49,16 +48,10 @@
             android:name=".MovieDetailActivity"
             android:label="@string/title_movie_detail"
             android:parentActivityName=".MovieListActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="theunderjackets.com.rottentechmatoes.MovieListActivity" />
-
-        <activity
-            android:name=".MovieController"
-            android:label="MovieController"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="theunderjackets.com.rottentechmatoes.MovieListActivity" />
         <activity
             android:name=".ViewProfileActivity"
             android:label="@string/title_activity_view_profile"

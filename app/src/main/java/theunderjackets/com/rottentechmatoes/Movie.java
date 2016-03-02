@@ -1,6 +1,5 @@
 package theunderjackets.com.rottentechmatoes;
 
-import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -10,24 +9,11 @@ public class Movie implements Parcelable {
     private int year;
     private int runtime;
     private String theaterReleaseDate;
-    private String apiRating;
+    private double apiRating;
     private String synopsis;
     private String thumbnailURL;
-    private Bitmap thumbnail;
 
-    public Movie(String id, String title, int year, int runtime, String theaterReleaseDate, String apiRating, String synopsis, String thumbnailURL, Bitmap thumbnail) {
-        this.id = id;
-        this.title = title;
-        this.year = year;
-        this.runtime = runtime;
-        this.theaterReleaseDate = theaterReleaseDate;
-        this.apiRating = apiRating;
-        this.synopsis = synopsis;
-        this.thumbnailURL = thumbnailURL;
-        this.thumbnail = thumbnail;
-    }
-
-    public Movie(String id, String title, int year, int runtime, String theaterReleaseDate, String apiRating, String synopsis, String thumbnailURL) {
+    public Movie(String id, String title, int year, int runtime, String theaterReleaseDate, double apiRating, String synopsis, String thumbnailURL) {
         this.id = id;
         this.title = title;
         this.year = year;
@@ -48,10 +34,9 @@ public class Movie implements Parcelable {
         this.year = in.readInt();
         this.runtime = in.readInt();
         this.theaterReleaseDate = in.readString();
-        this.apiRating = in.readString();
+        this.apiRating = in.readDouble();
         this.synopsis = in.readString();
         this.thumbnailURL = in.readString();
-        this.thumbnail = in.readParcelable(Bitmap.class.getClassLoader());
     }
 
     /**
@@ -66,10 +51,9 @@ public class Movie implements Parcelable {
         dest.writeInt(year);
         dest.writeInt(runtime);
         dest.writeString(theaterReleaseDate);
-        dest.writeString(apiRating);
+        dest.writeDouble(apiRating);
         dest.writeString(synopsis);
         dest.writeString(thumbnailURL);
-        dest.writeParcelable(thumbnail, flags);
     }
 
     /**
@@ -120,7 +104,7 @@ public class Movie implements Parcelable {
         return theaterReleaseDate;
     }
 
-    public String getApiRating() {
+    public double getApiRating() {
         return apiRating;
     }
 
@@ -130,10 +114,6 @@ public class Movie implements Parcelable {
 
     public String getThumbnailURL() {
         return thumbnailURL;
-    }
-
-    public void setThumbnail(Bitmap map) {
-        thumbnail = map;
     }
 
 
