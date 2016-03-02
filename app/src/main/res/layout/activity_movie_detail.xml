@@ -34,20 +34,19 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <FrameLayout
         android:id="@+id/movie_detail_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_height="match_parent">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|start"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/stat_notify_chat"
-        app:layout_anchor="@+id/movie_detail_container"
-        app:layout_anchorGravity="top|end" />
+        <fragment layout="@layout/content_movie_detail"
+            android:layout_height="251dp"
+            android:layout_width="match_parent"
+            android:name="theunderjackets.com.rottentechmatoes.MovieDetailFragment"
+            tools:layout="@layout/movie_detail"
+            android:id="@+id/movie_details" />
+
+    </FrameLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>

@@ -4,11 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
@@ -21,7 +19,6 @@ import android.widget.TextView;
 
 
 import theunderjackets.com.rottentechmatoes.dummy.*;
-import theunderjackets.com.rottentechmatoes.dummy.Movie;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -57,19 +54,7 @@ public class MovieListActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
-
+        toolbar.setTitle("Search results");
 
         View recyclerView = findViewById(R.id.movie_list);
         assert recyclerView != null;
@@ -84,12 +69,17 @@ public class MovieListActivity extends AppCompatActivity {
         }
 
         //get movies from intent
+
         MovieList movieList = getIntent().getParcelableExtra(MOVIES_EXTRAS);
         movies = movieList.getMovies();
-        Movies.clear();
+
+        if (Movies.ITEMS != null) {
+            Movies.clear();
+        }
         for(theunderjackets.com.rottentechmatoes.Movie m: movies) {
             Movies.addItem(m);
         }
+
 
 
     }
