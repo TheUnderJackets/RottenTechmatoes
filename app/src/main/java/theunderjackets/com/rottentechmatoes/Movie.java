@@ -9,11 +9,11 @@ public class Movie implements Parcelable {
     private int year;
     private int runtime;
     private String theaterReleaseDate;
-    private double apiRating;
+    private String apiRating;
     private String synopsis;
     private String thumbnailURL;
 
-    public Movie(String id, String title, int year, int runtime, String theaterReleaseDate, double apiRating, String synopsis, String thumbnailURL) {
+    public Movie(String id, String title, int year, int runtime, String theaterReleaseDate, String apiRating, String synopsis, String thumbnailURL) {
         this.id = id;
         this.title = title;
         this.year = year;
@@ -34,7 +34,7 @@ public class Movie implements Parcelable {
         this.year = in.readInt();
         this.runtime = in.readInt();
         this.theaterReleaseDate = in.readString();
-        this.apiRating = in.readDouble();
+        this.apiRating = in.readString();
         this.synopsis = in.readString();
         this.thumbnailURL = in.readString();
     }
@@ -51,7 +51,7 @@ public class Movie implements Parcelable {
         dest.writeInt(year);
         dest.writeInt(runtime);
         dest.writeString(theaterReleaseDate);
-        dest.writeDouble(apiRating);
+        dest.writeString(apiRating);
         dest.writeString(synopsis);
         dest.writeString(thumbnailURL);
     }
@@ -104,8 +104,8 @@ public class Movie implements Parcelable {
         return theaterReleaseDate;
     }
 
-    public double getApiRating() {
-        return apiRating;
+    public Float getApiRating() {
+        return Float.parseFloat(apiRating);
     }
 
     public String getSynopsis() {
