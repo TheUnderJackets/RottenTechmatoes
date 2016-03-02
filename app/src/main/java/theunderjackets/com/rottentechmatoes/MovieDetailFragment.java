@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import theunderjackets.com.rottentechmatoes.dummy.*;
 
@@ -51,7 +52,7 @@ public class MovieDetailFragment extends Fragment {
             mItem = Movies.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
             final Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+            android.support.v7.widget.Toolbar appBarLayout = (android.support.v7.widget.Toolbar) activity.findViewById(R.id.detail_toolbar);
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.getTitle());
                 appBarLayout.setOnKeyListener(new View.OnKeyListener() {
@@ -78,8 +79,8 @@ public class MovieDetailFragment extends Fragment {
             //}
 
             ((TextView) rootView.findViewById(R.id.textView_title)).setText(mItem.getTitle());
-            ((TextView) rootView.findViewById(R.id.textView_release)).setText(mItem.getTheaterReleaseDate());
-            ((RatingBar) rootView.findViewById(R.id.movieRating)).setRating((float) mItem.getApiRating());
+            ((TextView) rootView.findViewById(R.id.textView_release)).append(mItem.getTheaterReleaseDate());
+            ((RatingBar) rootView.findViewById(R.id.movieRating)).setRating((float) (mItem.getApiRating() / 20));
             ((TextView) rootView.findViewById(R.id.textView_synopsis)).setText(mItem.getSynopsis());
         }
 
