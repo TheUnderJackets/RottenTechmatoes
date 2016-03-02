@@ -44,26 +44,29 @@ public class MovieDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null){
+            if (getArguments().containsKey(ARG_ITEM_ID)) {
+                // Load the dummy content specified by the fragment
+                // arguments. In a real-world scenario, use a Loader
+                // to load content from a content provider.
+                mItem = Movies.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            mItem = Movies.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-
-            final Activity activity = this.getActivity();
-            android.support.v7.widget.Toolbar appBarLayout = (android.support.v7.widget.Toolbar) activity.findViewById(R.id.detail_toolbar);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.getTitle());
-                appBarLayout.setOnKeyListener(new View.OnKeyListener() {
-                    @Override
-                    public boolean onKey(View v, int keyCode, KeyEvent event) {
-                        activity.finish();
-                        return false;
-                    }
-                });
+                final Activity activity = this.getActivity();
+                //TODO: WRONG TYPE OF TOOLBAR
+                android.support.v7.widget.Toolbar appBarLayout = (android.support.v7.widget.Toolbar) activity.findViewById(R.id.detail_toolbar);
+                if (appBarLayout != null) {
+                    appBarLayout.setTitle(mItem.getTitle());
+                    appBarLayout.setOnKeyListener(new View.OnKeyListener() {
+                        @Override
+                        public boolean onKey(View v, int keyCode, KeyEvent event) {
+                            activity.finish();
+                            return false;
+                        }
+                    });
+                }
             }
         }
+
     }
 
     @Override
