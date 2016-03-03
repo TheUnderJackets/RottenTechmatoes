@@ -92,6 +92,8 @@ public final class RottenTomatoes {
                         String apiRating = "0";
                         int year = 0;
                         int runtime = 0;
+                        double userRating = 0;
+                        double[] userRatings = {};
                         JSONObject obj = null;
                         try {
                             obj = arrMain.getJSONObject(i);
@@ -122,7 +124,7 @@ public final class RottenTomatoes {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Movie movie = new Movie(id, title, year, runtime, theaterReleaseDate, apiRating, synopsis, thumbnailURL);
+                        Movie movie = new Movie(id, title, year, runtime, theaterReleaseDate, apiRating, synopsis, thumbnailURL, userRating, userRatings);
                         list.addMovie(movie);
                     }
                 callback.fireIntent(list, activityContext, goalClass);
@@ -151,3 +153,4 @@ public final class RottenTomatoes {
     }
     */
 }
+
