@@ -2,7 +2,6 @@ package theunderjackets.com.rottentechmatoes;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
@@ -52,8 +51,8 @@ public class MovieDetailFragment extends Fragment {
                 mItem = Movies.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
                 final Activity activity = this.getActivity();
-                //TODO: WRONG TYPE OF TOOLBAR
-                android.support.v7.widget.Toolbar appBarLayout = (android.support.v7.widget.Toolbar) activity.findViewById(R.id.detail_toolbar);
+
+                Toolbar appBarLayout = (Toolbar) activity.findViewById(R.id.detail_toolbar);
                 if (appBarLayout != null) {
                     appBarLayout.setTitle(mItem.getTitle());
                     appBarLayout.setOnKeyListener(new View.OnKeyListener() {

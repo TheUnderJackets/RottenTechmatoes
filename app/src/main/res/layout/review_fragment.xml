@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="280dp"
     tools:context="theunderjackets.com.rottentechmatoes.reviewFragment"
-    android:background="@android:color/holo_orange_dark">
+    android:background="@android:color/holo_orange_dark"
+    android:gravity="bottom">
 
     <TextView
         android:layout_width="wrap_content"

@@ -6,7 +6,8 @@
     android:layout_height="280dp"
     android:layout_alignParentBottom="true"
     tools:context="theunderjackets.com.rottentechmatoes.reviewListFragment"
-    android:background="@android:color/holo_orange_light">
+    android:background="@android:color/holo_orange_light"
+    android:gravity="bottom">
 
     <Button
         style="?android:attr/buttonStyleSmall"
