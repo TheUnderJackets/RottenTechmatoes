@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_orange_light">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -49,17 +50,30 @@
         android:id="@+id/movieRating"
         android:focusable="false"
         android:layout_below="@+id/thumbnail"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:clickable="false"
+        android:focusableInTouchMode="false"
+        android:isIndicator="true"/>
 
-    <TextView
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/textView_synopsis"
-        android:isScrollContainer="true"
+        android:layout_height="100dp"
+        android:id="@+id/scrollView"
         android:layout_below="@+id/movieRating"
-        android:layout_alignStart="@+id/thumbnail" />
+        android:layout_alignStart="@+id/thumbnail"
+        android:layout_marginRight="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Small Text"
+            android:id="@+id/textView_synopsis"
+            android:isScrollContainer="true"
+            android:background="#ffffff"/>
+
+    </ScrollView>
+
 
 </RelativeLayout>
 

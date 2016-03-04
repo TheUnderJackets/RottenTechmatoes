@@ -5,9 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 /**
- * Created by Lixin on 3/2/2016.
+ * Created by Lixin on 3/2/2016
  */
 public class ReviewFragment extends Fragment {
     /**
@@ -21,14 +23,14 @@ public class ReviewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.review_fragment, container, false);
+        return inflater.inflate(R.layout.review_fragment, container, false);
 
-        return rootView;
     }
 }
 
