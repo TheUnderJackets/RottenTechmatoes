@@ -11,6 +11,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Andrew Suh on 2/18/2016.
  */
@@ -93,7 +96,7 @@ public final class RottenTomatoes {
                         int year = 0;
                         int runtime = 0;
                         double userRating = 0;
-                        double[] userRatings = {};
+                        ArrayList<Double> userRatings = new ArrayList<>();
                         JSONObject obj = null;
                         try {
                             obj = arrMain.getJSONObject(i);
