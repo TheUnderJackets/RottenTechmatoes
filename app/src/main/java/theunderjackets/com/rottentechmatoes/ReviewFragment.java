@@ -1,12 +1,8 @@
 package theunderjackets.com.rottentechmatoes;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +10,6 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 
 import static android.widget.Toast.makeText;
 
@@ -81,9 +74,19 @@ public class ReviewFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        makeText(getContext(), String.valueOf(ratingBar.getRating()), Toast.LENGTH_SHORT).show();
-                        Movie.addUserRating(ratingBar.getRating());
-                        getActivity().getFragmentManager().popBackStack();
+                        if (ratingBar.getRating() == 0) {
+                            makeText(getContext(), "Rating cannot be empty.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            makeText(getContext(), String.valueOf(ratingBar.getRating()), Toast.LENGTH_SHORT).show();
+                            Movie.addUserRating(ratingBar.getRating());
+                            getActivity().getFragmentManager().popBackStack();
+                            cancelButton.setVisibility(View.GONE);
+                            submitButton.setVisibility(View.GONE);
+                            android.support.v4.app.FragmentTransaction trans = getFragmentManager().beginTransaction();
+                            Fragment goal = new ReviewListFragment();
+                            trans.replace(R.id.reviewFragment, goal);
+                            trans.commit();
+                        }
                     }
 
                 }
@@ -95,6 +98,8 @@ public class ReviewFragment extends Fragment {
                 Fragment goal = new ReviewListFragment();
                 trans.replace(R.id.reviewFragment, goal);
                 trans.commit();
+                cancelButton.setVisibility(View.GONE);
+                submitButton.setVisibility(View.GONE);
 
 
             }
