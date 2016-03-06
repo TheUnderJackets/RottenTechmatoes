@@ -3,6 +3,9 @@ package theunderjackets.com.rottentechmatoes;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Movie implements Parcelable {
     private String id;
     private String title;
@@ -12,10 +15,10 @@ public class Movie implements Parcelable {
     private String apiRating;
     private String synopsis;
     private String thumbnailURL;
-    private double[] userRatings;
-    private double userRating;
+    private static List<Double> userRatings = new ArrayList<>();
+    private static double userRating;
 
-    public Movie(String id, String title, int year, int runtime, String theaterReleaseDate, String apiRating, String synopsis, String thumbnailURL, double userRating, double[] userRatings) {
+    public Movie(String id, String title, int year, int runtime, String theaterReleaseDate, String apiRating, String synopsis, String thumbnailURL, double userRating, ArrayList userRatings) {
         this.id = id;
         this.title = title;
         this.year = year;
@@ -42,7 +45,7 @@ public class Movie implements Parcelable {
         this.synopsis = in.readString();
         this.thumbnailURL = in.readString();
         this.userRating = in.readDouble();
-        this.userRatings = in.createDoubleArray();
+        this.userRatings = in.readArrayList(Double.class.getClassLoader());
 
     }
 
@@ -62,7 +65,7 @@ public class Movie implements Parcelable {
         dest.writeString(synopsis);
         dest.writeString(thumbnailURL);
         dest.writeDouble(userRating);
-        dest.writeDoubleArray(userRatings);
+        dest.writeList(userRatings);
     }
 
     /**
@@ -127,6 +130,21 @@ public class Movie implements Parcelable {
 
     public double getUserRating() { return userRating; }
 
-    public double[] getUserRatings() { return userRatings; }
+    public static void addUserRating(double rating) {
+        userRatings.add(rating);
+        updateUserRating();
+    }
+
+    public static void updateUserRating() {
+        int total = 0;
+        int numElem = 0;
+        for (int i = 0; i < userRatings.size(); i++) {
+            total += userRatings.get(i);
+            numElem++;
+        }
+        userRating = (total/numElem);
+    }
+
+    public List<Double> getUserRatings() { return userRatings; }
 }
 

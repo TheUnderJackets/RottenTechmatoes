@@ -82,7 +82,7 @@ public class ReviewFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         makeText(getContext(), String.valueOf(ratingBar.getRating()), Toast.LENGTH_SHORT).show();
-                        mo
+                        Movie.addUserRating(ratingBar.getRating());
                         getActivity().getFragmentManager().popBackStack();
                     }
 
