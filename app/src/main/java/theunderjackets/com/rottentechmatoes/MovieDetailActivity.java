@@ -1,6 +1,7 @@
 package theunderjackets.com.rottentechmatoes;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -19,6 +20,7 @@ public class MovieDetailActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         android.widget.Toolbar toolbar = (android.widget.Toolbar) findViewById(R.id.detail_toolbar);
+        toolbar.setDrawingCacheBackgroundColor(Color.BLUE);
         setActionBar(toolbar);
 
 

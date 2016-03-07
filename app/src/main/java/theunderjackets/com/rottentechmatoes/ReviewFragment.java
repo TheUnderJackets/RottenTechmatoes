@@ -1,12 +1,17 @@
 package theunderjackets.com.rottentechmatoes;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +30,7 @@ public class ReviewFragment extends Fragment {
     private static Button cancelButton;
     private static TextView textView;
     private static RatingBar ratingBar;
+    private static EditText reviewBox;
     private static Activity activity;
     private String pos;
 
@@ -70,6 +76,7 @@ public class ReviewFragment extends Fragment {
         ratingBar = (RatingBar) view.findViewById(R.id.ratingBar2);
         submitButton = (Button) view.findViewById(R.id.submitReview);
         cancelButton = (Button) view.findViewById(R.id.cancelReview);
+        reviewBox = (EditText) view.findViewById(R.id.reviewBox);
         submitButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -82,6 +89,10 @@ public class ReviewFragment extends Fragment {
                             getActivity().getFragmentManager().popBackStack();
                             cancelButton.setVisibility(View.GONE);
                             submitButton.setVisibility(View.GONE);
+                            //Add the stuff to add the review text here, right below here
+
+                            reviewBox.setText("");
+                            reviewBox.setVisibility(View.GONE);
                             android.support.v4.app.FragmentTransaction trans = getFragmentManager().beginTransaction();
                             Fragment goal = new ReviewListFragment();
                             trans.replace(R.id.reviewFragment, goal);
@@ -118,5 +129,6 @@ public class ReviewFragment extends Fragment {
         return view;
 
     }
+
 }
 

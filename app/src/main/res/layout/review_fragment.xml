@@ -30,8 +30,8 @@
         android:text="Your Rating :"
         android:id="@+id/yourRate"
         android:textColor="#FFFFFF"
-        android:layout_below="@+id/editText2"
-        android:layout_alignStart="@+id/editText2" />
+        android:layout_below="@+id/reviewBox"
+        android:layout_alignStart="@+id/reviewBox" />
 
     <RatingBar
         android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
         android:layout_height="100dp"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/reviewBox"
         android:layout_below="@+id/writeReview"
         android:layout_alignEnd="@+id/cancelReview"
         android:layout_alignStart="@+id/submitReview"
