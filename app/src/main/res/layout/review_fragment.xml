@@ -67,7 +67,7 @@
         android:layout_below="@+id/writeReview"
         android:layout_alignEnd="@+id/cancelReview"
         android:layout_alignStart="@+id/submitReview"
-        android:textColor="#fdfdfd"
+        android:textColor="#000000"
         android:background="#ffffff" />
 
 </RelativeLayout>
