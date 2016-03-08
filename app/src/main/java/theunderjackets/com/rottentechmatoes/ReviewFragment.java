@@ -85,7 +85,11 @@ public class ReviewFragment extends Fragment {
                             makeText(getContext(), "Rating cannot be empty.", Toast.LENGTH_SHORT).show();
                         } else {
                             makeText(getContext(), String.valueOf(ratingBar.getRating()), Toast.LENGTH_SHORT).show();
-                            Movie.addUserRating(ratingBar.getRating());
+                            User user = CurrentUser.getInstance().getUser();
+                            Movie.addUserRating(ratingBar.getRating(), user);
+                            ReviewedMovieSingleton review = ReviewedMovieSingleton.getInstance(getActivity());
+                            Movie movie = MovieDetailFragment.getCurrent().getMovie();
+                            review.addMovie(movie);
                             getActivity().getFragmentManager().popBackStack();
                             cancelButton.setVisibility(View.GONE);
                             submitButton.setVisibility(View.GONE);
@@ -111,6 +115,8 @@ public class ReviewFragment extends Fragment {
                 trans.commit();
                 cancelButton.setVisibility(View.GONE);
                 submitButton.setVisibility(View.GONE);
+                reviewBox.setText("");
+                reviewBox.setVisibility(View.GONE);
 
 
             }
