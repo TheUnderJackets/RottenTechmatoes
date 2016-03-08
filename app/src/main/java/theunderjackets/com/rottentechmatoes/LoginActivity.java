@@ -53,7 +53,40 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println(userName);
         String passWord = password.getText().toString();
         password.setText("");
-        if (UserList.isUserValid(userName, passWord)) {
+        int check = UserList.isUserValid(userName, passWord);
+        if (check == 1) {
+            CharSequence msgText = "This Username does not exist.";
+            if (currentToast != null && currentToast.getView().isShown()) {
+                currentToast.cancel();
+            }
+            currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
+            currentToast.show();
+        }
+        if (check == 4) {
+            CharSequence msgText = "Incorrect password, please try again.";
+            if (currentToast != null && currentToast.getView().isShown()) {
+                currentToast.cancel();
+            }
+            currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
+            currentToast.show();
+        }
+        if (check == 2) {
+            CharSequence msgText = "Sorry, this account has been banned";
+            if (currentToast != null && currentToast.getView().isShown()) {
+                currentToast.cancel();
+            }
+            currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
+            currentToast.show();
+        }
+        if (check == 3) {
+            CharSequence msgText = "Sorry, this account has been locked, please contact an admin.";
+            if (currentToast != null && currentToast.getView().isShown()) {
+                currentToast.cancel();
+            }
+            currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
+            currentToast.show();
+        }
+        if (check == 0) {
             Intent loginIntent = new Intent(this, HomeActivity.class);
             User user = UserList.getUserByUsername(userName);
             CurrentUser current = CurrentUser.getInstance();
