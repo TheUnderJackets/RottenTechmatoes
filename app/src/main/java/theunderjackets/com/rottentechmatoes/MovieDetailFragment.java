@@ -31,13 +31,16 @@ public class MovieDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private Movie mItem;
+    protected Movie mItem;
+    private static CurrentMovie current;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
     public MovieDetailFragment() {
+        CurrentMovie current = CurrentMovie.getInstance();
+        current.setMovie(mItem);
     }
 
     @Override
@@ -87,5 +90,8 @@ public class MovieDetailFragment extends Fragment {
         }
 
         return rootView;
+    }
+    public static CurrentMovie getCurrent() {
+        return current;
     }
 }
