@@ -3,6 +3,12 @@ package theunderjackets.com.rottentechmatoes;
 import android.content.Context;
 import android.content.Intent;
 
+import java.util.List;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Collections;
+
 /**
  * Created by will on 2/21/16.
  */
@@ -88,5 +94,69 @@ public final class Search {
                 thisActivityContext.startActivity(intent);
             }
         });
+    }
+    public static void recommend(Major m, Context activity, Class goal) {
+        Intent intent = new Intent(activity, goal);
+        ReviewedMovieSingleton movies = ReviewedMovieSingleton.getInstance(activity);
+        List<Movie> temp = movies.getMovies();
+        List<Movie> sortedlist = new ArrayList<Movie>();
+        for (Movie movie: temp) {
+            List<User> tempuser = movie.getUsers();
+            for (User u: tempuser) {
+                if (u.getMajor().equals(m)) {
+                    sortedlist.add(movie);
+                }
+            }
+        }
+        final Major tempmajor = m;
+        Collections.sort(sortedlist, new Comparator<Movie>() {
+            public int compare(Movie a, Movie b) {
+                int comp = comparerating(a, b, tempmajor);
+                if (comp > 0) {
+                    return 1;
+                }
+                if (comp < 0) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+        MovieList list = new MovieList();
+        for (Movie movie: sortedlist) {
+            list.addMovie(movie);
+        }
+        intent.putExtra(MOVIES_EXTRAS, list);
+    }
+    public static int comparerating(Movie a, Movie b, Major major) {
+        double compa = 0;
+        double compb = 0;
+        List<User> usera = a.getUsers();
+        List<User> userb = b.getUsers();
+        List<Double> ratea = a.getUserRatings();
+        List<Double> rateb = b.getUserRatings();
+        int i = 0;
+        while(i < usera.size()) {
+            if (usera.get(i).getMajor().equals(major)) {
+                compa = compa + ratea.get(i);
+            }
+            i++;
+        }
+        i = 0;
+        while(i < userb.size()) {
+            if (userb.get(i).getMajor().equals(major)) {
+                compb = compa + rateb.get(i);
+            }
+            i++;
+        }
+        double comp = compa - compb;
+        if (comp > 0) {
+            return -1;
+        }
+        if (comp < 0) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
