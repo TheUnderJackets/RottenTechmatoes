@@ -16,6 +16,7 @@ public class Movie implements Parcelable {
     private String synopsis;
     private String thumbnailURL;
     private static List<Double> userRatings = new ArrayList<>();
+    private static List<User> users = new ArrayList<>();
     private static double userRating;
 
     public Movie(String id, String title, int year, int runtime, String theaterReleaseDate, String apiRating, String synopsis, String thumbnailURL, double userRating, ArrayList userRatings) {
@@ -29,6 +30,7 @@ public class Movie implements Parcelable {
         this.thumbnailURL = thumbnailURL;
         this.userRating = userRating;
         this.userRatings = userRatings;
+        this.users = users;
     }
 
     /**
@@ -46,6 +48,7 @@ public class Movie implements Parcelable {
         this.thumbnailURL = in.readString();
         this.userRating = in.readDouble();
         this.userRatings = in.readArrayList(Double.class.getClassLoader());
+
 
     }
 
@@ -66,6 +69,7 @@ public class Movie implements Parcelable {
         dest.writeString(thumbnailURL);
         dest.writeDouble(userRating);
         dest.writeList(userRatings);
+        dest.writeList(users);
     }
 
     /**
@@ -108,6 +112,10 @@ public class Movie implements Parcelable {
         return year;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
     public int getRuntime() {
         return runtime;
     }
@@ -130,8 +138,9 @@ public class Movie implements Parcelable {
 
     public double getUserRating() { return userRating; }
 
-    public static void addUserRating(double rating) {
+    public static void addUserRating(double rating, User user) {
         userRatings.add(rating);
+        users.add(user);
         updateUserRating();
     }
 
