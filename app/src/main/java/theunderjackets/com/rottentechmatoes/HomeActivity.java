@@ -78,7 +78,7 @@ public class HomeActivity extends AppCompatActivity {
         recommendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Search.recommend(user.getMajor());
+                Search.recommend(user.getMajor(), HomeActivity.this, MovieListActivity.class);
             }
         });
     }
