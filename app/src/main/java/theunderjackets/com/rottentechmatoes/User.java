@@ -8,6 +8,8 @@ public class User {
     private String name;
     private Major major = Major.UNDECIDED;
     private String description = "";
+    private boolean banned;
+    private boolean locked;
 
     //This is the only constructor necessary since these are the required fields, and
     //we will have a separate page for the rest. DELETE THIS LATER.
@@ -28,6 +30,21 @@ public class User {
 
     public String getName() {
         return name;
+    }
+
+    public boolean getBanned() {
+        return banned;
+    }
+
+    public boolean getLocked() {
+        return locked;
+    }
+
+    public void setBanned(boolean bool) {
+        this.banned = bool;
+    }
+    public void setLocked(boolean bool) {
+        this.locked = bool;
     }
 
     public void changePass(String pass) {
