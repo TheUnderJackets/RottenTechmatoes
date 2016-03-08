@@ -56,14 +56,21 @@ public final class UserList {
      * @param password password to check
      * @return true if login attempt is valid, false otherwise
      */
-    public static boolean isUserValid(String username, String password) {
+    public static int isUserValid(String username, String password) {
         User user;
         if (!UserList.isUserNameValid(username)) {
             user = UserList.getUserByUsername(username);
         } else {
-            return false;
+            return 1;
         }
-        return user.validatePassword(password);
+        if (user.getBanned() == true){
+            return 2;
+        } else if (user.getLocked()) {
+            return 3;
+        } else if(user.validatePassword(password)) {
+            return 0;
+        }
+        return 4;
     }
 
     /**
