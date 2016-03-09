@@ -138,12 +138,20 @@ public class Movie implements Parcelable {
 
     public double getUserRating() { return userRating; }
 
+    /**
+     * Method to add a user rating to a movie
+     * @param rating the new rating to be added
+     * @param user the user adding the new rating
+     */
     public static void addUserRating(double rating, User user) {
         userRatings.add(rating);
         users.add(user);
         updateUserRating();
     }
 
+    /**
+     * Method to update the average user rating once a new rating is submitted
+     */
     public static void updateUserRating() {
         int total = 0;
         int numElem = 0;
