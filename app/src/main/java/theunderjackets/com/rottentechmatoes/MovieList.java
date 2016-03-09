@@ -4,19 +4,17 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Set;
 
 public class MovieList implements Parcelable {
-    private List<Movie> movies = new ArrayList<>();
+    private List<Movie> movies;
 
     /**
      * Default constructor for constructing list.
      */
     public MovieList() {
-
+        movies = new ArrayList<>();
     }
 
     /**
@@ -24,7 +22,8 @@ public class MovieList implements Parcelable {
      * @param in parcel used to construct the object
      */
     private MovieList(Parcel in) {
-        this.movies = in.readArrayList(Movie.class.getClassLoader());
+        movies = new ArrayList<>();
+        in.readTypedList(movies, Movie.CREATOR);
     }
 
     /**
@@ -34,7 +33,7 @@ public class MovieList implements Parcelable {
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeList(movies);
+        dest.writeTypedList(movies);
     }
 
     /**

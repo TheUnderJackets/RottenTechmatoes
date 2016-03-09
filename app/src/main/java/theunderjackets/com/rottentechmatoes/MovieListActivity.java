@@ -15,14 +15,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import theunderjackets.com.rottentechmatoes.dummy.*;
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import theunderjackets.com.rottentechmatoes.dummy.Movies;
 
 import static theunderjackets.com.rottentechmatoes.Search.MOVIES_EXTRAS;
 
@@ -148,7 +147,7 @@ public class MovieListActivity extends AppCompatActivity {
 
             } catch (Exception ex) {
 
-                ex.printStackTrace();
+                //ex.printStackTrace();
 
             }
 
