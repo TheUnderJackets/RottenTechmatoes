@@ -2,12 +2,15 @@ package theunderjackets.com.rottentechmatoes;
 
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import java.util.List;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Collections;
+
+import android.widget.Toast;
 
 /**
  * Created by will on 2/21/16.
@@ -100,33 +103,45 @@ public final class Search {
         ReviewedMovieSingleton movies = ReviewedMovieSingleton.getInstance(activity);
         List<Movie> temp = movies.getMovies();
         List<Movie> sortedlist = new ArrayList<Movie>();
-        for (Movie movie: temp) {
-            List<User> tempuser = movie.getUsers();
-            for (User u: tempuser) {
-                if (u.getMajor().equals(m)) {
-                    sortedlist.add(movie);
+        if (temp == null) {
+            Toast currentToast = new Toast(activity);
+            CharSequence msgText = "No Reviewed Movies exist";
+            if (currentToast != null && currentToast.getView().isShown()) {
+                currentToast.cancel();
+            }
+            currentToast = Toast.makeText(activity, msgText, Toast.LENGTH_SHORT);
+            currentToast.show();
+        }
+         else {
+            for (Movie movie : temp) {
+                List<User> tempuser = movie.getUsers();
+                for (User u : tempuser) {
+                    if (u.getMajor().equals(m)) {
+                        sortedlist.add(movie);
+                    }
                 }
             }
-        }
-        final Major tempmajor = m;
-        Collections.sort(sortedlist, new Comparator<Movie>() {
-            public int compare(Movie a, Movie b) {
-                int comp = comparerating(a, b, tempmajor);
-                if (comp > 0) {
-                    return 1;
+            final Major tempmajor = m;
+            Collections.sort(sortedlist, new Comparator<Movie>() {
+                public int compare(Movie a, Movie b) {
+                    int comp = comparerating(a, b, tempmajor);
+                    if (comp > 0) {
+                        return 1;
+                    }
+                    if (comp < 0) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
                 }
-                if (comp < 0) {
-                    return -1;
-                } else {
-                    return 0;
-                }
+            });
+            MovieList list = new MovieList();
+            for (Movie movie : sortedlist) {
+                list.addMovie(movie);
             }
-        });
-        MovieList list = new MovieList();
-        for (Movie movie: sortedlist) {
-            list.addMovie(movie);
+            intent.putExtra(MOVIES_EXTRAS, list);
+            activity.startActivity(intent);
         }
-        intent.putExtra(MOVIES_EXTRAS, list);
     }
     public static int comparerating(Movie a, Movie b, Major major) {
         double compa = 0;
@@ -145,7 +160,7 @@ public final class Search {
         i = 0;
         while(i < userb.size()) {
             if (userb.get(i).getMajor().equals(major)) {
-                compb = compa + rateb.get(i);
+                compb = compb + rateb.get(i);
             }
             i++;
         }
