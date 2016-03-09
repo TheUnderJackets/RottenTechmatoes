@@ -7,6 +7,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by Hudson Lynam on 3/6/2016.
@@ -19,6 +20,7 @@ public class ReviewedMovieSingleton {
 
     private ReviewedMovieSingleton(Context context) {
         cont = context;
+        reviewedMovies = new ArrayList<Movie>();
     }
 
     /**
