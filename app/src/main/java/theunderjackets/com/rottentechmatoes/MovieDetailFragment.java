@@ -39,8 +39,6 @@ public class MovieDetailFragment extends Fragment {
      * fragment (e.g. upon screen orientation changes).
      */
     public MovieDetailFragment() {
-        CurrentMovie current = CurrentMovie.getInstance();
-        current.setMovie(mItem);
     }
 
     @Override
@@ -54,6 +52,9 @@ public class MovieDetailFragment extends Fragment {
                 mItem = Movies.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
                 final Activity activity = this.getActivity();
+
+                current = CurrentMovie.getInstance();
+                current.setMovie(mItem);
 
                 Toolbar appBarLayout = (Toolbar) activity.findViewById(R.id.detail_toolbar);
                 if (appBarLayout != null) {
