@@ -70,7 +70,7 @@ public class Movie implements Parcelable {
         dest.writeString(thumbnailURL);
         dest.writeDouble(userRating);
         dest.writeList(userRatings);
-        dest.writeList(users);
+        dest.writeTypedList(users);
     }
 
     /**
