@@ -120,31 +120,41 @@ public final class Search {
             currentToast.show();
         }
          else {
-            for (Movie movie : temp) {
-                List<User> tempuser = movie.getUsers();
-                for (User u : tempuser) {
-                    if (u.getMajor().equals(m) && !sortedlist.contains(movie)) {
-                        sortedlist.add(movie);
+            int l = 0;
+            int n = 0;
+            boolean notadded = false;
+            while (l < temp.size()) {
+                List<User> tempuser = temp.get(l).getUsers();
+                notadded = true;
+                while (n < tempuser.size() && notadded) {
+                    if (tempuser.get(n).getMajor().equals(m)) {
+                        sortedlist.add(temp.get(l));
+                        notadded = false;
+                    }
+                    n++;
+                }
+                l++;
+            }
+            List<Movie> checklist = sortedlist;
+            int o = 0;
+            int p = 0;
+            for (o = 0; o < (sortedlist.size() - 1); o++) {
+                for (p = 0; p < sortedlist.size() - o - 1; p++) {
+                    if (comparerating(sortedlist.get(p), sortedlist.get(p + 1), m) > 0) {
+                        Movie tempmov = sortedlist.get(p);
+                        sortedlist.set(p, sortedlist.get(p + 1));
+                        sortedlist.set(p+1, tempmov);
                     }
                 }
             }
-            final Major tempmajor = m;
-            Collections.sort(sortedlist, new Comparator<Movie>() {
-                public int compare(Movie a, Movie b) {
-                    int comp = comparerating(a, b, tempmajor);
-                    if (comp > 0) {
-                        return 1;
-                    }
-                    if (comp < 0) {
-                        return -1;
-                    } else {
-                        return 0;
-                    }
-                }
-            });
+            for (Movie movay: sortedlist) {
+                System.out.println(movay.getTitle() + movay.getUserRating());
+            }
             MovieList list = new MovieList();
-            for (Movie movie : sortedlist) {
-                list.addMovie(movie);
+            int k = 0;
+            while (k < sortedlist.size()) {
+                list.addMovie(sortedlist.get(k));
+                k++;
             }
             intent.putExtra(MOVIES_EXTRAS, list);
             activity.startActivity(intent);
@@ -165,24 +175,24 @@ public final class Search {
         List<Double> ratea = a.getUserRatings();
         List<Double> rateb = b.getUserRatings();
         int i = 0;
-        while(i < usera.size() && i < ratea.size()) {
+        while(i < usera.size()) {
             if (usera.get(i).getMajor().equals(major)) {
                 compa = compa + ratea.get(i);
             }
             i++;
         }
         i = 0;
-        while(i < userb.size() && i < rateb.size()) {
+        while(i < userb.size()) {
             if (userb.get(i).getMajor().equals(major)) {
                 compb = compb + rateb.get(i);
             }
             i++;
         }
         double comp = compa - compb;
-        if (comp > 0) {
+        if (comp < 0) {
             return -1;
         }
-        if (comp < 0) {
+        if (comp > 0) {
             return 1;
         } else {
             return 0;
