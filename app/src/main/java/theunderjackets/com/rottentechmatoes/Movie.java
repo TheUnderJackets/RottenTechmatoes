@@ -47,8 +47,8 @@ public class Movie implements Parcelable {
         this.synopsis = in.readString();
         this.thumbnailURL = in.readString();
         this.userRating = in.readDouble();
-        this.userRatings = in.readArrayList(Double.class.getClassLoader());
-        this.users =in.readArrayList(User.class.getClassLoader());
+        in.readList(userRatings, Double.class.getClassLoader());
+        in.readTypedList(users, User.CREATOR);
 
 
     }

@@ -32,7 +32,7 @@ public class User implements Parcelable {
         this.pass = in.readString();
         this.email = in.readString();
         this.name = in.readString();
-        this.major = in.readParcelable(Major.class.getClassLoader());
+        this.major = (Major) in.readSerializable();
         this.description = in.readString();
         this.banned = (Boolean) in.readValue(null);
         this.locked = (Boolean) in.readValue(null);
