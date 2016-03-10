@@ -92,16 +92,15 @@ public class ReviewFragment extends Fragment {
                             ReviewedMovieSingleton review = ReviewedMovieSingleton.getInstance(getActivity());
                             Movie movie = MovieDetailFragment.getCurrent().getMovie();
                             List<Movie> movies = review.getMovies();
-                            boolean added = false;
+                            boolean added = true;
                             int j = 0;
-                            while (j < movies.size()) {
+                            while (j < movies.size() && added) {
                                 if (movies.get(j).getTitle().equals(movie.getTitle())) {
-                                    movies.get(j).addUserRating(ratingBar.getRating(), user);
-                                    added = true;
+                                    added = false;
                                 }
                                 j++;
                             }
-                            if (!added) {
+                            if (added) {
                                 review.addMovie(movie);
                             }
                             getActivity().getFragmentManager().popBackStack();
@@ -151,3 +150,4 @@ public class ReviewFragment extends Fragment {
     }
 
 }
+
