@@ -41,4 +41,13 @@ public class ReviewedMovieSingleton {
     public void addMovie(Movie m) {
         reviewedMovies.add(m);
     }
+    public void addMovie(Movie m, int i) {
+        reviewedMovies.add(i, m);
+    }
+    public void removeMovie(Movie m) {
+        reviewedMovies.remove(m);
+    }
+    public void removeMovie(int m) {
+        reviewedMovies.remove(m);
+    }
 }
