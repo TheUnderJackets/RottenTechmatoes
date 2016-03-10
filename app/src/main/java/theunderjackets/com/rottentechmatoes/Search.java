@@ -113,11 +113,14 @@ public final class Search {
             currentToast.show();
         }
          else {
+            boolean notadded = true;
             for (Movie movie : temp) {
+                notadded = true;
                 List<User> tempuser = movie.getUsers();
                 for (User u : tempuser) {
-                    if (u.getMajor().equals(m)) {
+                    if (u.getMajor().equals(m) && notadded) {
                         sortedlist.add(movie);
+                        notadded = false;
                     }
                 }
             }
