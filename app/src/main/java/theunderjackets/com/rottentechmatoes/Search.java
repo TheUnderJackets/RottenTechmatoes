@@ -151,14 +151,14 @@ public final class Search {
         List<Double> ratea = a.getUserRatings();
         List<Double> rateb = b.getUserRatings();
         int i = 0;
-        while(i < usera.size()) {
+        while(i < usera.size() && i < ratea.size()) {
             if (usera.get(i).getMajor().equals(major)) {
                 compa = compa + ratea.get(i);
             }
             i++;
         }
         i = 0;
-        while(i < userb.size()) {
+        while(i < userb.size() && i < rateb.size()) {
             if (userb.get(i).getMajor().equals(major)) {
                 compb = compb + rateb.get(i);
             }
