@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import static android.widget.Toast.makeText;
 
+import java.util.List;
+
 /**
  * Created by Lixin on 3/2/2016
  */
@@ -89,7 +91,19 @@ public class ReviewFragment extends Fragment {
                             Movie.addUserRating(ratingBar.getRating(), user);
                             ReviewedMovieSingleton review = ReviewedMovieSingleton.getInstance(getActivity());
                             Movie movie = MovieDetailFragment.getCurrent().getMovie();
-                            review.addMovie(movie);
+                            List<Movie> movies = review.getMovies();
+                            boolean added = false;
+                            int j = 0;
+                            while (j < movies.size()) {
+                                if (movies.get(j).getTitle().equals(movie.getTitle())) {
+                                    movies.get(j).addUserRating(ratingBar.getRating(), user);
+                                    added = true;
+                                }
+                                j++;
+                            }
+                            if (!added) {
+                                review.addMovie(movie);
+                            }
                             getActivity().getFragmentManager().popBackStack();
                             cancelButton.setVisibility(View.GONE);
                             submitButton.setVisibility(View.GONE);
@@ -137,4 +151,3 @@ public class ReviewFragment extends Fragment {
     }
 
 }
-
