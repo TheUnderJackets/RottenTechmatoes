@@ -98,6 +98,13 @@ public final class Search {
             }
         });
     }
+    /**
+     * Recommend movies based on major
+     *
+     * @param m the major we're recommending based on
+     * @param activity where you are calling to
+     * @param goal class that will perform type of search
+     */
     public static void recommend(Major m, Context activity, Class goal) {
         Intent intent = new Intent(activity, goal);
         ReviewedMovieSingleton movies = ReviewedMovieSingleton.getInstance(activity);
@@ -143,6 +150,13 @@ public final class Search {
             activity.startActivity(intent);
         }
     }
+    /**
+     * Compares movies for sorting based on rating
+     *
+     * @param a movie 1
+     * @param b movie 2
+     * @param major the major we're recommending based on
+     */
     public static int comparerating(Movie a, Movie b, Major major) {
         double compa = 0;
         double compb = 0;
