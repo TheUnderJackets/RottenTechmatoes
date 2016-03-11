@@ -5,7 +5,7 @@ package theunderjackets.com.rottentechmatoes;
  */
 public class CurrentMovie {
     private static CurrentMovie currentInstance = new CurrentMovie();
-    private Movie currentMovie;
+    private static Movie currentMovie;
     private CurrentMovie() {
     }
 
