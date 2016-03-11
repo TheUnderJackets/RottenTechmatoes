@@ -109,11 +109,11 @@ public final class Search {
         Intent intent = new Intent(activity, goal);
         ReviewedMovieSingleton movies = ReviewedMovieSingleton.getInstance(activity);
         List<Movie> temp = movies.getMovies();
-        List<Movie> sortedlist = new ArrayList<Movie>();
+        List<Movie> sortedlist = new ArrayList<>();
         if (temp == null) {
             Toast currentToast = new Toast(activity);
             CharSequence msgText = "No Reviewed Movies exist";
-            if (currentToast != null && currentToast.getView().isShown()) {
+            if (currentToast.getView().isShown()) {
                 currentToast.cancel();
             }
             currentToast = Toast.makeText(activity, msgText, Toast.LENGTH_SHORT);
@@ -122,7 +122,7 @@ public final class Search {
          else {
             int l = 0;
             int n = 0;
-            boolean notadded = false;
+            boolean notadded;
             while (l < temp.size()) {
                 List<User> tempuser = temp.get(l).getUsers();
                 notadded = true;
@@ -133,22 +133,31 @@ public final class Search {
                     }
                     n++;
                 }
+                n = 0;
                 l++;
             }
-            List<Movie> checklist = sortedlist;
-            int o = 0;
-            int p = 0;
+            int o;
+            int p;
+            for (Movie m1 : sortedlist) {
+                System.out.println(m1.getTitle());
+                for (Double d: m1.getUserRatings()) {
+                    System.out.println(d);
+                }
+            }
             for (o = 0; o < (sortedlist.size() - 1); o++) {
                 for (p = 0; p < sortedlist.size() - o - 1; p++) {
-                    if (comparerating(sortedlist.get(p), sortedlist.get(p + 1), m) > 0) {
+                    if (comparerating(sortedlist.get(p), sortedlist.get(p + 1), m) < 0) {
                         Movie tempmov = sortedlist.get(p);
                         sortedlist.set(p, sortedlist.get(p + 1));
                         sortedlist.set(p+1, tempmov);
                     }
                 }
             }
-            for (Movie movay: sortedlist) {
-                System.out.println(movay.getTitle() + movay.getUserRating());
+            for (Movie m1 : sortedlist) {
+                System.out.println(m1.getTitle());
+                for (Double d: m1.getUserRatings()) {
+                    System.out.println(d);
+                }
             }
             MovieList list = new MovieList();
             int k = 0;
