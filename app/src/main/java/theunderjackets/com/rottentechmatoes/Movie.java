@@ -15,9 +15,9 @@ public class Movie implements Parcelable {
     private String apiRating;
     private String synopsis;
     private String thumbnailURL;
-    private static List<Double> userRatings = new ArrayList<>();
-    private static List<User> users = new ArrayList<>();
-    private static double userRating;
+    private List<Double> userRatings = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
+    private double userRating;
 
     public Movie(String id, String title, int year, int runtime, String theaterReleaseDate, String apiRating, String synopsis, String thumbnailURL, double userRating, ArrayList userRatings) {
         this.id = id;
@@ -144,7 +144,7 @@ public class Movie implements Parcelable {
      * @param rating the new rating to be added
      * @param user the user adding the new rating
      */
-    public static void addUserRating(double rating, User user) {
+    public void addUserRating(double rating, User user) {
         userRatings.add(rating);
         users.add(user);
         updateUserRating();
@@ -153,7 +153,7 @@ public class Movie implements Parcelable {
     /**
      * Method to update the average user rating once a new rating is submitted
      */
-    public static void updateUserRating() {
+    public void updateUserRating() {
         int total = 0;
         int numElem = 0;
         for (int i = 0; i < userRatings.size(); i++) {
