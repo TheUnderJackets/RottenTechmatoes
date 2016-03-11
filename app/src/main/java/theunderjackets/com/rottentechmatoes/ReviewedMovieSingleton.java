@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class ReviewedMovieSingleton {
     private static ReviewedMovieSingleton movieInstance;
-    private List<Movie> reviewedMovies;
-    private Movie resultsMovie;
+    private static List<Movie> reviewedMovies;
+    private static Movie resultsMovie;
     private static Context cont;
 
     private ReviewedMovieSingleton(Context context) {
