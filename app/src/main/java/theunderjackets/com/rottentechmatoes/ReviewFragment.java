@@ -88,20 +88,30 @@ public class ReviewFragment extends Fragment {
                         } else {
                             makeText(getContext(), String.valueOf(ratingBar.getRating()), Toast.LENGTH_SHORT).show();
                             User user = CurrentUser.getInstance().getUser();
-                            Movie.addUserRating(ratingBar.getRating(), user);
                             ReviewedMovieSingleton review = ReviewedMovieSingleton.getInstance(getActivity());
-                            Movie movie = MovieDetailFragment.getCurrent().getMovie();
+                            CurrentMovie curr = CurrentMovie.getInstance();
+                            Movie movie = curr.getMovie();
                             List<Movie> movies = review.getMovies();
                             boolean added = true;
                             int j = 0;
                             while (j < movies.size() && added) {
                                 if (movies.get(j).getTitle().equals(movie.getTitle())) {
+                                    review.removeMovie(movies.get(j));
+                                    movie.addUserRating(ratingBar.getRating(), user);
+                                    review.addMovie(movie);
                                     added = false;
                                 }
                                 j++;
                             }
                             if (added) {
+                                movie.addUserRating(ratingBar.getRating(), user);
                                 review.addMovie(movie);
+                            }
+                            for (Movie mv: review.getMovies()) {
+                                System.out.println(mv.getTitle());
+                                for (Double d: mv.getUserRatings()) {
+                                    System.out.println(d);
+                                }
                             }
                             getActivity().getFragmentManager().popBackStack();
                             cancelButton.setVisibility(View.GONE);
