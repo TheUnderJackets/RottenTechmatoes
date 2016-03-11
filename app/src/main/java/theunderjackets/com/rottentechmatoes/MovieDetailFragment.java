@@ -32,7 +32,7 @@ public class MovieDetailFragment extends Fragment {
      * The dummy content this fragment is presenting.
      */
     protected Movie mItem;
-    private static CurrentMovie current;
+    public CurrentMovie current;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -53,8 +53,6 @@ public class MovieDetailFragment extends Fragment {
 
                 final Activity activity = this.getActivity();
 
-                current = CurrentMovie.getInstance();
-                current.setMovie(mItem);
 
                 Toolbar appBarLayout = (Toolbar) activity.findViewById(R.id.detail_toolbar);
                 if (appBarLayout != null) {
@@ -89,10 +87,12 @@ public class MovieDetailFragment extends Fragment {
             ((RatingBar) rootView.findViewById(R.id.movieRating)).setRating(mItem.getApiRating() / 20);
             ((TextView) rootView.findViewById(R.id.textView_synopsis)).setText(mItem.getSynopsis());
         }
+        current = CurrentMovie.getInstance();
+        current.setMovie(mItem);
 
         return rootView;
     }
-    public static CurrentMovie getCurrent() {
+    public CurrentMovie getCurrent() {
         return current;
     }
 }
