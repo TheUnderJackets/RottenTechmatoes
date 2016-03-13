@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegistrationActivity extends AppCompatActivity {
     private Toast currentToast;
 
@@ -114,6 +117,23 @@ public class RegistrationActivity extends AppCompatActivity {
         return true;
     }
 
+    private static Pattern emailNamePtrn = Pattern.compile(
+            "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+
+    /**
+     * Checks to see if the email input during registration is a valid address.
+     * @param email the email to check
+     * @return true if email is valid, false otherwise
+     */
+    public static boolean isEmailAddressValid(String email){
+
+        Matcher mtch = emailNamePtrn.matcher(email);
+        if(mtch.matches()){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Makes it so that edittext will not be focused on anymore once clicked out of.
      * @param event click outside of box
@@ -137,3 +157,4 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
 }
+
