@@ -110,6 +110,7 @@ public final class Search {
         ReviewedMovieSingleton movies = ReviewedMovieSingleton.getInstance(activity);
         List<Movie> temp = movies.getMovies();
         List<Movie> sortedlist = new ArrayList<>();
+        //This makes a toast pop if there are no reviewed movies
         if (temp == null) {
             Toast currentToast = new Toast(activity);
             CharSequence msgText = "No Reviewed Movies exist";
@@ -123,6 +124,9 @@ public final class Search {
             int l = 0;
             int n = 0;
             boolean notadded;
+            //This double while loop goes through each movie, checking all the users that have rated
+            //it and seeing if any of those users have the Current User's major. If at least one does,
+            //adds the movie to the recommendations list.
             while (l < temp.size()) {
                 List<User> tempuser = temp.get(l).getUsers();
                 notadded = true;
@@ -144,6 +148,9 @@ public final class Search {
                     System.out.println(d);
                 }
             }
+            //This is a bubble sort for the list of movies given by the previous double while loop.
+            //It sorts based on the sum of all the ratings by a valid (major matches the Current User)
+            //user.
             for (o = 0; o < (sortedlist.size() - 1); o++) {
                 for (p = 0; p < sortedlist.size() - o - 1; p++) {
                     if (comparerating(sortedlist.get(p), sortedlist.get(p + 1), m) < 0) {
@@ -161,6 +168,7 @@ public final class Search {
             }
             MovieList list = new MovieList();
             int k = 0;
+            //This puts the sorted list into a MovieList, allowing for easy transfer to the activity.
             while (k < sortedlist.size()) {
                 list.addMovie(sortedlist.get(k));
                 k++;
@@ -175,6 +183,7 @@ public final class Search {
      * @param a movie 1
      * @param b movie 2
      * @param major the major we're recommending based on
+     * @return an int comparing the two movies
      */
     public static int comparerating(Movie a, Movie b, Major major) {
         double compa = 0;
@@ -184,6 +193,7 @@ public final class Search {
         List<Double> ratea = a.getUserRatings();
         List<Double> rateb = b.getUserRatings();
         int i = 0;
+        //Sums up all the ratings by users of a given major for the first movie.
         while(i < usera.size()) {
             if (usera.get(i).getMajor().equals(major)) {
                 compa = compa + ratea.get(i);
@@ -191,6 +201,7 @@ public final class Search {
             i++;
         }
         i = 0;
+        //Sums up all the ratings by users of a given major for the second movie.
         while(i < userb.size()) {
             if (userb.get(i).getMajor().equals(major)) {
                 compb = compb + rateb.get(i);
