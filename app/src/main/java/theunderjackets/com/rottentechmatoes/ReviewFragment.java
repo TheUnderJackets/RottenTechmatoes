@@ -96,9 +96,10 @@ public class ReviewFragment extends Fragment {
                             int j = 0;
                             while (j < movies.size() && added) {
                                 if (movies.get(j).getTitle().equals(movie.getTitle())) {
+                                    Movie tempmovie = movies.get(j);
+                                    tempmovie.addUserRating(ratingBar.getRating(), user);
                                     review.removeMovie(movies.get(j));
-                                    movie.addUserRating(ratingBar.getRating(), user);
-                                    review.addMovie(movie);
+                                    review.addMovie(tempmovie);
                                     added = false;
                                 }
                                 j++;
