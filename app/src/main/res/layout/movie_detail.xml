@@ -24,7 +24,9 @@
         android:id="@+id/textView_title"
         android:layout_marginLeft="30dp"
         android:layout_above="@+id/textView_release"
-        android:layout_toEndOf="@+id/thumbnail" />
+        android:layout_toEndOf="@+id/thumbnail"
+        android:textColor="#ffffff"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,27 +35,31 @@
         android:text="Release Date: "
         android:id="@+id/textView_release"
         android:layout_above="@+id/textView_rating"
-        android:layout_alignStart="@+id/textView_title" />
+        android:layout_alignStart="@+id/textView_title"
+        android:textColor="#FFFFFFFF"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Rating"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Rating: "
         android:id="@+id/textView_rating"
-        android:layout_alignBottom="@+id/thumbnail"
-        android:layout_centerHorizontal="true" />
+        android:textColor="#FFFFFFFF"
+        android:textStyle="bold"
+        android:layout_above="@+id/movieRating"
+        android:layout_alignStart="@+id/textView_release" />
 
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/movieRating"
         android:focusable="false"
-        android:layout_below="@+id/thumbnail"
-        android:layout_centerHorizontal="true"
         android:clickable="false"
         android:focusableInTouchMode="false"
-        android:isIndicator="true"/>
+        android:isIndicator="true"
+        android:layout_below="@+id/thumbnail"
+        android:layout_toEndOf="@+id/scrollView" />
 
     <ScrollView
         android:layout_width="wrap_content"

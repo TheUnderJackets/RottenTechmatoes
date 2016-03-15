@@ -56,6 +56,7 @@
     <!--Strings related to search results-->
     <string name="text_thumbnail">Thumbnail</string>
     <string name="title_activity_view_profile">ViewProfileActivity</string>
-
+    <string name="title_activity_settings_activity.java">Settings</string>
+    <string name="title_activity_manage_users">ManageUsersActivity</string>
 
 </resources>
