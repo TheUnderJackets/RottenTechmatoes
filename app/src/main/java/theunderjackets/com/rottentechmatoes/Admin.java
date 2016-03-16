@@ -7,7 +7,7 @@ public class Admin extends User {
     private String pass;
 
     public Admin(String userName, String pass) {
-        super(null, null, pass, userName);
+        super(null, null, pass, userName, false);
         this.userName = userName;
         this.pass = pass;
     }
