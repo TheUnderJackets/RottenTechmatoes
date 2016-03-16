@@ -1,12 +1,13 @@
 package theunderjackets.com.rottentechmatoes;
 
 
-public class Admin {
+public class Admin extends User {
 
     private String userName;
     private String pass;
 
     public Admin(String userName, String pass) {
+        super(null, null, pass, userName);
         this.userName = userName;
         this.pass = pass;
     }

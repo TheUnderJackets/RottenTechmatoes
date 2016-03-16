@@ -40,6 +40,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         UserList.getUserByUsername("Locked").setLocked(true);
         UserList.addUser(new User("Hudson Lynam", "Email3", "Password", "Banned"));
         UserList.getUserByUsername("Banned").setBanned(true);
+        AdminList.addAdmin(new Admin("Admin", "Password"));
     }
 
     private void linkToLogin(View v) {

@@ -53,6 +53,12 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println(userName);
         String passWord = password.getText().toString();
         password.setText("");
+        if (AdminList.isAdminValid(userName, passWord)) {
+            CurrentUser.getInstance().setUser(AdminList.getAdminByUsername(userName));
+            Intent loginIntent = new Intent(this, ManageUsersActivity.class);;
+            startActivity(loginIntent);
+            return;
+        }
         int check = UserList.isUserValid(userName, passWord);
         if (check == 0) {
             Intent loginIntent = new Intent(this, HomeActivity.class);
