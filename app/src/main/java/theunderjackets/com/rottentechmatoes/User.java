@@ -13,14 +13,16 @@ public class User implements Parcelable {
     private String description = "";
     private boolean banned;
     private boolean locked;
+    private boolean isSelected;
 
     //This is the only constructor necessary since these are the required fields, and
     //we will have a separate page for the rest. DELETE THIS LATER.
-    public User(String name, String email, String pass, String userName) {
+    public User(String name, String email, String pass, String userName, boolean isSelected) {
         this.userName = userName;
         this.name = name;
         this.pass = pass;
         this.email = email;
+        this.isSelected = isSelected;
     }
 
     /**
@@ -94,6 +96,18 @@ public class User implements Parcelable {
         return name;
     }
 
+    public void changePass(String pass) {
+        this.pass = pass;
+    }
+
+    public Major getMajor() {
+        return major;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public boolean getBanned() {
         return banned;
     }
@@ -110,16 +124,12 @@ public class User implements Parcelable {
         this.locked = bool;
     }
 
-    public void changePass(String pass) {
-        this.pass = pass;
+    public boolean isSelected() {
+        return isSelected;
     }
 
-    public Major getMajor() {
-        return major;
-    }
-
-    public String getDescription() {
-        return description;
+    public void setSelected(boolean isSelected) {
+        this.isSelected = isSelected;
     }
 
     public void setMajor(Major major) {
