@@ -47,4 +47,15 @@
         android:layout_alignParentStart="true"
         android:textSize="20sp" />
 
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Admin"
+        android:id="@+id/admin"
+        android:layout_below="@+id/registerButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="33dp"
+        android:textSize="20sp"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

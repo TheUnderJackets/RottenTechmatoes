@@ -102,7 +102,7 @@ public class RegistrationActivity extends AppCompatActivity {
             passwordrepeat.setText("");
             password.requestFocus();
         } else {
-            User newUser = new User(aName, email, pass, userName);
+            User newUser = new User(aName, email, pass, userName, false);
             UserList.addUser(newUser);
             finish();
         }

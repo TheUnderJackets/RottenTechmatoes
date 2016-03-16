@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -44,6 +45,9 @@ public class ManageUsersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: set action for UNLOCK button
+                // After this button is clicked, if a user is selected,
+                // then unlock that user
+                // See ".isSelected()" method in User.java
             }
         });
 
@@ -52,6 +56,9 @@ public class ManageUsersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: set action for BAN button
+                // After this button is clicked, if a user is selected,
+                // then ban that user
+                // See ".isSelected()" method in User.java
             }
         });
 
@@ -85,13 +92,32 @@ public class ManageUsersActivity extends AppCompatActivity {
         @Override
         public ViewHolder2 onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.movie_list_content1, parent, false);
+                    .inflate(R.layout.user_list_content, parent, false);
             return new ViewHolder2(view);
         }
 
         @Override
         public void onBindViewHolder(final ViewHolder2 holder, int position) {
+
+            final int pos = position;
+
             holder.uItem = userValues.get(position);
+
+            holder.chkSelected.setChecked(userValues.get(position).isSelected());
+
+            holder.chkSelected.setTag(userValues.get(position));
+
+            holder.chkSelected.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    CheckBox cb = (CheckBox) v;
+                    User contact = (User) cb.getTag();
+
+                    contact.setSelected(cb.isChecked());
+                    userValues.get(pos).setSelected(cb.isChecked());
+
+                }
+            });
+
             holder.uNameView.setText(userValues.get(position).getUserName());
 
             String status;
@@ -119,6 +145,7 @@ public class ManageUsersActivity extends AppCompatActivity {
             public final TextView uNameView;
             public final TextView uStatusView;
             public User uItem;
+            public CheckBox chkSelected;
 
             /**
              * The constructor tells the view holder to place the usernames
@@ -128,6 +155,7 @@ public class ManageUsersActivity extends AppCompatActivity {
             public ViewHolder2(View view) {
                 super(view);
                 uView = view;
+                chkSelected = (CheckBox) view.findViewById(R.id.checkBox);
                 uNameView = (TextView) view.findViewById(R.id.user);
                 uStatusView = (TextView) view.findViewById(R.id.status);
             }
