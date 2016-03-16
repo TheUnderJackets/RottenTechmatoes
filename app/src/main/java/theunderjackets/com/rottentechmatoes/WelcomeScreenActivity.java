@@ -34,6 +34,12 @@ public class WelcomeScreenActivity extends AppCompatActivity {
                 linkToRegister(v);
             }
         });
+        //Hard Coded Users for M8
+        UserList.addUser(new User("Ben French", "Email1", "Password", "Regular"));
+        UserList.addUser(new User("Lixin Wang", "Email2", "Password", "Locked"));
+        UserList.getUserByUsername("Locked").setLocked(true);
+        UserList.addUser(new User("Hudson Lynam", "Email3", "Password", "Banned"));
+        UserList.getUserByUsername("Banned").setBanned(true);
     }
 
     private void linkToLogin(View v) {

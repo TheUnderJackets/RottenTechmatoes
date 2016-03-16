@@ -94,6 +94,7 @@ public class ReviewFragment extends Fragment {
                             List<Movie> movies = review.getMovies();
                             boolean added = true;
                             int j = 0;
+                            // This checks to see if the movie has already been rated.
                             while (j < movies.size() && added) {
                                 if (movies.get(j).getTitle().equals(movie.getTitle())) {
                                     Movie tempmovie = movies.get(j);
@@ -104,6 +105,8 @@ public class ReviewFragment extends Fragment {
                                 }
                                 j++;
                             }
+                            //This adds the movie to the singleton if the movie is reviewed
+                            //for the first time.
                             if (added) {
                                 movie.addUserRating(ratingBar.getRating(), user);
                                 review.addMovie(movie);
