@@ -34,13 +34,26 @@ public class WelcomeScreenActivity extends AppCompatActivity {
                 linkToRegister(v);
             }
         });
+
+        Button admin = (Button) findViewById(R.id.admin);
+        admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linkToAdmin(v);
+            }
+        });
         //Hard Coded Users for M8
-        UserList.addUser(new User("Ben French", "Email1", "Password", "Regular"));
-        UserList.addUser(new User("Lixin Wang", "Email2", "Password", "Locked"));
+        UserList.addUser(new User("Ben French", "Email1", "Password", "Regular", false));
+        UserList.addUser(new User("Lixin Wang", "Email2", "Password", "Locked", false));
         UserList.getUserByUsername("Locked").setLocked(true);
-        UserList.addUser(new User("Hudson Lynam", "Email3", "Password", "Banned"));
+        UserList.addUser(new User("Hudson Lynam", "Email3", "Password", "Banned", false));
         UserList.getUserByUsername("Banned").setBanned(true);
         AdminList.addAdmin(new Admin("Admin", "Password"));
+    }
+
+    private void linkToAdmin(View v) {
+        Intent adminIntent = new Intent(this, ManageUsersActivity.class);
+        startActivity(adminIntent);
     }
 
     private void linkToLogin(View v) {
