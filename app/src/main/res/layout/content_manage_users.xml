@@ -12,28 +12,90 @@
     tools:context=".ManageUsersActivity"
     tools:showIn="@layout/activity_manage_users">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/user_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:scrollbars="vertical"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="theunderjackets.com.rottentechmatoes.ManageUsersActivity"
+        tools:listitem="@layout/user_list_content"
+        android:layout_above="@+id/unlockButton"
+        android:layout_below="@+id/select"
+        android:paddingBottom="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Unlock"
         android:id="@+id/unlockButton"
-        android:layout_marginBottom="74dp"
+        android:layout_marginBottom="50dp"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
+        android:textSize="16sp"
         android:background="@android:color/holo_green_light"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignStart="@+id/userTitle" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ban"
         android:id="@+id/banButton"
-        android:layout_alignTop="@+id/unlockButton"
-        android:layout_alignParentEnd="true"
         android:background="@android:color/holo_red_dark"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:textSize="16dp" />
+        android:textSize="16sp"
+        android:layout_alignTop="@+id/unlockButton"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Select"
+        android:id="@+id/select"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/user_list"
+        android:layout_toStartOf="@+id/unlockButton"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="User"
+        android:id="@+id/userTitle"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Status"
+        android:id="@+id/statusTitle"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/banButton"
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select All    "
+        android:id="@+id/selectAllBox"
+        android:checked="false"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_alignTop="@+id/unlockButton"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/holo_blue_light"
+        android:textColor="#FFFFFF"
+        android:layout_alignBottom="@+id/unlockButton" />
 
 </RelativeLayout>

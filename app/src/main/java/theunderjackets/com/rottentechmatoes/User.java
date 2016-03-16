@@ -105,6 +105,7 @@ public class User implements Parcelable {
     public void setBanned(boolean bool) {
         this.banned = bool;
     }
+
     public void setLocked(boolean bool) {
         this.locked = bool;
     }

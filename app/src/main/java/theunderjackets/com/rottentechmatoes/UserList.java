@@ -33,6 +33,14 @@ public final class UserList {
     }
 
     /**
+     * Get the set of users.
+     * @return users
+     */
+    public static Set<User> getUsers() {
+        return users;
+    }
+
+    /**
      * updates the list based on the given user
      * @param user user whose information has changed
      */
