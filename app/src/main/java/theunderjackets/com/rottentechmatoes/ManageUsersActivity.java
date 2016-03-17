@@ -29,7 +29,9 @@ import theunderjackets.com.rottentechmatoes.R;
 public class ManageUsersActivity extends AppCompatActivity {
     //get the set of users from Userlist and convert to a list
     Set<User> userSet = UserList.getUsers();
-    List<User> userList = new ArrayList<User>(userSet);
+    List<User> userList = new ArrayList<>(userSet);
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,7 @@ public class ManageUsersActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle("Manage Users");
 
-        View recyclerView = findViewById(R.id.user_list);
+        final View recyclerView = findViewById(R.id.user_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
 
@@ -52,6 +54,15 @@ public class ManageUsersActivity extends AppCompatActivity {
                 // After this button is clicked, if a user is selected,
                 // then unlock that user
                 // See ".isSelected()" method in User.java
+                for(User u: userList) {
+                    int i = 1;
+                    if(u.isSelected()) {
+                        u.setLocked(false);
+                    }
+                    u.setSelected(false);
+                }
+                ((RecyclerView) recyclerView).getAdapter().notifyDataSetChanged();
+
             }
         });
 
@@ -63,10 +74,42 @@ public class ManageUsersActivity extends AppCompatActivity {
                 // After this button is clicked, if a user is selected,
                 // then ban that user
                 // See ".isSelected()" method in User.java
+
+                for(User u: userList) {
+                    if(u.isSelected()) {
+                        u.setBanned(true);
+                    }
+                    u.setSelected(false);
+
+                }
+                ((RecyclerView) recyclerView).getAdapter().notifyDataSetChanged();
             }
+
+        });
+
+        final CheckBox selectAll = (CheckBox) findViewById(R.id.selectAllBox);
+        selectAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                for(User u: userList) {
+                    if (selectAll.isChecked()) {
+                        u.setSelected(true);
+                    }
+                    else {
+                        u.setSelected(false);
+                    }
+
+                }
+
+                ((RecyclerView) recyclerView).getAdapter().notifyDataSetChanged();
+            }
+
+
         });
 
     }
+
 
     /**
      * Sets up the recycler view for the list of users.

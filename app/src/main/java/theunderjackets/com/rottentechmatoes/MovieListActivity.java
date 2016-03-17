@@ -42,7 +42,7 @@ public class MovieListActivity extends AppCompatActivity {
     private boolean mTwoPane;
 
 
-    protected static List<theunderjackets.com.rottentechmatoes.Movie>  movies = new ArrayList<>();
+    protected static List<Movie>  movies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +57,6 @@ public class MovieListActivity extends AppCompatActivity {
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
 
-        if (findViewById(R.id.movie_detail_container) != null) {
-            // The detail container view will be present only in the
-            // large-screen layouts (res/values-w900dp).
-            // If this view is present, then the
-            // activity should be in two-pane mode.
-            mTwoPane = true;
-        }
-
         //get movies from intent
 
         MovieList movieList = getIntent().getParcelableExtra(MOVIES_EXTRAS);
@@ -77,8 +69,6 @@ public class MovieListActivity extends AppCompatActivity {
             Movies.addItem(m);
         }
 
-
-
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
@@ -88,9 +78,9 @@ public class MovieListActivity extends AppCompatActivity {
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<theunderjackets.com.rottentechmatoes.Movie> mValues;
+        private final List<Movie> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<theunderjackets.com.rottentechmatoes.Movie> items) {
+        public SimpleItemRecyclerViewAdapter(List<Movie> items) {
             mValues = items;
         }
 
@@ -164,7 +154,7 @@ public class MovieListActivity extends AppCompatActivity {
             public final TextView mIdView;
             public final TextView mContentView;
             public final ImageView mThumbnail;
-            public theunderjackets.com.rottentechmatoes.Movie mItem;
+            public Movie mItem;
 
             public ViewHolder(View view) {
                 super(view);
