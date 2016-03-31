@@ -84,7 +84,7 @@ public class MovieDetailFragment extends Fragment {
 
             ((TextView) rootView.findViewById(R.id.textView_title)).setText(mItem.getTitle());
             ((TextView) rootView.findViewById(R.id.textView_release)).append(mItem.getTheaterReleaseDate());
-            ((RatingBar) rootView.findViewById(R.id.movieRating)).setRating(mItem.getApiRating() / 20);
+            ((RatingBar) rootView.findViewById(R.id.movieRating)).setRating(Float.parseFloat(mItem.getApiRating()) / 20);
             ((TextView) rootView.findViewById(R.id.textView_synopsis)).setText(mItem.getSynopsis());
         }
         current = CurrentMovie.getInstance();

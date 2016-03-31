@@ -28,8 +28,7 @@ import theunderjackets.com.rottentechmatoes.R;
  */
 public class ManageUsersActivity extends AppCompatActivity {
     //get the set of users from Userlist and convert to a list
-    Set<User> userSet = UserList.getUsers();
-    List<User> userList = new ArrayList<>(userSet);
+    List<User> userList;
 
 
 
@@ -41,7 +40,7 @@ public class ManageUsersActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Manage Users");
-
+        userList = getIntent().getParcelableArrayListExtra(LoginActivity.USERSEXTRA);
         final View recyclerView = findViewById(R.id.user_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);

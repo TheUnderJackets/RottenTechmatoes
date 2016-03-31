@@ -83,40 +83,13 @@ public class ReviewFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        System.out.println("Hellowwwwwww");
                         if (ratingBar.getRating() == 0) {
                             makeText(getContext(), "Rating cannot be empty.", Toast.LENGTH_SHORT).show();
                         } else {
                             makeText(getContext(), String.valueOf(ratingBar.getRating()), Toast.LENGTH_SHORT).show();
                             User user = CurrentUser.getInstance().getUser();
-                            ReviewedMovieSingleton review = ReviewedMovieSingleton.getInstance(getActivity());
-                            CurrentMovie curr = CurrentMovie.getInstance();
-                            Movie movie = curr.getMovie();
-                            List<Movie> movies = review.getMovies();
-                            boolean added = true;
-                            int j = 0;
-                            // This checks to see if the movie has already been rated.
-                            while (j < movies.size() && added) {
-                                if (movies.get(j).getTitle().equals(movie.getTitle())) {
-                                    Movie tempmovie = movies.get(j);
-                                    tempmovie.addUserRating(ratingBar.getRating(), user);
-                                    review.removeMovie(movies.get(j));
-                                    review.addMovie(tempmovie);
-                                    added = false;
-                                }
-                                j++;
-                            }
-                            //This adds the movie to the singleton if the movie is reviewed
-                            //for the first time.
-                            if (added) {
-                                movie.addUserRating(ratingBar.getRating(), user);
-                                review.addMovie(movie);
-                            }
-                            for (Movie mv: review.getMovies()) {
-                                System.out.println(mv.getTitle());
-                                for (Double d: mv.getUserRatings()) {
-                                    System.out.println(d);
-                                }
-                            }
+                            Review review = new Review(user.getEmail(), CurrentMovie.getInstance().getMovie().getId(), ratingBar.getRating(), reviewBox.getText().toString());
                             getActivity().getFragmentManager().popBackStack();
                             cancelButton.setVisibility(View.GONE);
                             submitButton.setVisibility(View.GONE);
@@ -149,7 +122,9 @@ public class ReviewFragment extends Fragment {
             }
 
         });
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

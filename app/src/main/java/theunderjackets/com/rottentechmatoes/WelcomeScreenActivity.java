@@ -9,12 +9,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.firebase.client.Firebase;
+
 
 public class WelcomeScreenActivity extends AppCompatActivity {
     private Intent intent = getIntent();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_welcome_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -37,12 +40,16 @@ public class WelcomeScreenActivity extends AppCompatActivity {
 
 
         //Hard Coded Users for M8
+        /*
         UserList.addUser(new User("Ben French", "Email1", "Password", "Regular", false));
-        UserList.addUser(new User("Lixin Wang", "Email2", "Password", "Locked", false));
-        UserList.getUserByUsername("Locked").setLocked(true);
-        UserList.addUser(new User("Hudson Lynam", "Email3", "Password", "Banned", false));
-        UserList.getUserByUsername("Banned").setBanned(true);
-        AdminList.addAdmin(new Admin("Admin", "Password"));
+        User locked = new User("Lixin Wang", "Email2", "Password", "Locked", false);
+        UserList.addUser(locked);
+        locked.setLocked(true);
+        User banned = new User("Hudson Lynam", "Email3", "Password", "Banned", false);
+        UserList.addUser(banned);
+        banned.setBanned(true);
+        AdminList.addAdmin(new Admin("Email4", "Admin", "Password"));
+        */
     }
 
     private void linkToLogin(View v) {

@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 public final class UserList {
     private static Map<User, String> userNames = new HashMap<>();
     private static Set<User> users = new HashSet<>();
-
+    private static final String URLREF = "https://rottentechmatoes.firebaseio.com/";
     private UserList() {
     }
 
@@ -28,8 +28,7 @@ public final class UserList {
      * @param user user to be added
      */
     public static void addUser(User user) {
-        userNames.put(user, user.getUserName());
-        users.add(user);
+
     }
 
     /**

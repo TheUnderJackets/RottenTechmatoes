@@ -73,7 +73,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
             currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
             currentToast.show();
-        } else if (!UserList.isUserNameValid(userName)) {
+        } /*else if (!UserList.isUserNameValid(userName)) {
             CharSequence msgText = "Username has been taken. Please enter a different one.";
             if (currentToast != null && currentToast.getView().isShown()) {
                 currentToast.cancel();
@@ -91,7 +91,7 @@ public class RegistrationActivity extends AppCompatActivity {
             currentToast.show();
             emailaddress.setText("");
             emailaddress.requestFocus();
-        } else if (!pass.equals(passRepeat)){
+        } */else if (!pass.equals(passRepeat)){
             CharSequence msgText = "Repeat password does not match first password. Please try again.";
             if (currentToast != null && currentToast.getView().isShown()) {
                 currentToast.cancel();

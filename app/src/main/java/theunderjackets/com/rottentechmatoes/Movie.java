@@ -3,9 +3,12 @@ package theunderjackets.com.rottentechmatoes;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Movie implements Parcelable {
     private String id;
     private String title;
@@ -15,11 +18,12 @@ public class Movie implements Parcelable {
     private String apiRating;
     private String synopsis;
     private String thumbnailURL;
-    private List<Double> userRatings = new ArrayList<>();
-    private List<User> users = new ArrayList<>();
-    private double userRating;
+    private List<Review> reviews = new ArrayList<>();
 
-    public Movie(String id, String title, int year, int runtime, String theaterReleaseDate, String apiRating, String synopsis, String thumbnailURL, double userRating, ArrayList userRatings) {
+    public Movie() {
+
+    }
+    public Movie(String id, String title, int year, int runtime, String theaterReleaseDate, String apiRating, String synopsis, String thumbnailURL) {
         this.id = id;
         this.title = title;
         this.year = year;
@@ -28,9 +32,6 @@ public class Movie implements Parcelable {
         this.apiRating = apiRating;
         this.synopsis = synopsis;
         this.thumbnailURL = thumbnailURL;
-        this.userRating = userRating;
-        this.userRatings = userRatings;
-        this.users = users;
     }
 
     /**
@@ -46,11 +47,7 @@ public class Movie implements Parcelable {
         this.apiRating = in.readString();
         this.synopsis = in.readString();
         this.thumbnailURL = in.readString();
-        this.userRating = in.readDouble();
-        in.readList(userRatings, Double.class.getClassLoader());
-        in.readTypedList(users, User.CREATOR);
-
-
+        in.readTypedList(this.reviews, Review.CREATOR);
     }
 
     /**
@@ -68,9 +65,7 @@ public class Movie implements Parcelable {
         dest.writeString(apiRating);
         dest.writeString(synopsis);
         dest.writeString(thumbnailURL);
-        dest.writeDouble(userRating);
-        dest.writeList(userRatings);
-        dest.writeTypedList(users);
+        dest.writeTypedList(reviews);
     }
 
     /**
@@ -113,10 +108,6 @@ public class Movie implements Parcelable {
         return year;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
     public int getRuntime() {
         return runtime;
     }
@@ -125,8 +116,9 @@ public class Movie implements Parcelable {
         return theaterReleaseDate;
     }
 
-    public Float getApiRating() {
-        return Float.parseFloat(apiRating);
+    public String getApiRating() {
+
+        return apiRating;
     }
 
     public String getSynopsis() {
@@ -137,32 +129,18 @@ public class Movie implements Parcelable {
         return thumbnailURL;
     }
 
-    public double getUserRating() { return userRating; }
-
-    /**
-     * Method to add a user rating to a movie
-     * @param rating the new rating to be added
-     * @param user the user adding the new rating
-     */
-    public void addUserRating(double rating, User user) {
-        userRatings.add(rating);
-        users.add(user);
-        updateUserRating();
+    public List<Review> getReviews() {
+        return reviews;
     }
 
-    /**
-     * Method to update the average user rating once a new rating is submitted
-     */
-    public void updateUserRating() {
-        int total = 0;
-        int numElem = 0;
-        for (int i = 0; i < userRatings.size(); i++) {
-            total += userRatings.get(i);
-            numElem++;
+    public void addReview(Review review) {
+        reviews.add(review);
+    }
+
+    public void addReviews(Collection<Review> reviews) {
+        for (Review review : reviews) {
+            this.reviews.add(review);
         }
-        userRating = (total/numElem);
     }
-
-    public List<Double> getUserRatings() { return userRatings; }
 }
 

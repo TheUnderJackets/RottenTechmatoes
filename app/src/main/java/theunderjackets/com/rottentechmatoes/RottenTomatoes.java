@@ -127,7 +127,7 @@ public final class RottenTomatoes {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Movie movie = new Movie(id, title, year, runtime, theaterReleaseDate, apiRating, synopsis, thumbnailURL, userRating, userRatings);
+                        Movie movie = new Movie(id, title, year, runtime, theaterReleaseDate, apiRating, synopsis, thumbnailURL);
                         list.addMovie(movie);
                     }
                 callback.fireIntent(list, activityContext, goalClass);
