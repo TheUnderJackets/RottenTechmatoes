@@ -32,7 +32,7 @@ public class MovieList implements Parcelable {
      * @param flags flags
      */
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public final void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(movies);
     }
 
@@ -42,7 +42,7 @@ public class MovieList implements Parcelable {
      * @return 0
      */
     @Override
-    public int describeContents() {
+    public final int describeContents() {
         return 0;
     }
 
@@ -67,7 +67,7 @@ public class MovieList implements Parcelable {
      * Adds the movie to the list.
      * @param movie Movie to be added
      */
-    public void addMovie(Movie movie) {
+    public final void addMovie(Movie movie) {
         movies.add(movie);
     }
 
@@ -76,7 +76,7 @@ public class MovieList implements Parcelable {
      * @param movie Movie to check if in list
      * @return true if the movie is in the list, false otherwise
      */
-    public boolean containsMovie(Movie movie) {
+    public final boolean containsMovie(Movie movie) {
         return movies.contains(movie);
     }
 
@@ -84,7 +84,7 @@ public class MovieList implements Parcelable {
      * Removes the movie from the list.
      * @param movie Movie to be removed
      */
-    public void deleteMovie(Movie movie) {
+    public final void deleteMovie(Movie movie) {
         if (movies.contains(movie)) {
             movies.remove(movie);
         }
@@ -96,7 +96,7 @@ public class MovieList implements Parcelable {
      * @return movie if the movie is in the list
      * @throws java.util.NoSuchElementException if movie is not found
      */
-    public Movie getMovieById(String id) {
+    public final Movie getMovieById(String id) {
         for (Movie m: movies) {
             if (id.equals(m.getId())) {
                 return m;
@@ -111,7 +111,7 @@ public class MovieList implements Parcelable {
      * @return movie if the movie is in the list
      * @throws java.util.NoSuchElementException if movie is not found
      */
-    public Movie getMovieByTitle(String title) {
+    public final Movie getMovieByTitle(String title) {
         for (Movie m: movies) {
             if (title.equals(m.getTitle())) {
                 return m;
@@ -124,7 +124,7 @@ public class MovieList implements Parcelable {
      * Getter method for the list of movies.
      * @return list of movies
      */
-    public List<Movie> getMovies() {
+    public final List<Movie> getMovies() {
         return movies;
     }
 }
