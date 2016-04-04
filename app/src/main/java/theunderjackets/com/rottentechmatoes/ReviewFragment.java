@@ -1,15 +1,11 @@
 package theunderjackets.com.rottentechmatoes;
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Rect;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -18,7 +14,6 @@ import android.widget.Toast;
 
 import static android.widget.Toast.makeText;
 
-import java.util.List;
 
 /**
  * Created by Lixin on 3/2/2016
@@ -33,17 +28,15 @@ public class ReviewFragment extends Fragment {
     private static TextView textView;
     private static RatingBar ratingBar;
     private static EditText reviewBox;
-    private static Activity activity;
-    private String pos;
 
 
     public ReviewFragment() {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //listenerForRatingBar();
+        //listenerForRatingBar(), this is a necessary part of the listener;
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,20 +54,20 @@ public class ReviewFragment extends Fragment {
         };
 
     }
-    public void listenerForRatingBar(View view) {
+    public final void listenerForRatingBar(View view) {
         ratingBar = (RatingBar) view.findViewById(R.id.ratingBar2);
         textView = (TextView) view.findViewById(R.id.yourRate);
         ratingBar.setOnRatingBarChangeListener(
                 new RatingBar.OnRatingBarChangeListener() {
                     @Override
-                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                    public void onRatingChanged(RatingBar ratingBartemp, float rating, boolean fromUser) {
                         textView.setText(String.valueOf(rating));
                     }
                 }
         );
     }
 
-    public void onButtonClickListener(View view) {
+    public final void onButtonClickListener(View view) {
         ratingBar = (RatingBar) view.findViewById(R.id.ratingBar2);
         submitButton = (Button) view.findViewById(R.id.submitReview);
         cancelButton = (Button) view.findViewById(R.id.cancelReview);
@@ -83,12 +76,13 @@ public class ReviewFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        System.out.println("Hellowwwwwww");
                         if (ratingBar.getRating() == 0) {
                             makeText(getContext(), "Rating cannot be empty.", Toast.LENGTH_SHORT).show();
                         } else {
                             makeText(getContext(), String.valueOf(ratingBar.getRating()), Toast.LENGTH_SHORT).show();
                             User user = CurrentUser.getInstance().getUser();
+                            //review is not used now, but if adding the review text is
+                            //implemented, it will be necessary
                             Review review = new Review(user.getEmail(), CurrentMovie.getInstance().getMovie().getId(), ratingBar.getRating(), reviewBox.getText().toString());
                             getActivity().getFragmentManager().popBackStack();
                             cancelButton.setVisibility(View.GONE);
@@ -127,16 +121,14 @@ public class ReviewFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public final View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.review_fragment, container, false);
 
         listenerForRatingBar(view);
         onButtonClickListener(view);
-        activity = this.getActivity();
         return view;
 
     }
 
 }
-
