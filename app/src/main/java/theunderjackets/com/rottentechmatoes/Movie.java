@@ -20,9 +20,24 @@ public class Movie implements Parcelable {
     private String thumbnailURL;
     private List<Review> reviews = new ArrayList<>();
 
+    /**
+     * empty Movie constructor
+     */
     public Movie() {
 
     }
+
+    /**
+     * Movie constructor
+     * @param id of movie
+     * @param title of movie
+     * @param year movie was released
+     * @param runtime length of movie
+     * @param theaterReleaseDate release date in theaters
+     * @param apiRating RottenTomatos rating
+     * @param synopsis plot of movie
+     * @param thumbnailURL link to movie
+     */
     public Movie(String id, String title, int year, int runtime, String theaterReleaseDate, String apiRating, String synopsis, String thumbnailURL) {
         this.id = id;
         this.title = title;
@@ -95,48 +110,88 @@ public class Movie implements Parcelable {
                 }
             };
 
-
+    /**
+     * gets the movie ID
+     * @return id of movie
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * gets the movie title
+     * @return title of movie
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * gets the movie yeat
+     * @return year of movie
+     */
     public int getYear() {
         return year;
     }
 
+    /**
+     * gets the movie runtime
+     * @return runtime of movie
+     */
     public int getRuntime() {
         return runtime;
     }
 
+    /**
+     * gets the movie theater release date
+     * @return theater release of movie
+     */
     public String getTheaterReleaseDate() {
         return theaterReleaseDate;
     }
 
-    public String getApiRating() {
+    /**
+     * gets the movie rating
+     * @return RottenTomatoes rating of movie
+     */
+    public String getApiRating() { return apiRating; }
 
-        return apiRating;
-    }
-
+    /**
+     * gets the movie synopsis
+     * @return synopsis of movie
+     */
     public String getSynopsis() {
         return synopsis;
     }
 
+    /**
+     * gets the movie thumbnailURL
+     * @return thumbnailURL of movie
+     */
     public String getThumbnailURL() {
         return thumbnailURL;
     }
 
+    /**
+     * gets the movie user reviews
+     * @return user reviews of movie
+     */
     public List<Review> getReviews() {
         return reviews;
     }
 
+    /**
+     * Adds user review
+     * @param review of movie to add
+     */
     public void addReview(Review review) {
         reviews.add(review);
     }
 
+    /**
+     * Adds user reviews
+     * @param reviews of movie to add
+     */
     public void addReviews(Collection<Review> reviews) {
         for (Review review : reviews) {
             this.reviews.add(review);

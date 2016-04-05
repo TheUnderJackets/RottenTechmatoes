@@ -139,6 +139,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Login a user via Firebase
+     * @param username username to login
+     * @param password of user
+     * @param cont context of login
+     * @param callback for Firebase database
+     */
     private void loginUser(String username, final String password, final Context cont, final FireBaseCallBack callback) {
         Firebase usersRef = new Firebase("https://rottentechmatoes.firebaseio.com/users");
         Query login = usersRef.orderByChild("userName").equalTo(username);
@@ -181,7 +188,10 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    //Cancels the login attempt
+    /**
+     * Cancel/finish a view
+     * @param v view to cancel
+     */
     private void cancel(View v) {
         finish();
     }

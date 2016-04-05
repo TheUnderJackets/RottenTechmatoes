@@ -10,6 +10,9 @@ public class AdminList {
     private static Map<Admin, String> userNames = new HashMap<>();
     private static Set<Admin> admins = new HashSet<>();
 
+    /**
+     * empty AdminList constructor
+     */
     private AdminList() {
     }
 
@@ -64,6 +67,7 @@ public class AdminList {
      * Getter method for admin by username.
      * @param username username of the requested admin
      * @return Admin if found, NoSuchElementException otherwise
+     * @throws NoSuchElementException if username is not an Admin
      */
     public static Admin getAdminByUsername(String username) throws NoSuchElementException {
         for (Admin a: admins) {

@@ -89,46 +89,46 @@ public final class RottenTomatoes {
                 if (limit > arrMain.length()) {
                     bound = arrMain.length();
                 }
-                    for (int i = 0; i < bound; i++) {
-                        String id = "Not Available", title = "Not Available", theaterReleaseDate = "Not Available", synopsis = "Not Available", thumbnailURL = "Not Available";
-                        String apiRating = "0";
-                        int year = 0;
-                        int runtime = 0;
-                        double userRating = 0;
-                        ArrayList<Double> userRatings = new ArrayList<>();
-                        JSONObject obj = null;
-                        try {
-                            obj = arrMain.getJSONObject(i);
-                            id = obj.getString("id");
-                            title = obj.getString("title");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            if (!obj.getString("synopsis").equals("")) {
-                                synopsis = obj.getString("synopsis");
-                            }
-                            year = Integer.parseInt(obj.getString("year"));
-                            runtime = Integer.parseInt(obj.getString("runtime"));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            apiRating = obj.getJSONObject("ratings").getString("audience_score");
-                            if (apiRating.equals("-1") || apiRating.equals("")) {
-                                apiRating = obj.getJSONObject("ratings").getString("critics_score");
-                            }
-                            if (apiRating.equals("-1") || apiRating.equals("")) {
-                                apiRating = "Not Rated Yet";
-                            }
-                            thumbnailURL = obj.getJSONObject("posters").getString("thumbnail");
-                            theaterReleaseDate = obj.getJSONObject("release_dates").getString("theater");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        Movie movie = new Movie(id, title, year, runtime, theaterReleaseDate, apiRating, synopsis, thumbnailURL);
-                        list.addMovie(movie);
+                for (int i = 0; i < bound; i++) {
+                    String id = "Not Available", title = "Not Available", theaterReleaseDate = "Not Available", synopsis = "Not Available", thumbnailURL = "Not Available";
+                    String apiRating = "0";
+                    int year = 0;
+                    int runtime = 0;
+                    double userRating = 0;
+                    ArrayList<Double> userRatings = new ArrayList<>();
+                    JSONObject obj = null;
+                    try {
+                        obj = arrMain.getJSONObject(i);
+                        id = obj.getString("id");
+                        title = obj.getString("title");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
+                    try {
+                        if (!obj.getString("synopsis").equals("")) {
+                            synopsis = obj.getString("synopsis");
+                        }
+                        year = Integer.parseInt(obj.getString("year"));
+                        runtime = Integer.parseInt(obj.getString("runtime"));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        apiRating = obj.getJSONObject("ratings").getString("audience_score");
+                        if (apiRating.equals("-1") || apiRating.equals("")) {
+                            apiRating = obj.getJSONObject("ratings").getString("critics_score");
+                        }
+                        if (apiRating.equals("-1") || apiRating.equals("")) {
+                            apiRating = "Not Rated Yet";
+                        }
+                        thumbnailURL = obj.getJSONObject("posters").getString("thumbnail");
+                        theaterReleaseDate = obj.getJSONObject("release_dates").getString("theater");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Movie movie = new Movie(id, title, year, runtime, theaterReleaseDate, apiRating, synopsis, thumbnailURL);
+                    list.addMovie(movie);
+                }
                 callback.fireIntent(list, activityContext, goalClass);
             }
         }, new Response.ErrorListener() {

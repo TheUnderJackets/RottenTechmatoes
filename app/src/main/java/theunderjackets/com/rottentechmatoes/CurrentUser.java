@@ -6,6 +6,10 @@ package theunderjackets.com.rottentechmatoes;
 public class CurrentUser {
     private static CurrentUser currentInstance = new CurrentUser();
     private User currentUser;
+
+    /**
+     * empty CurrentUser constructor
+     */
     private CurrentUser() {
     }
 
@@ -20,7 +24,6 @@ public class CurrentUser {
     /**
      * Getter methpd for the current user.
      * @return the current user
-     * @throws IllegalStateException if there is no current user
      */
     public User getUser() {
         if (currentUser == null) {

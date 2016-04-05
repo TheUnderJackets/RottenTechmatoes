@@ -90,6 +90,11 @@ public class MovieDetailFragment extends Fragment {
 
         return rootView;
     }
+
+    /**
+     * gets the current movie
+     * @return current movie
+     */
     public CurrentMovie getCurrent() {
         return current;
     }

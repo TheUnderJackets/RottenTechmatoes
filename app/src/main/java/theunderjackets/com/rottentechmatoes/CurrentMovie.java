@@ -6,6 +6,10 @@ package theunderjackets.com.rottentechmatoes;
 public class CurrentMovie {
     private static CurrentMovie currentInstance = new CurrentMovie();
     private static Movie currentMovie;
+
+    /**
+     * empty CurrentMovie constructor
+     */
     private CurrentMovie() {
     }
 
