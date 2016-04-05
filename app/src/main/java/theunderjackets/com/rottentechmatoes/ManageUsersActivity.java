@@ -15,11 +15,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-import theunderjackets.com.rottentechmatoes.R;
 
 /**
  * An activity for the "Manage Users" page for the admin.

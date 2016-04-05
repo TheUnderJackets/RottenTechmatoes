@@ -49,8 +49,7 @@ public class RequestQueueSingleton {
     /**
      * Add method for the request queue. For the purpose of this app, get a JsonObjectRequest
      * from the RottenTomatoes class and add it to this queue.
-     * @param req
-     * @param <T>
+     * @param req request to be added
      */
     public <T> void add(Request<T> req) {
         getRequestQueue().add(req);

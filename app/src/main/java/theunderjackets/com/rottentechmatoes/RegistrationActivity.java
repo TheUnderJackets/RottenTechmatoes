@@ -1,11 +1,8 @@
 package theunderjackets.com.rottentechmatoes;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
@@ -73,7 +70,8 @@ public class RegistrationActivity extends AppCompatActivity {
             }
             currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
             currentToast.show();
-        } /*else if (!UserList.isUserNameValid(userName)) {
+        }
+        /*else if (!UserList.isUserNameValid(userName)) {
             CharSequence msgText = "Username has been taken. Please enter a different one.";
             if (currentToast != null && currentToast.getView().isShown()) {
                 currentToast.cancel();
@@ -128,10 +126,7 @@ public class RegistrationActivity extends AppCompatActivity {
     public static boolean isEmailAddressValid(String email){
 
         Matcher mtch = emailNamePtrn.matcher(email);
-        if(mtch.matches()){
-            return true;
-        }
-        return false;
+        return mtch.matches();
     }
 
     /**
