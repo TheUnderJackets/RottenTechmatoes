@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,18 +13,15 @@ import java.util.Comparator;
 import java.util.Collections;
 import java.util.Map;
 
-import android.widget.Toast;
-
-import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 
 /**
  * Created by will on 2/21/16.
  */
+@SuppressWarnings("DefaultFileTemplate")
 public final class Search {
 
     /*
