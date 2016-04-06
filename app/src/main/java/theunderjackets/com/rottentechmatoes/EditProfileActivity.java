@@ -68,6 +68,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 String description = descriptionTextField.getText().toString();
                 Major major = (Major) majorSpinner.getSelectedItem();
                 applyChanges(username, name, description, major, user);
+                finish();
             }
         });
         Button cancelChanges = (Button) findViewById(R.id.buttonCancelChanges);
@@ -87,25 +88,14 @@ public class EditProfileActivity extends AppCompatActivity {
      * @param major major to be changed to
      * @param user current user
      */
-    private void applyChanges(String username, String name, String description, Major major, User user) {
-        if (user.getUserName().equals(username) || UserList.isUserNameValid(username)) {
-            user.setUserName(username);
-            user.setName(name);
-            if (!description.equals("Description")) {
-                user.setDescription(description);
-            }
+    public static void applyChanges(String username, String name, String description, Major major, User user) {
+        user.setUserName(username);
+        user.setName(name);
+        if (!description.equals("Description")) {
             user.setDescription(description);
-            user.setMajor(major);
-            UserList.updateUser(user);
-            finish();
-        } else {
-            CharSequence msgText = "Username is already taken. Please try again.";
-            if (currentToast != null && currentToast.getView().isShown()) {
-                currentToast.cancel();
-            }
-            currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
-            currentToast.show();
         }
+        user.setMajor(major);
+        UserList.updateUser(user);
     }
 
     /**

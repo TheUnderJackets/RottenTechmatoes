@@ -40,8 +40,15 @@ public class User implements Parcelable {
         this.pass = pass;
         this.email = email;
         this.isSelected = isSelected;
-        Firebase usersRef = new Firebase(USERSURL).child(this.email);
-        usersRef.setValue(this);
+    }
+    public User(String name, String email, String pass, String userName, boolean isSelected, boolean isBanned, boolean isLocked) {
+        this.userName = userName;
+        this.name = name;
+        this.pass = pass;
+        this.email = email;
+        this.isSelected = isSelected;
+        banned = isBanned;
+        locked = isLocked;
     }
 
     /**
