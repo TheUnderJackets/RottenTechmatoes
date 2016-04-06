@@ -1,5 +1,7 @@
 package theunderjackets.com.rottentechmatoes;
 
+import com.firebase.client.Firebase;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -10,6 +12,7 @@ public final class UserList {
     private static Map<User, String> userNames = new HashMap<>();
     private static Set<User> users = new HashSet<>();
     private static final String URLREF = "https://rottentechmatoes.firebaseio.com/";
+    private static final String USERSURL = "https://rottentechmatoes.firebaseio.com/users";
 
     /**
      * empty UserList constructor
@@ -32,7 +35,14 @@ public final class UserList {
      * @param user user to be added
      */
     public static void addUser(User user) {
+        Firebase usersRef = new Firebase(USERSURL).child(user.getEmail());
+        usersRef.setValue(user);
+        addUserLocal(user);
+    }
 
+    public static void addUserLocal(User user) {
+        users.add(user);
+        userNames.put(user, user.getUserName());
     }
 
     /**
@@ -48,7 +58,9 @@ public final class UserList {
      * @param user user whose information has changed
      */
     public static void updateUser(User user) {
-        userNames.put(user, user.getUserName());
+        Firebase userRef = new Firebase("https://rottentechmatoes.firebaseio.com/users/" + user.getEmail());
+        userRef.setValue(user);
+        int bool = isUserValid("", "");
     }
 
     /**
@@ -74,7 +86,7 @@ public final class UserList {
         } else {
             return 1;
         }
-        if (user.getBanned() == true){
+        if (user.getBanned()){
             return 2;
         } else if (user.getLocked()) {
             return 3;
