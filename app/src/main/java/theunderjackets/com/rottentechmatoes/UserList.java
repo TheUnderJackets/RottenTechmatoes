@@ -131,33 +131,35 @@ public final class UserList {
     /**
      * Getter method for user by username. Used with local copy. Might need to be public for future
      * use.
-     *
      * @param username username of the requested user
-     * @return user if found, NoSuchElementException otherwise
+     * @return user if found, throws an Exception otherwise
      */
     public static User getUserByUsername(String username) {
+        if (username == null) {
+            throw new java.lang.IllegalArgumentException("Argument cannot be null.");
+        }
         for (final User u : users) {
             if (username.equalsIgnoreCase(u.getUserName())) {
                 return u;
             }
         }
-        throw new NoSuchElementException("user does not exist");
-
+        throw new NoSuchElementException("User does not exist.");
     }
 
     /**
      * Getter method for user by email.
-     *
      * @param email email of the requested user
-     * @return user if found, NoSuchElementException otherwise
+     * @return user if found, throws an Exception otherwise
      */
     public static User getUserByEmail(String email) {
+        if (email == null) {
+            throw new java.lang.IllegalArgumentException("Argument cannot be null.");
+        }
         for (final User u : users) {
             if (email.equalsIgnoreCase(u.getEmail())) {
                 return u;
             }
         }
         throw new NoSuchElementException("user does not exist");
-
     }
 }

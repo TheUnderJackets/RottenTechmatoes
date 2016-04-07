@@ -1,33 +1,27 @@
 package theunderjackets.com.rottentechmatoes;
 
-import android.util.Log;
-
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
-
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
 
-import java.io.Console;
+import java.lang.IllegalArgumentException;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 
 /**
- * Tests the UserList.isUserValid(String username, String password) method.
- * Created by Andrew Suh on 4/6/2016.
+ * Tests the UserList.isUserValid(String username, String password) method,
+ * and the UserList.getUserByUsername(String username) method.
+ * Created by Andrew Suh and Lixin Wang on 4/6/2016.
  */
 public class UserListTest {
 
     private User user;
+
     @Rule
     public Timeout globalTimeout = new Timeout(1000);
+
     @Before
     public void setUp() {
         user = new User("Testing User", "TestEmail", "Password", "TestingUser", false);
@@ -71,5 +65,38 @@ public class UserListTest {
         UserList.addUserLocal(user);
         int ret = UserList.isUserValid("RegularUser", "InPassword");
         assertEquals(4, ret);
+    }
+
+
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testGetNullUser() {
+        UserList.getUserByUsername(null);
+    }
+
+    @Test (expected = NoSuchElementException.class)
+    public void testGetEmptyString() {
+        UserList.getUserByUsername("");
+    }
+
+    @Test (expected = NoSuchElementException.class)
+    public void testGetUserNotExist() {
+        UserList.getUserByUsername("UserWhoDoesNotExist");
+    }
+
+    @Test (expected = NoSuchElementException.class)
+    public void testGetUserNotFound() {
+        User fakeUser = new User("Fake User", "FakeEmail", "Password", "FakeUser", false);
+        UserList.addUserLocal(fakeUser);
+        UserList.getUserByUsername("fakeuser  ");
+    }
+
+    @Test
+    public void testGetValidUser() {
+        User validUser = new User("Valid User", "ValidEmail", "Password", "ValidUser", false);
+        UserList.addUserLocal(validUser);
+        assertSame(UserList.getUserByUsername("ValidUser"), validUser);
+        // case not sensitive:
+        assertSame(UserList.getUserByUsername("VaLiDuSeR"), validUser);
     }
 }
