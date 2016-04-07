@@ -30,7 +30,7 @@ public class MovieListTest {
         assertSame(movieListsample.getMovieByTitle("Hunger Games"), m2);
         assertSame(movieListsample.getMovieByTitle("Star Wars"), m3);
     }
-    @Test(expected=NoSuchElementException.class)
+    @Test(expected=IllegalArgumentException.class)
     public void testNull() {
         MovieList movieListsample = new MovieList();
         Movie m1 = new Movie("112233", "LOTR", 2001, 123, "July 18th, 2001", "4.8",
