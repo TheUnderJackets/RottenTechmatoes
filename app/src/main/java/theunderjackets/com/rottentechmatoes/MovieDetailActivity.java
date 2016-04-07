@@ -1,12 +1,9 @@
 package theunderjackets.com.rottentechmatoes;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.View;
 import android.view.MenuItem;
-import android.support.v4.app.Fragment;
 /**
  * An activity representing a single Movie detail screen. This
  * activity is only used narrow width devices. On tablet-size devices,

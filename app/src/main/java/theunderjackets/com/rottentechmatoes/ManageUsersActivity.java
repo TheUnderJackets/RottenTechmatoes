@@ -15,11 +15,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import theunderjackets.com.rottentechmatoes.R;
 
 /**
  * An activity for the "Manage Users" page for the admin.
@@ -28,7 +24,7 @@ import theunderjackets.com.rottentechmatoes.R;
  */
 public class ManageUsersActivity extends AppCompatActivity {
     //get the set of users from Userlist and convert to a list
-    List<User> userList;
+    private List<User> userList;
 
 
 
@@ -49,12 +45,10 @@ public class ManageUsersActivity extends AppCompatActivity {
         unlockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: set action for UNLOCK button
                 // After this button is clicked, if a user is selected,
                 // then unlock that user
                 // See ".isSelected()" method in User.java
                 for(User u: userList) {
-                    int i = 1;
                     if(u.isSelected()) {
                         u.setLocked(false);
                     }
@@ -69,7 +63,6 @@ public class ManageUsersActivity extends AppCompatActivity {
         banButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: set action for BAN button
                 // After this button is clicked, if a user is selected,
                 // then ban that user
                 // See ".isSelected()" method in User.java
@@ -187,11 +180,12 @@ public class ManageUsersActivity extends AppCompatActivity {
          * placed where in the RecyclerView.
          */
         public class ViewHolder2 extends RecyclerView.ViewHolder {
-            public final View uView;
-            public final TextView uNameView;
-            public final TextView uStatusView;
-            public User uItem;
-            public CheckBox chkSelected;
+            //
+            protected final View uView;
+            protected final TextView uNameView;
+            protected final TextView uStatusView;
+            protected User uItem;
+            protected CheckBox chkSelected;
 
             /**
              * The constructor tells the view holder to place the usernames

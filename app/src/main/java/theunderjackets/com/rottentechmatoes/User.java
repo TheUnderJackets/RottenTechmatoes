@@ -19,12 +19,21 @@ public class User implements Parcelable {
     private boolean isSelected;
     private static final String USERSURL = "https://rottentechmatoes.firebaseio.com/users";
 
+    /**
+     * empty constructor
+     */
     public User() {
 
     }
 
-    //This is the only constructor necessary since these are the required fields, and
-    //we will have a separate page for the rest. DELETE THIS LATER.
+    /**
+     * constructor for users
+     * @param name name of user
+     * @param email email of user
+     * @param pass password for user
+     * @param userName username of user
+     * @param isSelected whether or not its selected
+     */
     public User(String name, String email, String pass, String userName, boolean isSelected) {
         this.userName = userName;
         this.name = name;
@@ -98,50 +107,90 @@ public class User implements Parcelable {
                 }
             };
 
+    /**
+     * getter for username
+     * @return username of user
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * getter for email
+     * @return users email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * getter for name
+     * @return users name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * getter for password
+     * @return users password
+     */
     public String getPass() {
         return pass;
     }
 
+    /**
+     * changes users password
+     * @param pass new password
+     */
     public void changePass(String pass) {
         this.pass = pass;
     }
 
+    /**
+     * getter for major
+     * @return users major
+     */
     public Major getMajor() {
         return major;
     }
 
+    /**
+     * getter for description
+     * @return description of user
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * getter for banned
+     * @return true if user is banned, false otherwise
+     */
     public boolean getBanned() {
         return banned;
     }
 
+    /**
+     * getter for locked
+     * @return true if locked, false otherwise
+     */
     public boolean getLocked() {
         return locked;
     }
 
-    public boolean getIsSelected() {
-        return isSelected;
-    }
-
+    /**
+     * getter for isAdmin
+     * @return true if admin, false otherwise
+     */
     public boolean getIsAdmin() {
         return this.isAdmin;
     }
 
+    /**
+     * setter for banned
+     * @param bool value of banned field
+     */
     public void setBanned(boolean bool) {
         this.banned = bool;
         Firebase userRef = new Firebase(USERSURL);
@@ -149,6 +198,10 @@ public class User implements Parcelable {
         userRef.setValue(bool);
     }
 
+    /**
+     * setter for locked
+     * @param bool value of locked field
+     */
     public void setLocked(boolean bool) {
         this.locked = bool;
         Firebase userRef = new Firebase(USERSURL);
@@ -156,10 +209,18 @@ public class User implements Parcelable {
         userRef.setValue(bool);
     }
 
+    /**
+     * getter for isSelected
+     * @return true if selected, false otherwise
+     */
     public boolean isSelected() {
         return isSelected;
     }
 
+    /**
+     * setter for selected
+     * @param isSelected value of selected field
+     */
     public void setSelected(boolean isSelected) {
         this.isSelected = isSelected;
         Firebase userRef = new Firebase(USERSURL);
@@ -167,6 +228,10 @@ public class User implements Parcelable {
         userRef.setValue(isSelected);
     }
 
+    /**
+     * setter for major
+     * @param major users new major
+     */
     public void setMajor(Major major) {
         this.major = major;
         Firebase userRef = new Firebase(USERSURL);
@@ -174,6 +239,10 @@ public class User implements Parcelable {
         userRef.setValue(major);
     }
 
+    /**
+     * setter for name
+     * @param name users name
+     */
     public void setName(String name) {
         this.name = name;
         Firebase userRef = new Firebase(USERSURL);
@@ -181,6 +250,10 @@ public class User implements Parcelable {
         userRef.setValue(name);
     }
 
+    /**
+     * setter for username
+     * @param name username of user
+     */
     public void setUserName(String name) {
         this.userName = name;
         Firebase userRef = new Firebase(USERSURL);
@@ -188,6 +261,10 @@ public class User implements Parcelable {
         userRef.setValue(name);
     }
 
+    /**
+     * setter for description
+     * @param desc description of user
+     */
     public void setDescription(String desc) {
         this.description = desc;
         Firebase userRef = new Firebase(USERSURL);

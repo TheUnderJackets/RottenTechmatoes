@@ -1,19 +1,17 @@
 package theunderjackets.com.rottentechmatoes;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import theunderjackets.com.rottentechmatoes.dummy.*;
+import theunderjackets.com.rottentechmatoes.dummy.Movies;
 
 /**
  * A fragment representing a single Movie detail screen.
@@ -45,6 +43,7 @@ public class MovieDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null){
+            //this breaks when the if statements are combined
             if (getArguments().containsKey(ARG_ITEM_ID)) {
                 // Load the dummy content specified by the fragment
                 // arguments. In a real-world scenario, use a Loader
@@ -92,6 +91,11 @@ public class MovieDetailFragment extends Fragment {
 
         return rootView;
     }
+
+    /**
+     * getter for current movie
+     * @return current movie eing viewed
+     */
     public CurrentMovie getCurrent() {
         return current;
     }

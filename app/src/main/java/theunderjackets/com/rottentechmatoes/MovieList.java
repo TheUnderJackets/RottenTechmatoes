@@ -94,7 +94,6 @@ public class MovieList implements Parcelable {
      * Gets a movie by the movie id
      * @param id ID of the movie
      * @return movie if the movie is in the list
-     * @throws java.util.NoSuchElementException if movie is not found
      */
     public Movie getMovieById(String id) {
         for (Movie m: movies) {
@@ -109,7 +108,6 @@ public class MovieList implements Parcelable {
      * Gets a movie by its title
      * @param title The title of the movie
      * @return movie if the movie is in the list
-     * @throws java.util.NoSuchElementException if movie is not found
      */
     public Movie getMovieByTitle(String title) {
         for (Movie m: movies) {

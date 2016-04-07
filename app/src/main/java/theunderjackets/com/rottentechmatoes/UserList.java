@@ -10,6 +10,10 @@ public final class UserList {
     private static Map<User, String> userNames = new HashMap<>();
     private static Set<User> users = new HashSet<>();
     private static final String URLREF = "https://rottentechmatoes.firebaseio.com/";
+
+    /**
+     * empty constructor
+     */
     private UserList() {
     }
 
@@ -70,7 +74,7 @@ public final class UserList {
         } else {
             return 1;
         }
-        if (user.getBanned() == true){
+        if (user.getBanned()){
             return 2;
         } else if (user.getLocked()) {
             return 3;
@@ -99,6 +103,7 @@ public final class UserList {
      * Getter method for user by username.
      * @param username username of the requested user
      * @return user if found, NoSuchElementException otherwise
+     * @throws NoSuchElementException if user doesnt exist
      */
     public static User getUserByUsername(String username) throws NoSuchElementException {
         for (User u: users) {
@@ -115,6 +120,7 @@ public final class UserList {
      * Getter method for user by email.
      * @param email email of the requested user
      * @return user if found, NoSuchElementException otherwise
+     * @throws NoSuchElementException if user doesnt exist
      */
     public static User getUserByEmail(String email) throws NoSuchElementException {
         for (User u: users) {

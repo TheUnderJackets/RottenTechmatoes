@@ -1,6 +1,9 @@
 package theunderjackets.com.rottentechmatoes;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.firebase.client.Firebase;
 
 public class Admin extends User {
@@ -9,10 +12,19 @@ public class Admin extends User {
     private String pass;
     private static final String USERSURL = "https://rottentechmatoes.firebaseio.com/users";
 
+    /**
+     * empty constructor for DB stuff
+     */
     public Admin() {
 
     }
 
+    /**
+     * constructor for admins
+     * @param email admins email
+     * @param userName admins username
+     * @param pass admins password
+     */
     public Admin(String email, String userName, String pass) {
         super(null, email, pass, userName, false);
         setUserName(userName);
@@ -20,19 +32,34 @@ public class Admin extends User {
         this.setIsAdmin(true);
     }
 
-
+    /**
+     * getter for whether or not user is an admin
+     * @return true if admin, false otherwise
+     */
     public boolean getIsAdmin() {
         return isAdmin;
     }
 
+    /**
+     * getter for username
+     * @return admins username
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     * getter for password
+     * @return admins password
+     */
     public String getPass() {
         return this.pass;
     }
 
+    /**
+     * changes admins password
+     * @param pass new password
+     */
     public void changePass(String pass) {
         this.pass = pass;
         Firebase userRef = new Firebase(USERSURL);
@@ -40,6 +67,10 @@ public class Admin extends User {
         userRef.setValue(pass);
     }
 
+    /**
+     * setter for username
+     * @param name username for admin
+     */
     public void setUserName(String name) {
         this.userName = name;
         Firebase userRef = new Firebase(USERSURL);
@@ -56,6 +87,10 @@ public class Admin extends User {
         return this.pass.equals(pass);
     }
 
+    /**
+     * setter for isadmin
+     * @param bool value of isAdmin
+     */
     public void setIsAdmin(boolean bool) {
         this.isAdmin = true;
         Firebase userRef = new Firebase(USERSURL);

@@ -2,8 +2,6 @@ package theunderjackets.com.rottentechmatoes;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,7 +65,10 @@ public class MovieListActivity extends AppCompatActivity {
         }
 
     }
-
+    /**
+    * sets up view for movies
+    * @param recyclerView view to set up
+    * */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(Movies.ITEMS));
     }
@@ -79,6 +77,11 @@ public class MovieListActivity extends AppCompatActivity {
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         private final List<Movie> mValues;
+
+        /**
+         * item recycler view
+         * @param items things to be stored in the view
+         */
 
         public SimpleItemRecyclerViewAdapter(List<Movie> items) {
             mValues = items;
@@ -94,10 +97,10 @@ public class MovieListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-            Bitmap bmp = getBitmapFromURL(mValues.get(position).getThumbnailURL());
-            if (bmp != null) {
-                holder.mThumbnail.setImageBitmap(bmp);
-            }
+            //Bitmap bmp = getBitmapFromURL(mValues.get(position).getThumbnailURL());
+            //if (bmp != null) {
+            //    holder.mThumbnail.setImageBitmap(bmp);
+            //}
             holder.mIdView.setText(mValues.get(position).getTitle());
             String rating = "Rating: " + mValues.get(position).getApiRating();
             holder.mContentView.setText(rating);
@@ -123,26 +126,7 @@ public class MovieListActivity extends AppCompatActivity {
                 }
             });
         }
-        private Bitmap getBitmapFromURL(String src) {
-            try {
 
-                URL url = new URL(src);
-                HttpURLConnection connection = (HttpURLConnection) url
-                        .openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-
-                return BitmapFactory.decodeStream(input);
-
-            } catch (Exception ex) {
-
-                //ex.printStackTrace();
-
-            }
-
-            return null;
-        }
 
         @Override
         public int getItemCount() {
@@ -150,12 +134,16 @@ public class MovieListActivity extends AppCompatActivity {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
-            public final View mView;
-            public final TextView mIdView;
-            public final TextView mContentView;
-            public final ImageView mThumbnail;
-            public Movie mItem;
+            protected final View mView;
+            protected final TextView mIdView;
+            protected final TextView mContentView;
+            protected final ImageView mThumbnail;
+            protected Movie mItem;
 
+            /**
+             * constructor for viewholder
+             * @param view view to be used
+             */
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
