@@ -143,8 +143,8 @@ public class User implements Parcelable {
             };
 
     /**
-     * gets user's username
-     *
+
+     * Gets user's username.
      * @return userName
      */
     public String getUserName() {
@@ -152,8 +152,7 @@ public class User implements Parcelable {
     }
 
     /**
-     * gets user's email
-     *
+     * Gets user's email.
      * @return email
      */
     public String getEmail() {
@@ -161,8 +160,7 @@ public class User implements Parcelable {
     }
 
     /**
-     * gets user's name
-     *
+     * Gets user's name.
      * @return name
      */
     public String getName() {
@@ -170,8 +168,7 @@ public class User implements Parcelable {
     }
 
     /**
-     * gets user's password. Necessary for FireBase to work.
-     *
+     * Gets user's password. Necessary for FireBase to work.
      * @return pass
      */
     public String getPass() {
@@ -179,8 +176,7 @@ public class User implements Parcelable {
     }
 
     /**
-     * changes user's password
-     *
+     * Changes user's password.
      * @param pass to update
      */
     public void changePass(String pass) {
@@ -188,8 +184,7 @@ public class User implements Parcelable {
     }
 
     /**
-     * gets user's major
-     *
+     * Gets user's major.
      * @return major
      */
     public Major getMajor() {
@@ -197,8 +192,7 @@ public class User implements Parcelable {
     }
 
     /**
-     * gets user's description
-     *
+     * Gets user's description.
      * @return description
      */
     public String getDescription() {
@@ -206,8 +200,7 @@ public class User implements Parcelable {
     }
 
     /**
-     * gets user's banned status
-     *
+     * Gets user's banned status.
      * @return banned
      */
     public boolean getBanned() {
@@ -215,8 +208,7 @@ public class User implements Parcelable {
     }
 
     /**
-     * gets user's locked status
-     *
+     * Gets user's locked status.
      * @return locked
      */
     public boolean getLocked() {
@@ -224,8 +216,7 @@ public class User implements Parcelable {
     }
 
     /**
-     * Gets user's selected status. Necessary for FireBase to work.
-     *
+     * Gets user's selected status.
      * @return isSelected
      */
     public boolean getIsSelected() {
@@ -233,8 +224,7 @@ public class User implements Parcelable {
     }
 
     /**
-     * gets user's admin status
-     *
+     * Gets user's admin status.
      * @return isAdmin
      */
     public boolean getIsAdmin() {
@@ -242,9 +232,8 @@ public class User implements Parcelable {
     }
 
     /**
-     * Method to ban or un-ban a User
-     *
-     * @param bool to ban/un-ban a user
+     * Method to ban or un-ban a User.
+     * @param bool to ban/un-ban a user.
      */
     public void setBanned(boolean bool) {
         this.banned = bool;
@@ -254,9 +243,8 @@ public class User implements Parcelable {
     }
 
     /**
-     * Method to lock or un-lock a User
-     *
-     * @param bool to ban/un-ban a user
+     * Method to lock or un-lock a User.
+     * @param bool to ban/un-ban a user.
      */
     public void setLocked(boolean bool) {
         this.locked = bool;
@@ -266,18 +254,16 @@ public class User implements Parcelable {
     }
 
     /**
-     * determine if a user is selected
-     *
-     * @return isSelected
+     * determines if a user is selected on the "Manage Users" admin page.
+     * @return isSelected.
      */
     public boolean isSelected() {
         return isSelected;
     }
 
     /**
-     * Method to select/un-select a user
-     *
-     * @param isSelected to select/un-select a user
+     * Method to select/un-select a user on the "Manage Users" admin page.
+     * @param isSelected to select/un-select a user.
      */
     public void setSelected(boolean isSelected) {
         this.isSelected = isSelected;
@@ -287,9 +273,8 @@ public class User implements Parcelable {
     }
 
     /**
-     * Method to set user's major
-     *
-     * @param major to assign to user
+     * Method to set user's major.
+     * @param major to assign to user.
      */
     public void setMajor(Major major) {
         this.major = major;
@@ -299,9 +284,8 @@ public class User implements Parcelable {
     }
 
     /**
-     * Method to set user's name
-     *
-     * @param name to assign to user
+     * Method to set user's name.
+     * @param name Name to assign to user.
      */
     public void setName(String name) {
         this.name = name;
@@ -311,9 +295,8 @@ public class User implements Parcelable {
     }
 
     /**
-     * Method to set user's username
-     *
-     * @param name to assign to user
+     * Method to set user's username.
+     * @param name Name to assign to user.
      */
     public void setUserName(String name) {
         this.userName = name;
@@ -323,9 +306,8 @@ public class User implements Parcelable {
     }
 
     /**
-     * Method to set user's description
-     *
-     * @param desc to assign to user
+     * Method to set user's description.
+     * @param desc Description to assign to user.
      */
     public void setDescription(String desc) {
         this.description = desc;
@@ -336,9 +318,8 @@ public class User implements Parcelable {
 
     /**
      * Checks if the password passed in is the same as the actual password.
-     *
-     * @param pass password to be checked
-     * @return true if they are equal, false otherwise
+     * @param pass Password to be checked.
+     * @return true If they are equal, false otherwise.
      */
     public boolean validatePassword(String pass) {
         return this.pass.equals(pass);
