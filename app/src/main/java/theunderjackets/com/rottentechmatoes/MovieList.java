@@ -104,6 +104,9 @@ public class MovieList implements Parcelable {
      * @throws java.util.NoSuchElementException if movie is not found
      */
     public final Movie getMovieById(String id) {
+        if (id == null) {
+            throw new java.lang.IllegalArgumentException("Argument cannot be null.");
+        }
         for (Movie m : movies) {
             if (id.equals(m.getId())) {
                 return m;
@@ -120,6 +123,9 @@ public class MovieList implements Parcelable {
      * @throws java.util.NoSuchElementException if movie is not found
      */
     public final Movie getMovieByTitle(String title) {
+        if (title == null) {
+            throw new java.lang.IllegalArgumentException("Argument cannot be null.");
+        }
         for (Movie m : movies) {
             if (title.equals(m.getTitle())) {
                 return m;
