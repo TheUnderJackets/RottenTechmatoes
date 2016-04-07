@@ -20,12 +20,12 @@ import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
     private Toast currentToast;
     private int incorrectLoginCounter = 0;
     public static final String USERSEXTRA = "theunderjackets.com.rottentechmatoes.usersextra";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +54,13 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Attempts to login with username and password credentials.
+     *
      * @param username the username box
      * @param password the password box
      */
     private void attemptLogin(EditText username, EditText password) {
         final String userName = username.getText().toString();
-        System.out.println(userName);
+        //System.out.println(userName);
         final String passWord = password.getText().toString();
         password.setText("");
         loginUser(userName, passWord, this, new FireBaseCallBack() {
@@ -140,6 +141,14 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Login a user via Firebase
+     *
+     * @param username username to login
+     * @param password of user
+     * @param cont     context of login
+     * @param callback for Firebase database
+     */
     private void loginUser(String username, final String password, final Context cont, final FireBaseCallBack callback) {
         Firebase usersRef = new Firebase("https://rottentechmatoes.firebaseio.com/users");
         Query login = usersRef.orderByChild("userName").equalTo(username);
@@ -154,19 +163,19 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     User user = data.getValue(User.class);
-                         if (user.getIsAdmin()) {
-                            exitCode = -1;
-                        } else if (user.getBanned() == true) {
-                            exitCode = 2;
-                        } else if (user.getLocked()) {
-                            exitCode = 3;
-                        } else if(user.validatePassword(password)) {
-                            exitCode = 0;
-                        } else {
-                            exitCode = 4;
-                        }
-                        callback.onPostExecute(user, exitCode, cont);
-                        return;
+                    if (user.getIsAdmin()) {
+                        exitCode = -1;
+                    } else if (user.getBanned()) {
+                        exitCode = 2;
+                    } else if (user.getLocked()) {
+                        exitCode = 3;
+                    } else if (user.validatePassword(password)) {
+                        exitCode = 0;
+                    } else {
+                        exitCode = 4;
+                    }
+                    callback.onPostExecute(user, exitCode, cont);
+                    return;
                 }
             }
 
@@ -182,13 +191,18 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    //Cancels the login attempt
+    /**
+     * Cancel/finish a view
+     *
+     * @param v view to cancel
+     */
     private void cancel(View v) {
         finish();
     }
 
     /**
      * Makes it so that edittext will not be focused on anymore once clicked out of.
+     *
      * @param event click outside of box
      * @return super.dispatchTouchEvent(event)
      */

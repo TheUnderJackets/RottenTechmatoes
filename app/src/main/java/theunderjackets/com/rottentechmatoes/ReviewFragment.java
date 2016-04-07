@@ -1,15 +1,11 @@
 package theunderjackets.com.rottentechmatoes;
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Rect;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -18,63 +14,69 @@ import android.widget.Toast;
 
 import static android.widget.Toast.makeText;
 
-import java.util.List;
 
 /**
  * Created by Lixin on 3/2/2016
  */
 public class ReviewFragment extends Fragment {
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+
     private static Button submitButton;
     private static Button cancelButton;
     private static TextView textView;
     private static RatingBar ratingBar;
     private static EditText reviewBox;
-    private static Activity activity;
-    private String pos;
 
-
+    /**
+     * Mandatory empty constructor for the fragment manager to instantiate the
+     * fragment (e.g. upon screen orientation changes).
+     */
     public ReviewFragment() {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //listenerForRatingBar();
-        View.OnClickListener listener = new View.OnClickListener() {
+        //listenerForRatingBar(), this is a necessary part of the listener;
+        final View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragment = null;
-                if(v == getView().findViewById(R.id.submitReview)) {
+                if (v == getView().findViewById(R.id.submitReview)) {
                     fragment = new ReviewListFragment();
                 }
-                if(v == getView().findViewById(R.id.cancelReview)) {
+                if (v == getView().findViewById(R.id.cancelReview)) {
                     getActivity().getFragmentManager().popBackStack();
                 }
-                android.support.v4.app.FragmentManager manager = getFragmentManager();
-                android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
+                final android.support.v4.app.FragmentManager manager = getFragmentManager();
+                final android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
 
             }
         };
 
     }
-    public void listenerForRatingBar(View view) {
+
+    /**
+     * Listener for the rating bar.
+     * @param view The current view.
+     */
+    public final void listenerForRatingBar(View view) {
         ratingBar = (RatingBar) view.findViewById(R.id.ratingBar2);
         textView = (TextView) view.findViewById(R.id.yourRate);
         ratingBar.setOnRatingBarChangeListener(
                 new RatingBar.OnRatingBarChangeListener() {
                     @Override
-                    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                    public void onRatingChanged(RatingBar ratingBartemp, float rating, boolean fromUser) {
                         textView.setText(String.valueOf(rating));
                     }
                 }
         );
     }
 
-    public void onButtonClickListener(View view) {
+    /**
+     * Button click listeners for the widgets.
+     * @param view The current view.
+     */
+    public final void onButtonClickListener(View view) {
         ratingBar = (RatingBar) view.findViewById(R.id.ratingBar2);
         submitButton = (Button) view.findViewById(R.id.submitReview);
         cancelButton = (Button) view.findViewById(R.id.cancelReview);
@@ -83,13 +85,14 @@ public class ReviewFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        System.out.println("Hellowwwwwww");
                         if (ratingBar.getRating() == 0) {
                             makeText(getContext(), "Rating cannot be empty.", Toast.LENGTH_SHORT).show();
                         } else {
                             makeText(getContext(), String.valueOf(ratingBar.getRating()), Toast.LENGTH_SHORT).show();
-                            User user = CurrentUser.getInstance().getUser();
-                            Review review = new Review(user.getEmail(), CurrentMovie.getInstance().getMovie().getId(), ratingBar.getRating(), reviewBox.getText().toString());
+                            final User user = CurrentUser.getInstance().getUser();
+                            //review is not used now, but if adding the review text is
+                            //implemented, it will be necessary
+                            final Review review = new Review(user.getEmail(), CurrentMovie.getInstance().getMovie().getId(), ratingBar.getRating(), reviewBox.getText().toString());
                             getActivity().getFragmentManager().popBackStack();
                             cancelButton.setVisibility(View.GONE);
                             submitButton.setVisibility(View.GONE);
@@ -97,8 +100,8 @@ public class ReviewFragment extends Fragment {
 
                             reviewBox.setText("");
                             reviewBox.setVisibility(View.GONE);
-                            android.support.v4.app.FragmentTransaction trans = getFragmentManager().beginTransaction();
-                            Fragment goal = new ReviewListFragment();
+                            final android.support.v4.app.FragmentTransaction trans = getFragmentManager().beginTransaction();
+                            final Fragment goal = new ReviewListFragment();
                             trans.replace(R.id.reviewFragment, goal);
                             trans.commit();
                         }
@@ -109,8 +112,8 @@ public class ReviewFragment extends Fragment {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                android.support.v4.app.FragmentTransaction trans = getFragmentManager().beginTransaction();
-                Fragment goal = new ReviewListFragment();
+                final android.support.v4.app.FragmentTransaction trans = getFragmentManager().beginTransaction();
+                final Fragment goal = new ReviewListFragment();
                 trans.replace(R.id.reviewFragment, goal);
                 trans.commit();
                 cancelButton.setVisibility(View.GONE);
@@ -127,16 +130,14 @@ public class ReviewFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.review_fragment, container, false);
+    public final View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                   Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.review_fragment, container, false);
 
         listenerForRatingBar(view);
         onButtonClickListener(view);
-        activity = this.getActivity();
         return view;
 
     }
 
 }
-

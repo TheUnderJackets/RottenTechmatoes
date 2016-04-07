@@ -93,8 +93,9 @@ public class MovieDetailFragment extends Fragment {
     }
 
     /**
-     * getter for current movie
-     * @return current movie eing viewed
+     * gets the current movie
+     *
+     * @return current movie
      */
     public CurrentMovie getCurrent() {
         return current;

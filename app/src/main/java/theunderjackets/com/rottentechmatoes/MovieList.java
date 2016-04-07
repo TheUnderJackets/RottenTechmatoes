@@ -19,6 +19,7 @@ public class MovieList implements Parcelable {
 
     /**
      * Private constructor for implementation of Parcelable.
+     *
      * @param in parcel used to construct the object
      */
     private MovieList(Parcel in) {
@@ -28,21 +29,23 @@ public class MovieList implements Parcelable {
 
     /**
      * Implementation of Parcelable. Ensures that the read/write are given in FIFO.
-     * @param dest destination parcel
+     *
+     * @param dest  destination parcel
      * @param flags flags
      */
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public final void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(movies);
     }
 
     /**
      * Basic implementation of describeContents(). For our purposes, we have no need to customize
      * the implementation.
+     *
      * @return 0
      */
     @Override
-    public int describeContents() {
+    public final int describeContents() {
         return 0;
     }
 
@@ -65,26 +68,29 @@ public class MovieList implements Parcelable {
 
     /**
      * Adds the movie to the list.
+     *
      * @param movie Movie to be added
      */
-    public void addMovie(Movie movie) {
+    public final void addMovie(Movie movie) {
         movies.add(movie);
     }
 
     /**
      * Checks if the list contains the movie.
+     *
      * @param movie Movie to check if in list
      * @return true if the movie is in the list, false otherwise
      */
-    public boolean containsMovie(Movie movie) {
+    public final boolean containsMovie(Movie movie) {
         return movies.contains(movie);
     }
 
     /**
      * Removes the movie from the list.
+     *
      * @param movie Movie to be removed
      */
-    public void deleteMovie(Movie movie) {
+    public final void deleteMovie(Movie movie) {
         if (movies.contains(movie)) {
             movies.remove(movie);
         }
@@ -92,11 +98,15 @@ public class MovieList implements Parcelable {
 
     /**
      * Gets a movie by the movie id
+     *
      * @param id ID of the movie
      * @return movie if the movie is in the list
      */
-    public Movie getMovieById(String id) {
-        for (Movie m: movies) {
+    public final Movie getMovieById(String id) {
+        if (id == null) {
+            throw new java.lang.IllegalArgumentException("Argument cannot be null.");
+        }
+        for (Movie m : movies) {
             if (id.equals(m.getId())) {
                 return m;
             }
@@ -106,11 +116,15 @@ public class MovieList implements Parcelable {
 
     /**
      * Gets a movie by its title
+     *
      * @param title The title of the movie
      * @return movie if the movie is in the list
      */
-    public Movie getMovieByTitle(String title) {
-        for (Movie m: movies) {
+    public final Movie getMovieByTitle(String title) {
+        if (title == null) {
+            throw new java.lang.IllegalArgumentException("Argument cannot be null.");
+        }
+        for (Movie m : movies) {
             if (title.equals(m.getTitle())) {
                 return m;
             }
@@ -120,9 +134,10 @@ public class MovieList implements Parcelable {
 
     /**
      * Getter method for the list of movies.
+     *
      * @return list of movies
      */
-    public List<Movie> getMovies() {
+    public final List<Movie> getMovies() {
         return movies;
     }
 }

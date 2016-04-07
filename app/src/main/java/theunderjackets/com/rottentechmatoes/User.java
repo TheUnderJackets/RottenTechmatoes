@@ -7,32 +7,46 @@ import android.os.Parcelable;
 import com.firebase.client.Firebase;
 
 public class User implements Parcelable {
+    /**
+     * Is protected instead of private so that Admin will work properly.
+     */
     protected boolean isAdmin;
     private String userName;
     private String pass;
+    /**
+     * Is protected instead of private so that Admin will work properly.
+     */
     protected String email;
     private String name;
     private Major major = Major.UNDECIDED;
     private String description = "";
     private boolean banned;
     private boolean locked;
+    /**
+     * This has same name as getter method since it is logical with is prefix. Others have getters
+     * strictly because FireBase requires it.
+     */
     private boolean isSelected;
-    private static final String USERSURL = "https://rottentechmatoes.firebaseio.com/users";
+    /**
+     * This is a constant, so it's expected to be in all caps for emphasis.
+     */
+    public static final String USERSURL = "https://rottentechmatoes.firebaseio.com/users";
 
     /**
-     * empty constructor
+     * Empty User Constructor. Necessary for FireBase to work correctly.
      */
     public User() {
 
     }
 
     /**
-     * constructor for users
-     * @param name name of user
-     * @param email email of user
-     * @param pass password for user
-     * @param userName username of user
-     * @param isSelected whether or not its selected
+     * User constructor
+     *
+     * @param name       of user
+     * @param email      of user
+     * @param pass       password of user
+     * @param userName   of user
+     * @param isSelected if user is selected
      */
     public User(String name, String email, String pass, String userName, boolean isSelected) {
         this.userName = userName;
@@ -40,15 +54,34 @@ public class User implements Parcelable {
         this.pass = pass;
         this.email = email;
         this.isSelected = isSelected;
-        Firebase usersRef = new Firebase(USERSURL).child(this.email);
-        usersRef.setValue(this);
+    }
+
+    /**
+     * Most descriptive constructor for a user.
+     * @param name name of user
+     * @param email email of user
+     * @param pass password of user
+     * @param userName username of user
+     * @param isSelected whether or not this should be selected under manage users
+     * @param isBanned whether or not this account is banned
+     * @param isLocked whether or not this account is locked
+     */
+    public User(String name, String email, String pass, String userName, boolean isSelected, boolean isBanned, boolean isLocked) {
+        this.userName = userName;
+        this.name = name;
+        this.pass = pass;
+        this.email = email;
+        this.isSelected = isSelected;
+        banned = isBanned;
+        locked = isLocked;
     }
 
     /**
      * Private constructor for implementation of Parcelable.
+     *
      * @param in parcel used to construct the object
      */
-    private User(Parcel in) {
+    public User(Parcel in) {
         this.isAdmin = (Boolean) in.readValue(null);
         this.userName = in.readString();
         this.pass = in.readString();
@@ -63,7 +96,8 @@ public class User implements Parcelable {
 
     /**
      * Implementation of Parcelable. Ensures that the read/write are given in FIFO.
-     * @param dest destination parcel
+     *
+     * @param dest  destination parcel
      * @param flags flags
      */
     @Override
@@ -83,6 +117,7 @@ public class User implements Parcelable {
     /**
      * Basic implementation of describeContents(). For our purposes, we have no need to customize
      * the implementation.
+     *
      * @return 0
      */
     @Override
@@ -108,88 +143,97 @@ public class User implements Parcelable {
             };
 
     /**
-     * getter for username
-     * @return username of user
+
+     * Gets user's username.
+     * @return userName
      */
     public String getUserName() {
         return userName;
     }
 
     /**
-     * getter for email
-     * @return users email
+     * Gets user's email.
+     * @return email
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * getter for name
-     * @return users name
+     * Gets user's name.
+     * @return name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * getter for password
-     * @return users password
+     * Gets user's password. Necessary for FireBase to work.
+     * @return pass
      */
     public String getPass() {
         return pass;
     }
 
     /**
-     * changes users password
-     * @param pass new password
+     * Changes user's password.
+     * @param pass to update
      */
     public void changePass(String pass) {
         this.pass = pass;
     }
 
     /**
-     * getter for major
-     * @return users major
+     * Gets user's major.
+     * @return major
      */
     public Major getMajor() {
         return major;
     }
 
     /**
-     * getter for description
-     * @return description of user
+     * Gets user's description.
+     * @return description
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * getter for banned
-     * @return true if user is banned, false otherwise
+     * Gets user's banned status.
+     * @return banned
      */
     public boolean getBanned() {
         return banned;
     }
 
     /**
-     * getter for locked
-     * @return true if locked, false otherwise
+     * Gets user's locked status.
+     * @return locked
      */
     public boolean getLocked() {
         return locked;
     }
 
     /**
-     * getter for isAdmin
-     * @return true if admin, false otherwise
+     * Gets user's selected status.
+     * @return isSelected
+     */
+    public boolean getIsSelected() {
+        return isSelected;
+    }
+
+    /**
+     * Gets user's admin status.
+     * @return isAdmin
      */
     public boolean getIsAdmin() {
         return this.isAdmin;
     }
 
     /**
-     * setter for banned
-     * @param bool value of banned field
+     * Method to ban or un-ban a User.
+     * @param bool to ban/un-ban a user.
      */
     public void setBanned(boolean bool) {
         this.banned = bool;
@@ -199,8 +243,8 @@ public class User implements Parcelable {
     }
 
     /**
-     * setter for locked
-     * @param bool value of locked field
+     * Method to lock or un-lock a User.
+     * @param bool to ban/un-ban a user.
      */
     public void setLocked(boolean bool) {
         this.locked = bool;
@@ -210,16 +254,16 @@ public class User implements Parcelable {
     }
 
     /**
-     * getter for isSelected
-     * @return true if selected, false otherwise
+     * determines if a user is selected on the "Manage Users" admin page.
+     * @return isSelected.
      */
     public boolean isSelected() {
         return isSelected;
     }
 
     /**
-     * setter for selected
-     * @param isSelected value of selected field
+     * Method to select/un-select a user on the "Manage Users" admin page.
+     * @param isSelected to select/un-select a user.
      */
     public void setSelected(boolean isSelected) {
         this.isSelected = isSelected;
@@ -229,8 +273,8 @@ public class User implements Parcelable {
     }
 
     /**
-     * setter for major
-     * @param major users new major
+     * Method to set user's major.
+     * @param major to assign to user.
      */
     public void setMajor(Major major) {
         this.major = major;
@@ -240,8 +284,8 @@ public class User implements Parcelable {
     }
 
     /**
-     * setter for name
-     * @param name users name
+     * Method to set user's name.
+     * @param name Name to assign to user.
      */
     public void setName(String name) {
         this.name = name;
@@ -251,8 +295,8 @@ public class User implements Parcelable {
     }
 
     /**
-     * setter for username
-     * @param name username of user
+     * Method to set user's username.
+     * @param name Name to assign to user.
      */
     public void setUserName(String name) {
         this.userName = name;
@@ -262,8 +306,8 @@ public class User implements Parcelable {
     }
 
     /**
-     * setter for description
-     * @param desc description of user
+     * Method to set user's description.
+     * @param desc Description to assign to user.
      */
     public void setDescription(String desc) {
         this.description = desc;
@@ -274,8 +318,8 @@ public class User implements Parcelable {
 
     /**
      * Checks if the password passed in is the same as the actual password.
-     * @param pass password to be checked
-     * @return true if they are equal, false otherwise
+     * @param pass Password to be checked.
+     * @return true If they are equal, false otherwise.
      */
     public boolean validatePassword(String pass) {
         return this.pass.equals(pass);

@@ -13,28 +13,28 @@ import com.firebase.client.Firebase;
 
 
 public class WelcomeScreenActivity extends AppCompatActivity {
-    private Intent intent = getIntent();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_welcome_screen);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button logIn = (Button) findViewById(R.id.logInButton);
+        final Button logIn = (Button) findViewById(R.id.logInButton);
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                linkToLogin(v);
+                linkToLogin();
             }
         });
 
-        Button register = (Button) findViewById(R.id.registerButton);
+        final Button register = (Button) findViewById(R.id.registerButton);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                linkToRegister(v);
+                linkToRegister();
             }
         });
 
@@ -52,15 +52,22 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         */
     }
 
-    private void linkToLogin(View v) {
-        Intent logInIntent = new Intent(this, LoginActivity.class);
+    /**
+     * Private method to link to the LoginActivity.
+     */
+    private void linkToLogin() {
+        final Intent logInIntent = new Intent(this, LoginActivity.class);
         startActivity(logInIntent);
     }
 
-    private void linkToRegister(View v) {
-        Intent registerIntent = new Intent(this, RegistrationActivity.class);
+    /**
+     * Private method to link to the RegistrationActivity.
+     */
+    private void linkToRegister() {
+        final Intent registerIntent = new Intent(this, RegistrationActivity.class);
         startActivity(registerIntent);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -73,7 +80,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        final int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
@@ -84,7 +91,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         finish();
     }

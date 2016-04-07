@@ -20,6 +20,7 @@ import android.widget.Toast;
 public class HomeActivity extends AppCompatActivity {
     public static final String MOVIE_LIST_EXTRA = "theunderjackets.com.rottentechmatoes.MOVIELIST";
     private Toast currentToast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +28,6 @@ public class HomeActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Intent intent = getIntent();
         final User user = CurrentUser.getInstance().getUser();
         final TextView welcomeUser = (TextView) findViewById(R.id.textViewWelcomeUser);
 
@@ -85,6 +85,7 @@ public class HomeActivity extends AppCompatActivity {
 
     /**
      * Makes it so that edittext will not be focused on anymore once clicked out of.
+     *
      * @param event click outside of box
      * @return super.dispatchTouchEvent(event)
      */

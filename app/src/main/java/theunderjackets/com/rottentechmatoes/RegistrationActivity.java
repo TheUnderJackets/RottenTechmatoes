@@ -1,11 +1,8 @@
 package theunderjackets.com.rottentechmatoes;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
@@ -54,10 +51,12 @@ public class RegistrationActivity extends AppCompatActivity {
 
     /**
      * Attempts to register a new user based on info entered.
-     * @param v the current view
-     * @param emailaddress the emailaddress box
-     * @param username the username box
-     * @param password the password box
+     *
+     * @param v              the current view
+     * @param emailaddress   the emailaddress box
+     * @param name           the name box
+     * @param username       the username box
+     * @param password       the password box
      * @param passwordrepeat the retype password box
      */
     private void attemptRegistration(View v, EditText emailaddress, EditText name, EditText username, EditText password, EditText passwordrepeat) {
@@ -73,25 +72,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
             currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
             currentToast.show();
-        } /*else if (!UserList.isUserNameValid(userName)) {
-            CharSequence msgText = "Username has been taken. Please enter a different one.";
-            if (currentToast != null && currentToast.getView().isShown()) {
-                currentToast.cancel();
-            }
-            currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
-            currentToast.show();
-            username.setText("");
-            username.requestFocus();
-        } else if (!UserList.isEmailValid(email)) {
-            CharSequence msgText = "Email is already taken. Enter a different one.";
-            if (currentToast != null && currentToast.getView().isShown()) {
-                currentToast.cancel();
-            }
-            currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
-            currentToast.show();
-            emailaddress.setText("");
-            emailaddress.requestFocus();
-        } */else if (!pass.equals(passRepeat)){
+        } else if (!pass.equals(passRepeat)) {
             CharSequence msgText = "Repeat password does not match first password. Please try again.";
             if (currentToast != null && currentToast.getView().isShown()) {
                 currentToast.cancel();
@@ -110,6 +91,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     /**
      * Checks to see if the email used during registration is available or not.
+     *
      * @param email the email to check
      * @return true if email is unused, false otherwise
      */
@@ -122,20 +104,19 @@ public class RegistrationActivity extends AppCompatActivity {
 
     /**
      * Checks to see if the email input during registration is a valid address.
+     *
      * @param email the email to check
      * @return true if email is valid, false otherwise
      */
-    public static boolean isEmailAddressValid(String email){
+    public static boolean isEmailAddressValid(String email) {
 
         Matcher mtch = emailNamePtrn.matcher(email);
-        if(mtch.matches()){
-            return true;
-        }
-        return false;
+        return mtch.matches();
     }
 
     /**
      * Makes it so that edittext will not be focused on anymore once clicked out of.
+     *
      * @param event click outside of box
      * @return super.dispatchTouchEvent(event)
      */

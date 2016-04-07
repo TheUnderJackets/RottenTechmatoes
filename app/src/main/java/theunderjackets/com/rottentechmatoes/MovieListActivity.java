@@ -37,7 +37,7 @@ public class MovieListActivity extends AppCompatActivity {
     private boolean mTwoPane;
 
 
-    protected static List<Movie>  movies = new ArrayList<>();
+    protected static List<Movie> movies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +60,16 @@ public class MovieListActivity extends AppCompatActivity {
         if (Movies.ITEMS != null) {
             Movies.clear();
         }
-        for(theunderjackets.com.rottentechmatoes.Movie m: movies) {
+        for (theunderjackets.com.rottentechmatoes.Movie m : movies) {
             Movies.addItem(m);
         }
 
     }
+
     /**
-    * sets up view for movies
-    * @param recyclerView view to set up
-    * */
+     * Sets up the recycler view for the movie list.
+     * @param recyclerView The recycler view.
+     */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(Movies.ITEMS));
     }
@@ -79,10 +80,9 @@ public class MovieListActivity extends AppCompatActivity {
         private final List<Movie> mValues;
 
         /**
-         * item recycler view
-         * @param items things to be stored in the view
+         * Mandatory public constructor.
+         * @param items The list of movie items.
          */
-
         public SimpleItemRecyclerViewAdapter(List<Movie> items) {
             mValues = items;
         }
@@ -134,15 +134,15 @@ public class MovieListActivity extends AppCompatActivity {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
-            protected final View mView;
-            protected final TextView mIdView;
-            protected final TextView mContentView;
-            protected final ImageView mThumbnail;
-            protected Movie mItem;
+            public final View mView;
+            public final TextView mIdView;
+            public final TextView mContentView;
+            public final ImageView mThumbnail;
+            public Movie mItem;
 
             /**
-             * constructor for viewholder
-             * @param view view to be used
+             * Public constructor for the view holder.
+             * @param view The current view.
              */
             public ViewHolder(View view) {
                 super(view);

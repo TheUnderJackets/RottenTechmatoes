@@ -2,18 +2,12 @@ package theunderjackets.com.rottentechmatoes;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 
-import java.util.List;
 
 public class ViewProfileActivity extends AppCompatActivity {
 
@@ -21,15 +15,9 @@ public class ViewProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Intent intent = getIntent();
         final User user = CurrentUser.getInstance().getUser();
-        TextView userNameText = (TextView) findViewById(R.id.textUsername);
-        TextView nameText = (TextView) findViewById(R.id.textName);
-        TextView emailText = (TextView) findViewById(R.id.textEmail);
-        TextView majorText = (TextView) findViewById(R.id.textMajor);
-        TextView descriptionText = (TextView) findViewById(R.id.textDescription);
         final EditText userNameTextField = (EditText) findViewById(R.id.inputUsername);
         userNameTextField.setText(user.getUserName());
         final EditText nameTextField = (EditText) findViewById(R.id.inputName);
@@ -39,19 +27,19 @@ public class ViewProfileActivity extends AppCompatActivity {
         final EditText majorTextField = (EditText) findViewById(R.id.major);
         majorTextField.setText(user.getMajor().toString());
         final EditText descriptionTextField = (EditText) findViewById(R.id.inputDescription);
-        if (!user.getDescription().equals("") && !user.getDescription().equals("Description")) {
+        if (!"".equals(user.getDescription()) && !"Description".equals(user.getDescription())) {
             descriptionTextField.setText(user.getDescription());
         }
         final Button editProfile = (Button) findViewById(R.id.buttonEditProfile);
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentEdit = new Intent(ViewProfileActivity.this, EditProfileActivity.class);
+                final Intent intentEdit = new Intent(ViewProfileActivity.this, EditProfileActivity.class);
                 startActivity(intentEdit);
                 finish();
             }
         });
-        Button cancelChanges = (Button) findViewById(R.id.buttonCancelChanges);
+        final Button cancelChanges = (Button) findViewById(R.id.buttonCancelChanges);
         cancelChanges.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,7 +61,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         final EditText majorTextField = (EditText) findViewById(R.id.major);
         majorTextField.setText(user.getMajor().toString());
         final EditText descriptionTextField = (EditText) findViewById(R.id.inputDescription);
-        if (!user.getDescription().equals("") && !user.getDescription().equals("Description")) {
+        if (!"".equals(user.getDescription()) && !"Description".equals(user.getDescription())) {
             descriptionTextField.setText(user.getDescription());
         }
     }

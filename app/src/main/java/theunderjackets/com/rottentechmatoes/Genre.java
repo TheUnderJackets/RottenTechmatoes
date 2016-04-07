@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * This entire class is currently not in use, still exists for possible future functionality. Also,
+ * this is an enum, so the constants are self-explanatory.
  * Created by Andrew Suh on 2/18/2016.
  */
 public enum Genre {
@@ -26,7 +28,12 @@ public enum Genre {
     TELEVISION("Television"),
     WESTERN("Western");
 
-    private String genreName;
+    private final String genreName;
+
+    /**
+     * Constructor for Genre with name parameter.
+     * @param name name of the genre
+     */
     Genre(String name) {
         genreName = name;
     }
@@ -38,6 +45,7 @@ public enum Genre {
 
     /**
      * Getter method for the genre name.
+     *
      * @return the string version of the genre
      */
     public String getName() {
@@ -46,6 +54,7 @@ public enum Genre {
 
     /**
      * Gets the list of genres in sorted order.
+     *
      * @return list of sorted genres
      */
     public static List<Genre> getGenres() {

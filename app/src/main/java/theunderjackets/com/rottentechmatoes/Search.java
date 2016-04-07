@@ -4,32 +4,27 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Collections;
-import java.util.Map;
-
-import android.widget.Toast;
-
-import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by will on 2/21/16.
  */
+@SuppressWarnings("DefaultFileTemplate")
 public final class Search {
 
-    /*
-     * Private constructor
+    /**
+     * Private constructor for Search
      */
     private Search() {
     }
@@ -39,10 +34,10 @@ public final class Search {
     /**
      * Search through movies based on a string query of a movie title
      *
-     * @param limit amount of movies to list
+     * @param limit    amount of movies to list
      * @param activity where you are calling to
-     * @param goal class that will perform type of search
-     * @param query movie title searched for
+     * @param goal     class that will perform type of search
+     * @param query    movie title searched for
      */
     public static void byKeyword(final int limit, Context activity, Class goal, String query) { //activity - from, goal - to
         query = query.replaceAll(" ", "+");
@@ -65,9 +60,9 @@ public final class Search {
     /**
      * Search through movies based on to rentals
      *
-     * @param limit amount of movies to list
+     * @param limit    amount of movies to list
      * @param activity where you are calling to
-     * @param goal class that will perform type of search
+     * @param goal     class that will perform type of search
      */
     public static void byRentals(final int limit, Context activity, Class goal) { //activity - from, goal - to
         RottenTomatoes.getMovies(RottenTomatoesRequest.TOP_RENTALS, limit, activity, goal, new RTCallBack() {
@@ -89,9 +84,9 @@ public final class Search {
     /**
      * Search through movies based on new DVD releases
      *
-     * @param limit amount of movies to list
+     * @param limit    amount of movies to list
      * @param activity where you are calling to
-     * @param goal class that will perform type of search
+     * @param goal     class that will perform type of search
      */
     public static void byNewDVD(final int limit, Context activity, Class goal) { //activity - from, goal - to
         RottenTomatoes.getMovies(RottenTomatoesRequest.NEW_RELEASES_DVD, limit, activity, goal, new RTCallBack() {
@@ -113,9 +108,9 @@ public final class Search {
     /**
      * Search through movies based on new movie
      *
-     * @param limit amount of movies to list
+     * @param limit    amount of movies to list
      * @param activity where you are calling to
-     * @param goal class that will perform type of search
+     * @param goal     class that will perform type of search
      */
     public static void byNewMovies(final int limit, Context activity, Class goal) { //activity - from, goal - to
         RottenTomatoes.getMovies(RottenTomatoesRequest.NEW_RELEASES_MOVIES, limit, activity, goal, new RTCallBack() {
@@ -133,12 +128,13 @@ public final class Search {
             }
         });
     }
+
     /**
      * Recommend movies based on major
      *
-     * @param m the major we're recommending based on
+     * @param m        the major we're recommending based on
      * @param activity where you are calling to
-     * @param goal class that will perform type of search
+     * @param goal     class that will perform type of search
      */
     public static void recommend(final Major m, final Context activity, Class goal) {
         final Intent intent = new Intent(activity, goal);
@@ -190,7 +186,7 @@ public final class Search {
                     });
 
                     final MovieList movies = new MovieList();
-                    System.out.println("List Size: " + list.size());
+                    //System.out.println("List Size: " + list.size());
                     for (int i = 0; i < list.size(); i++) {
                         List<Review> revs = new ArrayList<>();
                         for (List<Review> rev : reviews) {
@@ -221,7 +217,7 @@ public final class Search {
                             try {
                                 Thread.sleep(1000);
                             } catch (Exception e) {
-                                System.out.println("Timer didn't work!");
+                                //System.out.println("Timer didn't work!");
                             }
                             Firebase movieRef = new Firebase("https://rottentechmatoes.firebaseio.com/movies");
 
