@@ -12,8 +12,9 @@ import static org.junit.Assert.*;
 
 /**
  * Tests the UserList.isUserValid(String username, String password) method,
- * and the UserList.getUserByUsername(String username) method.
- * Created by Andrew Suh and Lixin Wang on 4/6/2016.
+ * the UserList.getUserByUsername(String username) method,
+ * and the UserList.getUserbyEmail(String username) method.
+ * Created by Andrew Suh, Lixin Wang, and Ben French on 4/6/2016.
  */
 public class UserListTest {
 
@@ -98,5 +99,36 @@ public class UserListTest {
         assertSame(UserList.getUserByUsername("ValidUser"), validUser);
         // case not sensitive:
         assertSame(UserList.getUserByUsername("VaLiDuSeR"), validUser);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testNullEmail() {
+        UserList.getUserByEmail(null);
+    }
+
+    @Test (expected = NoSuchElementException.class)
+    public void testEmptyEmail() {
+        UserList.getUserByEmail("");
+    }
+
+    @Test (expected = NoSuchElementException.class)
+    public void testEmailNotExist() {
+        UserList.getUserByEmail("fakeemail@fake.com");
+    }
+
+    @Test (expected = NoSuchElementException.class)
+    public void testGetEmailNotFound() {
+        User fakeUser = new User("User", "RightEmail@yes.com", "Password", "Fake", false);
+        UserList.addUserLocal(fakeUser);
+        UserList.getUserByEmail("wrongEmail@nope.com");
+    }
+
+    @Test
+    public void testValidEmail() {
+        User validEmail = new User("User", "RightEmail@yes.com", "Password", "Valid", false);
+        UserList.addUserLocal(validEmail);
+        assertSame(UserList.getUserByEmail("RightEmail@yes.com"), validEmail);
+        // case not sensitive:
+        assertSame(UserList.getUserByEmail("rightemail@yes.com"), validEmail);
     }
 }

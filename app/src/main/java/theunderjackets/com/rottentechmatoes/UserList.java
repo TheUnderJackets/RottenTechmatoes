@@ -150,8 +150,10 @@ public final class UserList {
      * Getter method for user by email.
      * @param email email of the requested user
      * @return user if found, throws an Exception otherwise
+     * @throws NoSuchElementException if user does not exist
+     * @throws IllegalArgumentException if email is null
      */
-    public static User getUserByEmail(String email) {
+    public static User getUserByEmail(String email) throws IllegalArgumentException, NoSuchElementException{
         if (email == null) {
             throw new java.lang.IllegalArgumentException("Argument cannot be null.");
         }
@@ -160,6 +162,6 @@ public final class UserList {
                 return u;
             }
         }
-        throw new NoSuchElementException("user does not exist");
+        throw new NoSuchElementException("User does not exist");
     }
 }
