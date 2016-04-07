@@ -28,7 +28,6 @@ public class HomeActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Intent intent = getIntent();
         final User user = CurrentUser.getInstance().getUser();
         final TextView welcomeUser = (TextView) findViewById(R.id.textViewWelcomeUser);
 

@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void attemptLogin(EditText username, EditText password) {
         final String userName = username.getText().toString();
-        System.out.println(userName);
+        //System.out.println(userName);
         final String passWord = password.getText().toString();
         password.setText("");
         loginUser(userName, passWord, this, new FireBaseCallBack() {
@@ -165,7 +165,7 @@ public class LoginActivity extends AppCompatActivity {
                     User user = data.getValue(User.class);
                     if (user.getIsAdmin()) {
                         exitCode = -1;
-                    } else if (user.getBanned() == true) {
+                    } else if (user.getBanned()) {
                         exitCode = 2;
                     } else if (user.getLocked()) {
                         exitCode = 3;

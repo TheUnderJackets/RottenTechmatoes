@@ -54,6 +54,7 @@ public class RegistrationActivity extends AppCompatActivity {
      *
      * @param v              the current view
      * @param emailaddress   the emailaddress box
+     * @param name           the name box
      * @param username       the username box
      * @param password       the password box
      * @param passwordrepeat the retype password box
@@ -71,27 +72,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
             currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
             currentToast.show();
-        }
-        /*else if (!UserList.isUserNameValid(userName)) {
-            CharSequence msgText = "Username has been taken. Please enter a different one.";
-            if (currentToast != null && currentToast.getView().isShown()) {
-                currentToast.cancel();
-            }
-            currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
-            currentToast.show();
-            username.setText("");
-            username.requestFocus();
-        } else if (!UserList.isEmailValid(email)) {
-            CharSequence msgText = "Email is already taken. Enter a different one.";
-            if (currentToast != null && currentToast.getView().isShown()) {
-                currentToast.cancel();
-            }
-            currentToast = Toast.makeText(getApplicationContext(), msgText, Toast.LENGTH_SHORT);
-            currentToast.show();
-            emailaddress.setText("");
-            emailaddress.requestFocus();
-        } */
-        else if (!pass.equals(passRepeat)) {
+        } else if (!pass.equals(passRepeat)) {
             CharSequence msgText = "Repeat password does not match first password. Please try again.";
             if (currentToast != null && currentToast.getView().isShown()) {
                 currentToast.cancel();

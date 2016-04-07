@@ -64,7 +64,8 @@
         android:focusable="false"
         android:editable="false"
         android:layout_below="@+id/inputEmail"
-        android:layout_alignStart="@+id/inputEmail" />
+        android:layout_alignStart="@+id/inputEmail"
+        android:inputType="text"/>
 
     <EditText
         android:layout_width="wrap_content"

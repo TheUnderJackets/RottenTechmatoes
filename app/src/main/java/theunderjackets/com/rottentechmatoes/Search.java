@@ -23,8 +23,8 @@ import java.util.Map;
 @SuppressWarnings("DefaultFileTemplate")
 public final class Search {
 
-    /*
-     * Private constructor
+    /**
+     * Private constructor for Search
      */
     private Search() {
     }
@@ -186,7 +186,7 @@ public final class Search {
                     });
 
                     final MovieList movies = new MovieList();
-                    System.out.println("List Size: " + list.size());
+                    //System.out.println("List Size: " + list.size());
                     for (int i = 0; i < list.size(); i++) {
                         List<Review> revs = new ArrayList<>();
                         for (List<Review> rev : reviews) {
@@ -217,7 +217,7 @@ public final class Search {
                             try {
                                 Thread.sleep(1000);
                             } catch (Exception e) {
-                                System.out.println("Timer didn't work!");
+                                //System.out.println("Timer didn't work!");
                             }
                             Firebase movieRef = new Firebase("https://rottentechmatoes.firebaseio.com/movies");
 

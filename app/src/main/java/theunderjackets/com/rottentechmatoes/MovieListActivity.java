@@ -71,6 +71,10 @@ public class MovieListActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Sets up the recycler view for the movie list.
+     * @param recyclerView The recycler view.
+     */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(Movies.ITEMS));
     }
@@ -80,6 +84,10 @@ public class MovieListActivity extends AppCompatActivity {
 
         private final List<Movie> mValues;
 
+        /**
+         * Mandatory public constructor.
+         * @param items The list of movie items.
+         */
         public SimpleItemRecyclerViewAdapter(List<Movie> items) {
             mValues = items;
         }
@@ -157,6 +165,10 @@ public class MovieListActivity extends AppCompatActivity {
             public final ImageView mThumbnail;
             public Movie mItem;
 
+            /**
+             * Public constructor for the view holder.
+             * @param view The current view.
+             */
             public ViewHolder(View view) {
                 super(view);
                 mView = view;

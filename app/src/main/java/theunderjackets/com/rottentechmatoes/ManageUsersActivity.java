@@ -20,12 +20,14 @@ import java.util.List;
 
 /**
  * An activity for the "Manage Users" page for the admin.
- * The page displays a list of usernames and the users' statuses, and options
+ * The page displays a list of userNames and the users' statuses, and options
  * to unlock or ban the users.
  */
 public class ManageUsersActivity extends AppCompatActivity {
-    //get the set of users from Userlist and convert to a list
-    List<User> userList;
+    /**
+     * Get the set of users from UserList and convert to a list
+     */
+    private List<User> userList;
 
 
     @Override
@@ -33,7 +35,7 @@ public class ManageUsersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_users);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("Manage Users");
         userList = getIntent().getParcelableArrayListExtra(LoginActivity.USERSEXTRA);
@@ -41,16 +43,14 @@ public class ManageUsersActivity extends AppCompatActivity {
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
 
-        Button unlockButton = (Button) findViewById(R.id.unlockButton);
+        final Button unlockButton = (Button) findViewById(R.id.unlockButton);
         unlockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: set action for UNLOCK button
                 // After this button is clicked, if a user is selected,
                 // then unlock that user
                 // See ".isSelected()" method in User.java
-                for (User u : userList) {
-                    int i = 1;
+                for (final User u : userList) {
                     if (u.isSelected()) {
                         u.setLocked(false);
                     }
@@ -61,16 +61,15 @@ public class ManageUsersActivity extends AppCompatActivity {
             }
         });
 
-        Button banButton = (Button) findViewById(R.id.banButton);
+        final Button banButton = (Button) findViewById(R.id.banButton);
         banButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: set action for BAN button
                 // After this button is clicked, if a user is selected,
                 // then ban that user
                 // See ".isSelected()" method in User.java
 
-                for (User u : userList) {
+                for (final User u : userList) {
                     if (u.isSelected()) {
                         u.setBanned(true);
                     }
@@ -87,7 +86,7 @@ public class ManageUsersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                for (User u : userList) {
+                for (final User u : userList) {
                     if (selectAll.isChecked()) {
                         u.setSelected(true);
                     } else {
@@ -104,11 +103,29 @@ public class ManageUsersActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        final MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_admin, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.adminLogout) {
+            CurrentUser.getInstance().setUser(null);
+            final Intent intent = new Intent(this, WelcomeScreenActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
 
     /**
      * Sets up the recycler view for the list of users.
-     *
-     * @param recyclerView The recycler view for the lsit of users.
+     * @param recyclerView The recycler view for the list of users.
      */
     private void setupRecyclerView(RecyclerView recyclerView) {
         recyclerView.setAdapter(new RecyclerViewAdapter(userList));
@@ -134,7 +151,7 @@ public class ManageUsersActivity extends AppCompatActivity {
 
         @Override
         public ViewHolder2 onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
+            final View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.user_list_content, parent, false);
             return new ViewHolder2(view);
         }
@@ -152,8 +169,8 @@ public class ManageUsersActivity extends AppCompatActivity {
 
             holder.chkSelected.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    CheckBox cb = (CheckBox) v;
-                    User contact = (User) cb.getTag();
+                    final CheckBox cb = (CheckBox) v;
+                    final User contact = (User) cb.getTag();
 
                     contact.setSelected(cb.isChecked());
                     userValues.get(pos).setSelected(cb.isChecked());
@@ -188,10 +205,10 @@ public class ManageUsersActivity extends AppCompatActivity {
             public final TextView uNameView;
             public final TextView uStatusView;
             public User uItem;
-            public CheckBox chkSelected;
+            public final CheckBox chkSelected;
 
             /**
-             * The constructor tells the view holder to place the usernames
+             * The constructor tells the view holder to place the userNames
              * and statuses in their respective locations.
              *
              * @param view The view.
@@ -208,26 +225,6 @@ public class ManageUsersActivity extends AppCompatActivity {
             public String toString() {
                 return super.toString() + " '" + uStatusView.getText() + "'";
             }
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_admin, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.adminLogout) {
-            CurrentUser.getInstance().setUser(null);
-            Intent intent = new Intent(this, WelcomeScreenActivity.class);
-            startActivity(intent);
-            finish();
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
         }
     }
 }

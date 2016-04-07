@@ -19,7 +19,7 @@ public class Movie implements Parcelable {
     private String apiRating;
     private String synopsis;
     private String thumbnailURL;
-    private List<Review> reviews = new ArrayList<>();
+    private final List<Review> reviews = new ArrayList<>();
 
     /**
      * empty Movie constructor
@@ -36,7 +36,7 @@ public class Movie implements Parcelable {
      * @param year               movie was released
      * @param runtime            length of movie
      * @param theaterReleaseDate release date in theaters
-     * @param apiRating          RottenTomatos rating
+     * @param apiRating          Rotten Tomatoes rating
      * @param synopsis           plot of movie
      * @param thumbnailURL       link to movie
      */
@@ -134,7 +134,7 @@ public class Movie implements Parcelable {
     }
 
     /**
-     * gets the movie yeat
+     * gets the movie year
      *
      * @return year of movie
      */
@@ -211,7 +211,7 @@ public class Movie implements Parcelable {
      * @param reviews of movie to add
      */
     public void addReviews(Collection<Review> reviews) {
-        for (Review review : reviews) {
+        for (final Review review : reviews) {
             this.reviews.add(review);
         }
     }
