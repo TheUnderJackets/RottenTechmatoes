@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.MenuItem;
+
 /**
  * An activity representing a single Movie detail screen. This
  * activity is only used narrow width devices. On tablet-size devices,
@@ -19,7 +20,6 @@ public class MovieDetailActivity extends FragmentActivity {
         android.widget.Toolbar toolbar = (android.widget.Toolbar) findViewById(R.id.detail_toolbar);
         toolbar.setDrawingCacheBackgroundColor(Color.BLUE);
         setActionBar(toolbar);
-
 
 
         // Show the Up button in the action bar.

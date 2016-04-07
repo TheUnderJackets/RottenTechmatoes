@@ -6,28 +6,23 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-public class AdminList {
-    private static Map<Admin, String> userNames = new HashMap<>();
-    private static Set<Admin> admins = new HashSet<>();
+/**
+ * Utility class to handle high level Admin management.
+ */
+final class AdminList {
+    private static final Map<Admin, String> userNames = new HashMap<>();
+    private static final Set<Admin> admins = new HashSet<>();
 
     /**
-     * empty AdminList constructor
+     * Empty AdminList constructor to prevent this from being instantiated, is just a utility class.
      */
     private AdminList() {
     }
 
     /**
-     * checks the list of admins to see if it already exists in the map
-     * @param admin admin to check list
-     * @return true if the userName is taken, false otherwise
-     */
-
-    public static boolean adminExists(Admin admin) {
-        return admins.contains(admin);
-    }
-
-    /**
-     * adds the given admin to the list
+     * Adds the given admin to the list. This currently isn't used, but would be necessary if we
+     * use functionality to add admins using other admins.
+     *
      * @param admin admin to be added
      */
     public static void addAdmin(Admin admin) {
@@ -36,47 +31,25 @@ public class AdminList {
     }
 
     /**
-     *
-     * Checks to see if the username is already used. This is used during admin creation.
-     * @param username the username we are checking for
-     * @return true if username is valid, false otherwise
+     * Removes the admin from the admin list. Currently not used, but if we wanted to add this
+     * functionality, we would need this.
+     * @param username username of the admin
      */
-    public static boolean isUserNameValid(String username) {
-        return !userNames.containsValue(username);
-    }
-
-    /**
-     * Checks to see if the username and password combo is valid.
-     * @param username username to check
-     * @param password password to check
-     * @return true if login attempt is valid, false otherwise
-     */
-    public static boolean isAdminValid(String username, String password) {
-        Admin admin;
-        if (!AdminList.isUserNameValid(username)) {
-            admin = AdminList.getAdminByUsername(username);
-        } else {
-            return false;
-        }
-        return admin.validatePassword(password);
-    }
-
-
-    /**
-     *
-     * Getter method for admin by username.
-     * @param username username of the requested admin
-     * @return Admin if found, NoSuchElementException otherwise
-     * @throws NoSuchElementException if username is not an Admin
-     */
-    public static Admin getAdminByUsername(String username) throws NoSuchElementException {
-        for (Admin a: admins) {
-            if (username.equalsIgnoreCase(a.getUserName())) {
-                return a;
+    public static void removeAdmin(String username) {
+        Admin admin = null;
+        for (final Map.Entry<Admin, String> entry : userNames.entrySet()) {
+            if (entry.getValue().equals(username)) {
+                admin = entry.getKey();
             }
         }
-        throw new NoSuchElementException("admin does not exist");
-
+        if (admin == null) {
+            throw new NoSuchElementException("Admin was not found.");
+        }
+        for (final Admin adminFound : admins) {
+            if (adminFound.equals(admin)) {
+                admins.remove(adminFound);
+            }
+        }
     }
 
 

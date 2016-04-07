@@ -11,7 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import theunderjackets.com.rottentechmatoes.dummy.*;
+import theunderjackets.com.rottentechmatoes.dummy.Movies;
 
 /**
  * A fragment representing a single Movie detail screen.
@@ -42,7 +42,7 @@ public class MovieDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null){
+        if (getArguments() != null) {
             if (getArguments().containsKey(ARG_ITEM_ID)) {
                 // Load the dummy content specified by the fragment
                 // arguments. In a real-world scenario, use a Loader
@@ -93,6 +93,7 @@ public class MovieDetailFragment extends Fragment {
 
     /**
      * gets the current movie
+     *
      * @return current movie
      */
     public CurrentMovie getCurrent() {

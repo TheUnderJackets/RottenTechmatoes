@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.firebase.client.Firebase;
 
 /**
+ * Represents a review that users make on movies.
  * Created by Andrew Suh on 3/30/2016.
  */
 public class Review implements Parcelable {
@@ -14,11 +15,20 @@ public class Review implements Parcelable {
     private double rating;
     private String review = "";
     private static final String URL = "https://rottentechmatoes.firebaseio.com/";
-    /**
-     * Default constructor for Firebase to use.
-     */
-    public Review() {}
 
+    /**
+     * Default constructor for FireBase to use. Very much necessary.
+     */
+    public Review() {
+    }
+
+    /**
+     * Constructor that should be used to construct a review.
+     * @param email email of the reviewer
+     * @param id id of the movie reviewed
+     * @param rating rating given by user
+     * @param review text of the review
+     */
     public Review(String email, String id, double rating, String review) {
         this.movieId = id;
         this.userEmail = email;
@@ -26,31 +36,48 @@ public class Review implements Parcelable {
         if (review != null) {
             this.review = review;
         } else {
-            review = "";
+            this.review = "";
         }
-        Firebase reviewRef = new Firebase(URL + "reviews").push();
+        final Firebase reviewRef = new Firebase(URL + "reviews").push();
         reviewRef.setValue(this);
     }
 
 
+    /**
+     * Getter method for user email. Necessary for FireBase.
+     * @return email of reviewer
+     */
     public String getUserEmail() {
         return userEmail;
     }
 
+    /**
+     * Getter method for movie id. Necessary for FireBase.
+     * @return movie id
+     */
     public String getMovieId() {
         return movieId;
     }
 
+    /**
+     * Getter method for rating the review. Necessary for FireBase.
+     * @return rating of the review
+     */
     public double getRating() {
         return rating;
     }
 
+    /**
+     * Getter method for review text. Necessary for FireBase.
+     * @return review text of review
+     */
     public String getReview() {
         return review;
     }
 
     /**
      * Private constructor for implementation of Parcelable.
+     *
      * @param in parcel used to construct the object
      */
     private Review(Parcel in) {
@@ -62,7 +89,8 @@ public class Review implements Parcelable {
 
     /**
      * Implementation of Parcelable. Ensures that the read/write are given in FIFO.
-     * @param dest destination parcel
+     *
+     * @param dest  destination parcel
      * @param flags flags
      */
     @Override
@@ -76,6 +104,7 @@ public class Review implements Parcelable {
     /**
      * Basic implementation of describeContents(). For our purposes, we have no need to customize
      * the implementation.
+     *
      * @return 0
      */
     @Override

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * Enum to restrict what possible majors there are.
  * Created by Andrew Suh on 2/12/2016.
  */
 public enum Major {
@@ -45,18 +46,23 @@ public enum Major {
     PSYCHOLOGY("Psychology"),
     PUBLIC_POLICY("Public Policy");
 
-    private String majorName;
+    private final String majorName;
+
+    /**
+     * Constructor to create the major enum.
+     * @param majorName name of the major
+     */
     Major(String majorName) {
         this.majorName = majorName;
     }
 
     /**
      * Creates a list of all possible majors and returns it in sorted order.
+     *
      * @return Sorted list of all possible majors.
      */
     public static List<Major> getMajorList() {
-        List<Major> majors = Arrays.asList(Major.values());
-        return majors;
+        return Arrays.asList(Major.values());
     }
 
     @Override
@@ -65,7 +71,8 @@ public enum Major {
     }
 
     /**
-     * Getter method for the name of the major.
+     * Getter method for the name of the major. May need to be public for later use, functionality.
+     *
      * @return the name of the major
      */
     public String getName() {

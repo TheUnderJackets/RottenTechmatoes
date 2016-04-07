@@ -6,18 +6,19 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
-import java.util.List;
-
 /**
+ * Implements the Singleton pattern in order to ensure a single queue of RottenTomatoes requests.
  * Created by Andrew Suh on 2/18/2016.
  */
-public class RequestQueueSingleton {
+public final class RequestQueueSingleton {
     private static RequestQueueSingleton queueInstance;
     private RequestQueue requestQueue;
-    private List<Movie> resultsMovies;
-    private Movie resultsMovie;
     private static Context cont;
 
+    /**
+     * Private constructor to make sure only one instance ever exists.
+     * @param context the context of the activity
+     */
     private RequestQueueSingleton(Context context) {
         cont = context;
         requestQueue = getRequestQueue();
@@ -25,6 +26,7 @@ public class RequestQueueSingleton {
 
     /**
      * Singleton instance accessor
+     *
      * @param context current context in application
      * @return single instance of the class
      */
@@ -36,7 +38,9 @@ public class RequestQueueSingleton {
     }
 
     /**
-     * Getter method for the request queue.
+     * Getter method for the request queue. This should be public. The goal is to provide
+     * global state for RT requests.
+     *
      * @return request queue
      */
     public RequestQueue getRequestQueue() {
@@ -49,17 +53,11 @@ public class RequestQueueSingleton {
     /**
      * Add method for the request queue. For the purpose of this app, get a JsonObjectRequest
      * from the RottenTomatoes class and add it to this queue.
+     *
+     * @param <T> the generic type of the request
      * @param req request to be added
      */
     public <T> void add(Request<T> req) {
         getRequestQueue().add(req);
-    }
-
-    public List<Movie> getMovies() {
-        return resultsMovies;
-    }
-
-    public Movie getMovie() {
-        return resultsMovie;
     }
 }

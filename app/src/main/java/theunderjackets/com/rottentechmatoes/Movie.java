@@ -8,7 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-@JsonIgnoreProperties(ignoreUnknown=true)
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie implements Parcelable {
     private String id;
     private String title;
@@ -29,14 +30,15 @@ public class Movie implements Parcelable {
 
     /**
      * Movie constructor
-     * @param id of movie
-     * @param title of movie
-     * @param year movie was released
-     * @param runtime length of movie
+     *
+     * @param id                 of movie
+     * @param title              of movie
+     * @param year               movie was released
+     * @param runtime            length of movie
      * @param theaterReleaseDate release date in theaters
-     * @param apiRating RottenTomatos rating
-     * @param synopsis plot of movie
-     * @param thumbnailURL link to movie
+     * @param apiRating          RottenTomatos rating
+     * @param synopsis           plot of movie
+     * @param thumbnailURL       link to movie
      */
     public Movie(String id, String title, int year, int runtime, String theaterReleaseDate, String apiRating, String synopsis, String thumbnailURL) {
         this.id = id;
@@ -51,6 +53,7 @@ public class Movie implements Parcelable {
 
     /**
      * Private constructor for implementation of Parcelable.
+     *
      * @param in parcel used to construct the object
      */
     private Movie(Parcel in) {
@@ -67,7 +70,8 @@ public class Movie implements Parcelable {
 
     /**
      * Implementation of Parcelable. Ensures that the read/write are given in FIFO.
-     * @param dest destination parcel
+     *
+     * @param dest  destination parcel
      * @param flags flags
      */
     @Override
@@ -86,6 +90,7 @@ public class Movie implements Parcelable {
     /**
      * Basic implementation of describeContents(). For our purposes, we have no need to customize
      * the implementation.
+     *
      * @return 0
      */
     @Override
@@ -112,6 +117,7 @@ public class Movie implements Parcelable {
 
     /**
      * gets the movie ID
+     *
      * @return id of movie
      */
     public String getId() {
@@ -120,6 +126,7 @@ public class Movie implements Parcelable {
 
     /**
      * gets the movie title
+     *
      * @return title of movie
      */
     public String getTitle() {
@@ -128,6 +135,7 @@ public class Movie implements Parcelable {
 
     /**
      * gets the movie yeat
+     *
      * @return year of movie
      */
     public int getYear() {
@@ -136,6 +144,7 @@ public class Movie implements Parcelable {
 
     /**
      * gets the movie runtime
+     *
      * @return runtime of movie
      */
     public int getRuntime() {
@@ -144,6 +153,7 @@ public class Movie implements Parcelable {
 
     /**
      * gets the movie theater release date
+     *
      * @return theater release of movie
      */
     public String getTheaterReleaseDate() {
@@ -152,12 +162,16 @@ public class Movie implements Parcelable {
 
     /**
      * gets the movie rating
+     *
      * @return RottenTomatoes rating of movie
      */
-    public String getApiRating() { return apiRating; }
+    public String getApiRating() {
+        return apiRating;
+    }
 
     /**
      * gets the movie synopsis
+     *
      * @return synopsis of movie
      */
     public String getSynopsis() {
@@ -166,6 +180,7 @@ public class Movie implements Parcelable {
 
     /**
      * gets the movie thumbnailURL
+     *
      * @return thumbnailURL of movie
      */
     public String getThumbnailURL() {
@@ -174,6 +189,7 @@ public class Movie implements Parcelable {
 
     /**
      * gets the movie user reviews
+     *
      * @return user reviews of movie
      */
     public List<Review> getReviews() {
@@ -182,6 +198,7 @@ public class Movie implements Parcelable {
 
     /**
      * Adds user review
+     *
      * @param review of movie to add
      */
     public void addReview(Review review) {
@@ -190,6 +207,7 @@ public class Movie implements Parcelable {
 
     /**
      * Adds user reviews
+     *
      * @param reviews of movie to add
      */
     public void addReviews(Collection<Review> reviews) {

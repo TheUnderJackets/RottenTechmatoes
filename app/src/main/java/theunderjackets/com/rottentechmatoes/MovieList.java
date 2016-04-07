@@ -19,6 +19,7 @@ public class MovieList implements Parcelable {
 
     /**
      * Private constructor for implementation of Parcelable.
+     *
      * @param in parcel used to construct the object
      */
     private MovieList(Parcel in) {
@@ -28,7 +29,8 @@ public class MovieList implements Parcelable {
 
     /**
      * Implementation of Parcelable. Ensures that the read/write are given in FIFO.
-     * @param dest destination parcel
+     *
+     * @param dest  destination parcel
      * @param flags flags
      */
     @Override
@@ -39,6 +41,7 @@ public class MovieList implements Parcelable {
     /**
      * Basic implementation of describeContents(). For our purposes, we have no need to customize
      * the implementation.
+     *
      * @return 0
      */
     @Override
@@ -65,6 +68,7 @@ public class MovieList implements Parcelable {
 
     /**
      * Adds the movie to the list.
+     *
      * @param movie Movie to be added
      */
     public final void addMovie(Movie movie) {
@@ -73,6 +77,7 @@ public class MovieList implements Parcelable {
 
     /**
      * Checks if the list contains the movie.
+     *
      * @param movie Movie to check if in list
      * @return true if the movie is in the list, false otherwise
      */
@@ -82,6 +87,7 @@ public class MovieList implements Parcelable {
 
     /**
      * Removes the movie from the list.
+     *
      * @param movie Movie to be removed
      */
     public final void deleteMovie(Movie movie) {
@@ -92,12 +98,13 @@ public class MovieList implements Parcelable {
 
     /**
      * Gets a movie by the movie id
+     *
      * @param id ID of the movie
      * @return movie if the movie is in the list
      * @throws java.util.NoSuchElementException if movie is not found
      */
     public final Movie getMovieById(String id) {
-        for (Movie m: movies) {
+        for (Movie m : movies) {
             if (id.equals(m.getId())) {
                 return m;
             }
@@ -107,12 +114,13 @@ public class MovieList implements Parcelable {
 
     /**
      * Gets a movie by its title
+     *
      * @param title The title of the movie
      * @return movie if the movie is in the list
      * @throws java.util.NoSuchElementException if movie is not found
      */
     public final Movie getMovieByTitle(String title) {
-        for (Movie m: movies) {
+        for (Movie m : movies) {
             if (title.equals(m.getTitle())) {
                 return m;
             }
@@ -122,6 +130,7 @@ public class MovieList implements Parcelable {
 
     /**
      * Getter method for the list of movies.
+     *
      * @return list of movies
      */
     public final List<Movie> getMovies() {

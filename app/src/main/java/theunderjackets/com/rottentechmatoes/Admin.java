@@ -1,36 +1,46 @@
 package theunderjackets.com.rottentechmatoes;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.firebase.client.Firebase;
 
 public class Admin extends User {
 
     private String userName;
     private String pass;
-    private static final String USERSURL = "https://rottentechmatoes.firebaseio.com/users";
+    /**
+     * This is a constant, so it's expected to have an all capitalized name and a public modifier.
+     */
+    public static final String USERSURL = "https://rottentechmatoes.firebaseio.com/users";
 
     /**
-     * Empty Admin constructor
+     * Empty Admin constructor. THIS IS NECESSARY FOR FireBase.
      */
     public Admin() {
 
     }
 
     /**
-     * Admin constructor
-     * @param email email to assign
+     * Admin constructor. This is not used currently, but it if we wanted functionality to create
+     * new admins from current admins, this would be necessary.
+     *
+     * @param email    email to assign
      * @param userName to assign
-     * @param pass to assign
+     * @param pass     to assign
      */
     public Admin(String email, String userName, String pass) {
         super(null, email, pass, userName, false);
         setUserName(userName);
         changePass(pass);
-        this.setIsAdmin(true);
+        this.isAdmin = true;
+        this.pass = pass;
     }
 
     /**
      * Determine if an admin
+     *
      * @return isAdmin whether user is an admin
      */
     public boolean getIsAdmin() {
@@ -39,6 +49,7 @@ public class Admin extends User {
 
     /**
      * Get user's username
+     *
      * @return userName
      */
     public String getUserName() {
@@ -46,7 +57,8 @@ public class Admin extends User {
     }
 
     /**
-     * Get admin's password
+     * Get password from the current admin.
+     *
      * @return pass
      */
     public String getPass() {
@@ -54,7 +66,8 @@ public class Admin extends User {
     }
 
     /**
-     * Change admin's password
+     * Change password for the admin.
+     *
      * @param pass new password
      */
     public void changePass(String pass) {
@@ -65,7 +78,8 @@ public class Admin extends User {
     }
 
     /**
-     * Set Admin's password
+     * Set password for the admin.
+     *
      * @param name username to set
      */
     public void setUserName(String name) {
@@ -77,6 +91,7 @@ public class Admin extends User {
 
     /**
      * Checks if the password passed in is the same as the actual password.
+     *
      * @param pass password to be checked
      * @return true if they are equal, false otherwise
      */
@@ -85,13 +100,28 @@ public class Admin extends User {
     }
 
     /**
-     * Set whether or not user is an admin
-     * @param bool is/isn't and Admin
+     * Implementation of parcelable with Admin.
+     * @param in parcel to rebuild object
      */
-    public void setIsAdmin(boolean bool) {
-        this.isAdmin = true;
-        Firebase userRef = new Firebase(USERSURL);
-        userRef = userRef.child(this.email + "/isAdmin");
-        userRef.setValue(bool);
+    private Admin(Parcel in) {
+        super(in);
     }
+
+    /**
+     * Constant for implementation of Parcelable. This is necessary for an implementation of
+     * parcelable, despite the fact that checkstyle doesn't like it.
+     */
+    public static final Parcelable.Creator<Admin> CREATOR =
+            new Parcelable.Creator<Admin>() {
+
+                @Override
+                public Admin createFromParcel(Parcel source) {
+                    return new Admin(source);
+                }
+
+                @Override
+                public Admin[] newArray(int size) {
+                    return new Admin[size];
+                }
+            };
 }

@@ -7,7 +7,6 @@ import java.util.Map;
 
 
 /**
- *
  * Created by BensComputer on 2/20/16.
  */
 public class Movies {

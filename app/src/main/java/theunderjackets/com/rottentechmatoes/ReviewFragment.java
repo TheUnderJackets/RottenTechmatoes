@@ -41,10 +41,10 @@ public class ReviewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Fragment fragment = null;
-                if(v == getView().findViewById(R.id.submitReview)) {
+                if (v == getView().findViewById(R.id.submitReview)) {
                     fragment = new ReviewListFragment();
                 }
-                if(v == getView().findViewById(R.id.cancelReview)) {
+                if (v == getView().findViewById(R.id.cancelReview)) {
                     getActivity().getFragmentManager().popBackStack();
                 }
                 android.support.v4.app.FragmentManager manager = getFragmentManager();
@@ -54,6 +54,7 @@ public class ReviewFragment extends Fragment {
         };
 
     }
+
     public final void listenerForRatingBar(View view) {
         ratingBar = (RatingBar) view.findViewById(R.id.ratingBar2);
         textView = (TextView) view.findViewById(R.id.yourRate);
@@ -122,7 +123,7 @@ public class ReviewFragment extends Fragment {
 
     @Override
     public final View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                                   Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.review_fragment, container, false);
 
         listenerForRatingBar(view);

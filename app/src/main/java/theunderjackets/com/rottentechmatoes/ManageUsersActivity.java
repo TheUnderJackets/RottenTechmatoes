@@ -28,7 +28,6 @@ public class ManageUsersActivity extends AppCompatActivity {
     List<User> userList;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +49,9 @@ public class ManageUsersActivity extends AppCompatActivity {
                 // After this button is clicked, if a user is selected,
                 // then unlock that user
                 // See ".isSelected()" method in User.java
-                for(User u: userList) {
+                for (User u : userList) {
                     int i = 1;
-                    if(u.isSelected()) {
+                    if (u.isSelected()) {
                         u.setLocked(false);
                     }
                     u.setSelected(false);
@@ -71,8 +70,8 @@ public class ManageUsersActivity extends AppCompatActivity {
                 // then ban that user
                 // See ".isSelected()" method in User.java
 
-                for(User u: userList) {
-                    if(u.isSelected()) {
+                for (User u : userList) {
+                    if (u.isSelected()) {
                         u.setBanned(true);
                     }
                     u.setSelected(false);
@@ -88,11 +87,10 @@ public class ManageUsersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                for(User u: userList) {
+                for (User u : userList) {
                     if (selectAll.isChecked()) {
                         u.setSelected(true);
-                    }
-                    else {
+                    } else {
                         u.setSelected(false);
                     }
 
@@ -109,6 +107,7 @@ public class ManageUsersActivity extends AppCompatActivity {
 
     /**
      * Sets up the recycler view for the list of users.
+     *
      * @param recyclerView The recycler view for the lsit of users.
      */
     private void setupRecyclerView(RecyclerView recyclerView) {
@@ -126,6 +125,7 @@ public class ManageUsersActivity extends AppCompatActivity {
 
         /**
          * The constructor takes in the list of users.
+         *
          * @param items The list of users
          */
         public RecyclerViewAdapter(List<User> items) {
@@ -193,6 +193,7 @@ public class ManageUsersActivity extends AppCompatActivity {
             /**
              * The constructor tells the view holder to place the usernames
              * and statuses in their respective locations.
+             *
              * @param view The view.
              */
             public ViewHolder2(View view) {
@@ -209,6 +210,7 @@ public class ManageUsersActivity extends AppCompatActivity {
             }
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

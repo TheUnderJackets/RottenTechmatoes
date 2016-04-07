@@ -42,7 +42,7 @@ public class MovieListActivity extends AppCompatActivity {
     private boolean mTwoPane;
 
 
-    protected static List<Movie>  movies = new ArrayList<>();
+    protected static List<Movie> movies = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class MovieListActivity extends AppCompatActivity {
         if (Movies.ITEMS != null) {
             Movies.clear();
         }
-        for(theunderjackets.com.rottentechmatoes.Movie m: movies) {
+        for (theunderjackets.com.rottentechmatoes.Movie m : movies) {
             Movies.addItem(m);
         }
 
@@ -123,6 +123,7 @@ public class MovieListActivity extends AppCompatActivity {
                 }
             });
         }
+
         private Bitmap getBitmapFromURL(String src) {
             try {
 

@@ -20,11 +20,10 @@ public class ReviewListFragment extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.review_list_fragment, container, false);
+        View v = inflater.inflate(R.layout.review_list_fragment, container, false);
         final Button reviewMovie = (Button) v.findViewById(R.id.reviewMov);
         final Button viewTrailer = (Button) v.findViewById(R.id.viewTrailer);
         reviewMovie.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +42,7 @@ public class ReviewListFragment extends Fragment {
         return v;
 
     }
+
     public void onClick(View v) {
 
     }
