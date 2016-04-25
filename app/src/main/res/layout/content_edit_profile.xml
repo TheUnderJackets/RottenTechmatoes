@@ -16,10 +16,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/text_profile"
+        android:text="Edit Profile"
         android:id="@+id/titleProfile"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:typeface="serif"
+        android:textStyle="bold"
+        android:textSize="36dp"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -28,9 +31,9 @@
         android:text="Username"
         android:ems="10"
         android:id="@+id/inputUsername"
-        android:layout_marginTop="39dp"
+        android:layout_marginTop="34dp"
         android:layout_below="@+id/titleProfile"
-        android:layout_alignStart="@+id/titleProfile" />
+        android:layout_alignParentEnd="true"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -68,9 +71,9 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/inputDescription"
+        android:text="Personal Interest &amp; Fun Facts"
         android:layout_below="@+id/majorSpinner"
-        android:layout_alignStart="@+id/majorSpinner"
-        android:text="Description" />
+        android:layout_alignParentEnd="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -78,8 +81,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/input_text_username"
         android:id="@+id/textUsername"
-        android:layout_above="@+id/inputName"
-        android:layout_alignParentStart="true" />
+        android:layout_alignTop="@+id/inputUsername"
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -87,8 +90,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/input_text_name"
         android:id="@+id/textName"
-        android:layout_above="@+id/inputEmail"
-        android:layout_alignEnd="@+id/textUsername" />
+        android:layout_below="@+id/inputUsername"
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -96,9 +99,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/input_text_email"
         android:id="@+id/textEmail"
-        android:layout_alignBottom="@+id/inputEmail"
-        android:layout_toStartOf="@+id/inputName"
-        android:layout_alignEnd="@+id/textName" />
+        android:layout_below="@+id/inputName"
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -113,20 +115,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/input_text_description"
+        android:text="About Me:"
         android:id="@+id/textDescription"
-        android:layout_alignBottom="@+id/inputDescription"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/majorSpinner" />
+        android:layout_below="@+id/majorSpinner"
+        android:layout_alignParentStart="true"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/action_apply_changes"
         android:id="@+id/buttonApplyChanges"
-        android:layout_below="@+id/textDescription"
-        android:layout_alignStart="@+id/textMajor"
-        android:layout_marginTop="34dp" />
+        android:layout_marginTop="49dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:background="@android:color/holo_green_light"
+        android:layout_below="@+id/inputDescription"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/inputDescription"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -134,6 +139,9 @@
         android:text="@string/action_cancel_changes"
         android:id="@+id/buttonCancelChanges"
         android:layout_alignTop="@+id/buttonApplyChanges"
-        android:layout_toEndOf="@+id/titleProfile" />
+        android:background="@android:color/holo_orange_light"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:layout_alignEnd="@+id/inputDescription"/>
 
 </RelativeLayout>

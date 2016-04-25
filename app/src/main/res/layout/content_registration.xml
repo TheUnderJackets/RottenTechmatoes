@@ -13,65 +13,72 @@
     tools:showIn="@layout/activity_registration">
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/emailaddress"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="118dp"
-        android:hint="@string/email_address" />
+        android:layout_marginTop="27dp"
+        android:hint="@string/email_address"
+        android:layout_below="@+id/textViewWelcome"
+        android:layout_centerHorizontal="true"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/name"
+        android:hint="@string/name"
         android:layout_below="@+id/emailaddress"
         android:layout_alignStart="@+id/emailaddress"
-        android:hint="@string/name" />
+        android:layout_marginTop="10dp"/>
 
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="textEmailSubject"
         android:ems="10"
         android:id="@+id/username"
+        android:hint="@string/prompt_username"
         android:layout_below="@+id/name"
         android:layout_alignStart="@+id/name"
-        android:hint="@string/prompt_username" />
+        android:layout_marginTop="10dp"/>
 
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/password"
+        android:hint="@string/prompt_password"
         android:layout_below="@+id/username"
         android:layout_alignStart="@+id/username"
-        android:hint="@string/prompt_password" />
+        android:layout_marginTop="10dp"/>
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/repeatpassword"
+        android:hint="@string/repeat_password"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/password"
-        android:layout_alignStart="@+id/password"
-        android:hint="@string/repeat_password" />
+        android:layout_alignStart="@+id/password"/>
 
     <Button
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/register"
         android:id="@+id/registerButton"
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/repeatpassword"
-        android:layout_alignStart="@+id/textViewWelcome" />
+        android:layout_alignStart="@+id/repeatpassword"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:background="@android:color/holo_green_light"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -80,14 +87,20 @@
         android:text="@string/registration"
         android:id="@+id/textViewWelcome"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:typeface="serif"
+        android:textStyle="bold"
+        android:textSize="36dp"
+        android:gravity="center"/>
 
     <Button
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
         android:id="@+id/cancelRegistrationButton"
-        android:layout_below="@+id/repeatpassword"
-        android:layout_alignEnd="@+id/repeatpassword" />
+        android:layout_alignTop="@+id/registerButton"
+        android:layout_alignEnd="@+id/repeatpassword"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:background="@android:color/holo_orange_light"/>
 </RelativeLayout>

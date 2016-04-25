@@ -16,20 +16,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/text_welcome"
+        android:text="Welcome, "
         android:id="@+id/textViewWelcomeUser"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:typeface="serif"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:gravity="center"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/searchEditText"
+        android:layout_marginTop="29dp"
+        android:hint="@string/hint_search"
         android:layout_below="@+id/textViewWelcomeUser"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp"
-        android:hint="@string/hint_search"
-        android:layout_alignEnd="@+id/textViewWelcomeUser" />
+        android:layout_toStartOf="@+id/searchButton"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -37,41 +41,59 @@
         android:id="@+id/searchButton"
         android:layout_alignBottom="@+id/searchEditText"
         android:layout_alignParentEnd="true"
-        android:text="@string/action_search" />
+        android:text="@string/action_search"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:background="@android:color/holo_orange_light"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:text="@string/action_topRentals"
         android:id="@+id/topRentButton"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="28dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:background="@android:color/holo_orange_light"
         android:layout_below="@+id/searchEditText"
-        android:layout_toStartOf="@+id/textViewWelcomeUser" />
+        android:layout_alignParentStart="true"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:text="@string/action_newReleases"
         android:id="@+id/newReleaseButton"
-        android:layout_alignTop="@+id/topRentButton"
-        android:layout_toEndOf="@+id/searchEditText" />
+        android:layout_above="@+id/recommendButton"
+        android:layout_alignStart="@+id/newDVDButton"
+        android:background="@android:color/holo_green_light"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:textSize="25dp"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/action_recommend"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="Recommended Movies"
         android:id="@+id/recommendButton"
-        android:layout_marginTop="51dp"
+        android:layout_marginTop="28dp"
         android:layout_below="@+id/topRentButton"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="12dp" />
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#ffffff"
+        android:background="@android:color/holo_green_light"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:text="@string/action_newDVDs"
         android:id="@+id/newDVDButton"
         android:layout_alignTop="@+id/recommendButton"
-        android:layout_toEndOf="@+id/textViewWelcomeUser" />
+        android:layout_alignEnd="@+id/searchButton"
+        android:background="@android:color/holo_orange_light"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:textColor="#ffffff"/>
 
 </RelativeLayout>

@@ -12,7 +12,8 @@
         android:src="@mipmap/thumbnail_pholder"
         android:contentDescription="@string/text_thumbnail"
         android:maxHeight="45dp"
-        android:maxWidth="45dp" />
+        android:maxWidth="45dp"
+        android:layout_gravity="center_vertical|left"/>
 
     <TextView
         android:id="@+id/id"
@@ -20,7 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:layout_gravity="center_vertical|left"/>
 
     <TextView
         android:id="@+id/content"
@@ -28,5 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:layout_gravity="center_vertical|right"/>
 </LinearLayout>

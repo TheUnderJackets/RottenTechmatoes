@@ -13,50 +13,60 @@
     tools:showIn="@layout/activity_login">
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/username"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="118dp"
-        android:hint="@string/prompt_username" />
+        android:layout_marginTop="33dp"
+        android:hint="@string/prompt_username"
+        android:layout_below="@+id/textViewWelcome"
+        android:layout_centerHorizontal="true"/>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/password"
+        android:hint="@string/prompt_password"
         android:layout_below="@+id/username"
-        android:layout_alignStart="@+id/username"
-        android:hint="@string/prompt_password" />
+        android:layout_alignStart="@+id/username"/>
 
     <Button
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/action_sign_in_short"
         android:id="@+id/signInButton"
+        android:layout_marginTop="32dp"
         android:layout_below="@+id/password"
-        android:layout_alignStart="@+id/password" />
+        android:layout_alignStart="@+id/password"
+        android:background="@android:color/holo_green_light"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/welcome"
+        android:text="Welcome! Please Log In:"
         android:id="@+id/textViewWelcome"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="45dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:typeface="serif"/>
 
     <Button
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/action_cancel_short"
         android:id="@+id/cancelButton"
         android:layout_alignTop="@+id/signInButton"
-        android:layout_alignEnd="@+id/textViewWelcome" />
+        android:layout_alignEnd="@+id/password"
+        android:textColor="@android:color/white"
+        android:background="@android:color/holo_orange_light"
+        android:textStyle="bold"/>
 </RelativeLayout>

@@ -23,7 +23,7 @@
             android:text="New Text"
             android:id="@+id/title"
             android:layout_column="1"
-            android:layout_gravity="left|center_horizontal"
+            android:layout_gravity="left"
             android:gravity="fill_horizontal"
             android:minWidth="120dp"
             android:maxWidth="140dp"
@@ -35,9 +35,9 @@
             android:text="New Text"
             android:id="@+id/rating"
             android:layout_column="2"
-            android:layout_gravity="right"
             android:gravity="fill_horizontal"
-            android:minWidth="80dp" />
+            android:minWidth="80dp"
+            android:layout_gravity="right"/>
 
     </TableRow>
 </TableLayout>

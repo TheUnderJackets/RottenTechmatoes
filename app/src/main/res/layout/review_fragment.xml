@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="280dp"
     tools:context="theunderjackets.com.rottentechmatoes.reviewFragment"
-    android:background="@android:color/holo_orange_dark"
+    android:background="@android:color/holo_green_light"
     android:gravity="bottom"
     android:id="@+id/reviewFragment">
 
@@ -47,7 +47,8 @@
         android:text="Submit"
         android:id="@+id/submitReview"
         android:layout_below="@+id/ratingBar2"
-        android:layout_toStartOf="@+id/writeReview" />
+        android:layout_toStartOf="@+id/writeReview"
+        android:textColor="#000000"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -56,7 +57,8 @@
         android:text="Cancel"
         android:id="@+id/cancelReview"
         android:layout_below="@+id/ratingBar2"
-        android:layout_toEndOf="@+id/writeReview" />
+        android:layout_toEndOf="@+id/writeReview"
+        android:textColor="#000000"/>
 
     <EditText
         android:layout_width="match_parent"
